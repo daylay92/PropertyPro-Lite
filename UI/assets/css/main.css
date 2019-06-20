@@ -1292,3 +1292,179 @@ ul{
         font-size: 0.8rem;
     }
 }
+/* sign up page */
+.sign-up__block{
+    width: 100%;
+    margin: 0;
+    background: #f2f7ff;
+}
+.sign-up__block-form-section{
+    padding: 3rem 4rem;
+}
+.sign-up__block-form-wrapper{
+    width: 500px;
+    margin: auto;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(57,73,76,.35);
+    padding: 2rem 1.5rem;
+}
+.sign-up__block-form-header{
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 0 30px 0;
+    font-weight: 400;
+}
+.sign-up__block-form-group{
+    padding: 1rem 0.5rem 0 0.5rem;
+}
+.sign-up__block-form-input{
+    border: 1px solid #e0e0e0;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    padding: 10px 19px;
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+    transition: all ease-in-out 0.6s;
+}
+.sign-up__block-form-input-gender-mimic{
+    border: 1px solid #e0e0e0;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    padding: 10px 19px;
+    width: 100%;
+    border-radius: 3px;
+    outline: none;
+    transition: all ease-in-out 0.6s;
+    color: #999;
+    position: relative;
+}
+.sign-up__block--relative{
+    position: relative;
+    cursor: pointer;
+}
+.sign-up__block-form-drop-down{
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    position: absolute;
+    bottom: -100px;
+    left: 0;
+    width: 80%;
+    margin-left: 1rem;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #999;
+    background-color: #fff;
+    display: none;
+}
+.sign-up__block-form-drop-down-item{
+    padding: 10px 19px;
+    line-height: 18px;
+    cursor: pointer;
+    transition: 0.6s all ease-in-out;
+    color: #4d4d4d;
+}
+
+.sign-up__block-form-drop-down-item:hover{
+    background-color: #9ea9b926;
+}
+.sign-up__block-form-input--color{
+    color: #000 !important;
+}
+.sign-up__block-form-drop-down-item + .sign-up__block-form-drop-down-item{
+    border-top: 1px solid #e0e0e0;
+}
+.sign-up__block__drop-down-btn{
+    color: #4d4d4d;
+    position: absolute;
+    cursor: pointer;
+    top: 12px;
+    right: 13px;
+    z-index: 2;
+}
+.sign-up__block-form-input:hover{
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+    border-color: rgba(20, 99, 191, 0.7);
+}
+.sign-up__block-form-input-gender-mimic:hover{
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+    border-color: rgba(20, 99, 191, 0.7);
+}
+.sign-up__block-form-input::-moz-placeholder {
+    color: #999;
+  }
+.sign-up__block-form-input:-ms-input-placeholder {
+    color: #999;
+  }
+.sign-up__block-form-input::-webkit-input-placeholder {
+    color: #999;
+  }
+.sign-up__block-form-group-btn{
+    padding: 11px 28px;
+    line-height: 14px;
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 1px 6px rgba(57,73,76,0.35);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: all 0.6s ease-in-out;
+    background: rgba(20, 99, 191, 0.9);
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.16);
+    text-transform: capitalize;
+    border: 2px solid rgba(20, 99, 191, 0.9);
+    cursor: pointer;
+    outline: none;
+    margin-top: 1rem;
+  }
+.sign-up__block-form-group-btn:hover{
+    background: #1059ad;
+  }
+.sign-up__block-form-group--center{
+      text-align: center;
+  }
+.sign-up__block-form-drop-down--block{
+      display: flex !important;
+      animation: slide-down 0.6s ease-in-out;
+  }
+
+  @keyframes slide-down {
+      from{
+        opacity: 0;
+        transform: translateY(30px)
+      }
+      to{
+        opacity: 1;
+        transform: translateY(0)
+      }
+  }
+  @media only screen and (max-width: 650px){
+    .sign-up__block-form-section{
+        padding: 3rem 2rem;
+    }
+  }
+  @media only screen and (max-width: 590px){
+    .sign-up__block-form-section{
+        padding: 3rem 1rem;
+    }
+    .sign-up__block-form-wrapper{
+        width: 95%;
+    }
+  }
+  @media only screen and (max-width: 365px){
+    .sign-up__block-form-header{
+        font-size: 1.2rem;
+    }
+    .sign-up__block-form-wrapper{
+        width: 96%;
+    }
+    .sign-up__block-form-section{
+        padding: 3rem 0.5rem;
+    }
+  }

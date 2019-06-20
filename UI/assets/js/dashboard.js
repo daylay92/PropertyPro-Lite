@@ -58,8 +58,79 @@ const selectNextPropertyPage = () => {
         e.preventDefault();
     }
 }
+//Mark property sold/rented Functions
+//Utilities that adds and removes Modals
+const addModalToDOM = (innerhtml, childSelector, position) => {
+    const childModal = document.querySelector(childSelector);
+    const parentElem = document.querySelector('body');
+    if(childModal) parentElem.removeChild(childModal);
+    parentElem.insertAdjacentHTML(position,innerhtml);
+}
+const removeModalFromDom = (childSelector) => {
+    const childModal = document.querySelector(childSelector);
+    const parentElem = document.querySelector('body');
+    if(!parentElem) return;
+    if(!childModal) return;
+    parentElem.removeChild(childModal);
+}
+const generateHTML = (CallToAction,actionId,action) => {
+    return `
+    <div class="properties-dialog-overlay">
+        <div class="properties-dialog-overlay__confirm">   
+            <div class="properties-dialog-overlay__heading">
+                <h5 class="properties-dialog-overlay__header">Please confirm Action</h5>
+                <button class="properties-dialog-overlay__close-btn">
+                    <i class="far fa-window-close properties-dialog-close"></i>
+                </button>
+            </div>
+            <div class="properties-dialog-overlay__body">
+                <p class="properties-dialog-overlay__body-text">${CallToAction}</p>
+            </div>
+            <div class="properties-dialog-overlay__footer">
+                <button class="properties-dialog-overlay__cancel-btn" >no</button>
+                <button class="properties-dialog-overlay__proceed-btn" id="${actionId}">${action}</button>
+            </div>
+        </div>
+    </div>
+`;
+}
+const enableCloseModal = () => {
+    const modalCloseBtn = document.querySelector('.properties-dialog-overlay__close-btn');
+    const modalCancelBtn = document.querySelector('.properties-dialog-overlay__cancel-btn');
+    const closeNow = (e) => {
+            removeModalFromDom('.properties-dialog-overlay');
+            e.preventDefault();
+        }
+    modalCloseBtn.addEventListener('click',closeNow);
+    modalCancelBtn.addEventListener('click',closeNow);
+}
+const proceedWithMark = (selector) => {
+    const modalProceedBtn = document.querySelector(selector);
+    const proceed = (e) => {
+        window.location.assign('/UI/manage-properties.html');
+        e.preventDefault();
+        }
+        modalProceedBtn.addEventListener('click',proceed);
+}
+//Adds and removes  Modal on click of Mark as rented/sold
+const markOrUnSoldOrRented = () => {
+   const markBtns = document.querySelectorAll('.property-list__mark');
+    const innerhtml = generateHTML('Would you like to proceed?','proceed','Yes');
+   const popUpModal = (e) => {
+        addModalToDOM(innerhtml,'.properties-dialog-overlay','afterbegin');
+        enableCloseModal();
+        proceedWithMark('#proceed');
+        e.preventDefault();
+   }
+   if(!markBtns) return;
+   markBtns.forEach((btn)=> {
+       btn.addEventListener('click',popUpModal);
+   })
+}
+
 const startDashApp = () => {
     showSideNav();
     selectNextPropertyPage();
+    markOrUnSoldOrRented();
 }
 startDashApp();

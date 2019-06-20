@@ -584,3 +584,109 @@
         padding-right: 0.3rem;
     }
 }
+/* Mark/unMark rented/sold */
+.properties-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 999999;
+    width: 100%;
+    height: 100%;
+}
+.properties-dialog-overlay__confirm {
+    width: 310px;
+    margin: 150px auto 0 auto;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+    border-radius: 3px;
+    animation: navbar-slide-in 0.8s ease-in-out;
+}
+.properties-dialog-overlay__heading {
+    padding: 10px 10px;
+    background-color: #f6f7f9;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.properties-dialog-overlay__header{
+    color: #34495e;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0;
+    font-weight: 500;
+}
+.properties-dialog-overlay__close-btn{
+   color: #c4c5c7;
+   cursor: pointer;
+   transition: all .5s ease; 
+   outline: none;
+   font-size: 1rem;
+   background-color: #f6f7f9; 
+   border: none;
+}
+
+.properties-dialog-overlay__close-btn:hover{
+    color: #d32f2f;
+
+}
+.properties-dialog-overlay__body{
+    padding: 12px 10px;
+    background: #fff;
+}
+.properties-dialog-overlay__body-text{
+    font-size: 1rem;
+    color: #1a1c1eeb;
+    margin: 0;
+    font-weight: 350;
+}
+.properties-dialog-overlay__footer{
+    border-top: 1px solid #e5e5e5;
+    padding: 8px 10px;
+    display: flex;
+    justify-content: flex-end;
+    background-color: #f6f7f9;
+}
+.properties-dialog-overlay__cancel-btn,.properties-dialog-overlay__proceed-btn{
+    line-height: 14px;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    box-shadow: 0 1px 6px rgba(57,73,76,0.35);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    transition: all 0.6s ease-in-out;
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.16);
+    text-transform: capitalize;
+    cursor: pointer; 
+    padding: 4px 10px;
+}
+.properties-dialog-overlay__proceed-btn{
+    background-color: #f44336;
+    border: 1px solid #d32f2f;
+    margin-left: 10px;
+}
+.properties-dialog-overlay__proceed-btn:hover{
+    background-color: #d32f2f;
+}
+.properties-dialog-overlay__cancel-btn{
+    background-color: #737070;
+    border: 1px solid #7a7b7d;
+}
+.properties-dialog-overlay__cancel-btn:hover{
+    background-color: #a9a5a5;
+}
+  
+@media only screen and (max-width: 357px){
+    .properties-dialog-overlay__confirm {
+        width: 280px;
+    }
+    .properties-dialog-overlay__body-text{
+        font-size: 0.7rem;
+    }
+}

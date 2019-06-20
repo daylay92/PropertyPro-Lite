@@ -94,6 +94,30 @@ const searchForPropRedirect = () => {
     }
 }
 
+//view-properties page Functions
+ //Google Map: API utilizes only ES5 Synthax
+ function initialize(location) {
+    const mapBlock = document.querySelector('.location');
+    if(!mapBlock) return;
+    const map = new google.maps.Map( mapBlock, {zoom: 15, center: location});
+    const marker = new google.maps.Marker({position: location, map: map});
+}
+function codeAddress() {
+    const address = "28, Ojumu Crescent, Ijapo Estate, Akure, Ondo State"
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({address: address},(results,status) => {
+        let coordinate = '';
+        if(status === 'OK')
+        {
+            coordinate = results[0].geometry.location;
+            initialize(coordinate);
+        }
+        else{
+            console.log('something went wrong');
+        }  
+    })
+}
+
 const startApp = () => {
     assignNavbarColor();
     colorNav();

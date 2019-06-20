@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PropertyPro Lite | Home</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A platform for posting or searching properties for sale or rent">
+	<meta name="keywords" content="Rent, Property Sales, Real Estate, Property Advert">
+  	<meta name="author" content="Ayodele Akinbohun">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+   
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css" />
+</head>
+<body>
+    <!-- Page Preloader -->
+	<div class="preloader">
+            <div class="preloader__loader"></div>
+    </div>
+    <!-- Page Preloader Ends-->
+    <!-- Header section -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar__brand-container">
+                <a href="index.html" class="navbar__brand">PropertyPro<sup class="navbar__brand-sup-text">Lite</sup></a>
+            </div>
+            <div class="navbar__toggle-button">
+                <span class="navbar__toggle-button-icon"><i class="fas fa-bars navbar__toggle-icon--transform-anti-clockwise navbar__toggle-icon"></i></span>    
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__menu-item"><a href="index.html" class="navbar__menu-item-link">Home</a></li>
+                <li class="navbar__menu-item"><a href="view-properties.html" class="navbar__menu-item-link">Properties</a></li>
+                <li class="navbar__menu-item"><a href="login.html" class="navbar__menu-item-link">login</a></li>
+                <li class="navbar__menu-item"><a href="sign-up.html" class="navbar__menu-item-link">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Header section end -->
+    <!-- Hero section -->
+    <section class="hero-section">
+        <div class="hero-section__overlay">
+        </div>
+        <div class="hero-section__heading">
+            <h3 class="hero-section__header">Find a Property that Resonates You</h3>
+            <p class="hero-section__sub-header">What to sell or lease out a property? <a href="sign-up.html" class="hero-section__sign-up-link">Sign Up</a></p>
+        </div>
+        <div class="hero-section__search-area">
+            <div class="hero-section__dropdown-container">
+                <div class="hero-section__search-field" id="inputField">
+                    <span class="hero-section__field-text" id="inputTypeText">What kind of property are you looking for?</span>
+                </div>
+                <div class="hero-section__dropdown-options">
+                    <ul class="hero-section__dropdown-menu">
+                        <li class="hero-section__dropdown-item">All</li>
+                        <li class="hero-section__dropdown-item">Studio Flat</li>
+                        <li class="hero-section__dropdown-item">Mini Flat</li>
+                        <li class="hero-section__dropdown-item">2 Bedroom</li>
+                        <li class="hero-section__dropdown-item">3 Bedroom</li>
+                        <li class="hero-section__dropdown-item">Duplex</li>
+                        <li class="hero-section__dropdown-item">Twin Duplex</li>
+                        <li class="hero-section__dropdown-item">Office Apartment</li>
+                        <li class="hero-section__dropdown-item">Land</li>                       
+                    </ul>
+                </div>
+            </div>
+            <div class="hero-section__dropdown-btn">
+                <span class="hero-section__dropdown-icon" id="dropBtn"><i class="fas fa-chevron-down chevron-home fa-chevron-down--animate-anti-clockwise"></i></span>
+            </div>
+            <div class="hero-section__search-btn">
+                <button class="hero-section__search-icon" id="searchBtn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- Hero section end -->
+    <!-- Property Listing -->
+    <section class="property-listing">
+        <div class="property-listing__header">
+            <p class="property-listing__header-sub-text">Discover</p>
+            <h3 class="property-listing__header-text">Popular Listing</h3>
+        </div>
+        <div class="property-listing__grid">
+            <div class="property-listing__card">
+                <a href="/view-property.html" class="property-listing__img-link">
+                    <div class="property-listing__prop-img-block">
+                        <div class="property-listing__img-overlay-first"></div>
+                        <img src="assets/images/property-1.jpg" alt="Property Image" class="property-listing__prop-img">
+                        <div class="property-listing__img-overlay"></div>
+                        <div class="property-listing__img-label-top">
+                            <span class="property-listing__trade-mode">For Rent</span>
+                        </div>
+                        <div class="property-listing__img-label">
+                            <p class="property-listing__cost"><span>&#8358;</span>500,000</p>
+                            <span class="property-listing__status-available">Available</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/view-property.html" class="property-list__body-link">
+                    <div class="property-listing__card-body">
+                        <h5 class="property-listing__card-body-header">
+                             28, Ojumu Crescent, Ijapo Estate, Akure
+                        </h5>
+                        <p class="property-listing__card-body-sub-header">
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Akure</span>,
+                            <span>Ondo State</span>
+                        </p>
+                        <div class="property-listing__divider"></div>
+                        <div class="property-listing__card-body-footer">
+                            <p class="property-listing__card-body-footer-text">
+                                Mini Flat
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="property-listing__card">
+                <a href="/view-property.html" class="property-listing__img-link">
+                    <div class="property-listing__prop-img-block">
+                        <div class="property-listing__img-overlay-first"></div>
+                        <img src="assets/images/1.jpg" alt="Property Image" class="property-listing__prop-img">
+                        <div class="property-listing__img-overlay"></div>
+                        <div class="property-listing__img-label-top">
+                            <span class="property-listing__trade-mode">For Sale</span>
+                        </div>
+                        <div class="property-listing__img-label">
+                            <p class="property-listing__cost"><span>&#8358;</span>500,000</p>
+                            <span class="property-listing__status-sold">Sold</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/view-property.html" class="property-list__body-link">
+                    <div class="property-listing__card-body">
+                        <h5 class="property-listing__card-body-header">
+                             28, Ojumu Crescent, Ijapo Estate, Akure
+                        </h5>
+                        <p class="property-listing__card-body-sub-header">
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Akure</span>,
+                            <span>Ondo State</span>
+                        </p>
+                        <div class="property-listing__divider"></div>
+                        <div class="property-listing__card-body-footer">
+                            <p class="property-listing__card-body-footer-text">
+                                Mini Flat
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="property-listing__card">
+                <a href="/view-property.html" class="property-listing__img-link">
+                    <div class="property-listing__prop-img-block">
+                        <div class="property-listing__img-overlay-first"></div>
+                        <img src="assets/images/2.jpg" alt="Property Image" class="property-listing__prop-img">
+                        <div class="property-listing__img-overlay"></div>
+                        <div class="property-listing__img-label-top">
+                            <span class="property-listing__trade-mode">For Rent</span>
+                        </div>
+                        <div class="property-listing__img-label">
+                            <p class="property-listing__cost"><span>&#8358;</span>500,000</p>
+                            <span class="property-listing__status-sold">Rented</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/view-property.html" class="property-list__body-link">
+                    <div class="property-listing__card-body">
+                        <h5 class="property-listing__card-body-header">
+                             28, Ojumu Crescent, Ijapo Estate, Akure
+                        </h5>
+                        <p class="property-listing__card-body-sub-header">
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Akure</span>,
+                            <span>Ondo State</span>
+                        </p>
+                        <div class="property-listing__divider"></div>
+                        <div class="property-listing__card-body-footer">
+                            <p class="property-listing__card-body-footer-text">
+                                Self Contain
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="property-listing__card">
+                <a href="/view-property.html" class="property-listing__img-link">
+                    <div class="property-listing__prop-img-block">
+                        <div class="property-listing__img-overlay-first"></div>
+                        <img src="assets/images/property-1.jpg" alt="Property Image" class="property-listing__prop-img">
+                        <div class="property-listing__img-overlay"></div>
+                        <div class="property-listing__img-label-top">
+                            <span class="property-listing__trade-mode">For Sale</span>
+                        </div>
+                        <div class="property-listing__img-label">
+                            <p class="property-listing__cost"><span>&#8358;</span>500,000</p>
+                            <span class="property-listing__status-sold">Sold</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/view-property.html" class="property-list__body-link">
+                    <div class="property-listing__card-body">
+                        <h5 class="property-listing__card-body-header">
+                             28, Ojumu Crescent, Ijapo Estate, Akure
+                        </h5>
+                        <p class="property-listing__card-body-sub-header">
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Akure</span>,
+                            <span>Ondo State</span>
+                        </p>
+                        <div class="property-listing__divider"></div>
+                        <div class="property-listing__card-body-footer">
+                            <p class="property-listing__card-body-footer-text">
+                                Mini Flat
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="property-listing__card">
+                <a href="/view-property.html" class="property-listing__img-link">
+                    <div class="property-listing__prop-img-block">
+                        <div class="property-listing__img-overlay-first"></div>
+                        <img src="assets/images/3.jpg" alt="Property Image" class="property-listing__prop-img">
+                        <div class="property-listing__img-overlay"></div>
+                        <div class="property-listing__img-label-top">
+                            <span class="property-listing__trade-mode">For Rent</span>
+                        </div>
+                        <div class="property-listing__img-label">
+                            <p class="property-listing__cost"><span>&#8358;</span>500,000</p>
+                            <span class="property-listing__status-available">Available</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/view-property.html" class="property-list__body-link">
+                    <div class="property-listing__card-body">
+                        <h5 class="property-listing__card-body-header">
+                             28, Ojumu Crescent, Ijapo Estate, Akure
+                        </h5>
+                        <p class="property-listing__card-body-sub-header">
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Akure</span>,
+                            <span>Ondo State</span>
+                        </p>
+                        <div class="property-listing__divider"></div>
+                        <div class="property-listing__card-body-footer">
+                            <p class="property-listing__card-body-footer-text">
+                                Mini Flat
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="property-listing__card">
+                <a href="/view-property.html" class="property-listing__img-link">
+                    <div class="property-listing__prop-img-block">
+                        <div class="property-listing__img-overlay-first"></div>
+                        <img src="assets/images/4.jpg" alt="Property Image" class="property-listing__prop-img">
+                        <div class="property-listing__img-overlay"></div>
+                        <div class="property-listing__img-label-top">
+                            <span class="property-listing__trade-mode">For Rent</span>
+                        </div>
+                        <div class="property-listing__img-label">
+                            <p class="property-listing__cost"><span>&#8358;</span>500,000</p>
+                            <span class="property-listing__status-available">Available</span>
+                        </div>
+                    </div>
+                </a>
+                <a href="/view-property.html" class="property-list__body-link">
+                    <div class="property-listing__card-body">
+                        <h5 class="property-listing__card-body-header">
+                             28, Ojumu Crescent, Ijapo Estate, Akure
+                        </h5>
+                        <p class="property-listing__card-body-sub-header">
+                            <span><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Akure</span>,
+                            <span>Ondo State</span>
+                        </p>
+                        <div class="property-listing__divider"></div>
+                        <div class="property-listing__card-body-footer">
+                            <p class="property-listing__card-body-footer-text">
+                                Studio Flat
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+            <div class="view-all">
+                <a href="view-properties.html" class="view-all__btn">view all</a>
+            </div>
+    </section>
+    <!-- Property Listing end-->
+    <!-- How it Works Section-->
+    <section class="instruction-section">
+        <div class="instruction-section__header">
+            <p class="instruction-section__header-sub-text">Explore Our Features</p>
+            <h3 class="instruction-section__header-text">Simple Steps</h3>
+        </div>
+        <div class="instruction-section__flexbox">
+            <div class="instruction-section__flexbox-child">
+                <div class="instruction-section__icon-block">
+                       <span class="instruction-section__icon">
+                            <div class="instruction-section__icon-pulse"></div>
+                           <i class="fas fa-search-location instruction-section__icon-self"></i>
+                        </span> 
+                </div>
+                <div class="instruction-section__body">
+                        <h5 class="instruction-section__body-header">Search For a Property</h5>
+                        <p class="instruction-section__body-text">Make a quick search by using our filter to find specific property types and click on a listing to view in details.</p>  
+                </div>
+            </div>
+            <div class="instruction-section__flexbox-child">
+                <div class="instruction-section__icon-block">
+                       <span class="instruction-section__icon">
+                            <div class="instruction-section__icon-pulse"></div>
+                           <i class="fas fa-phone-volume instruction-section__icon-self"></i>
+                </div>
+                <div class="instruction-section__body">
+                        <h5 class="instruction-section__body-header">Get in Touch with Us</h5>
+                        <p class="instruction-section__body-text">The properties listed are provided with the mobile number of the agent in charge, give a call to declare your interest.</p>  
+                </div>
+            </div>
+            <div class="instruction-section__flexbox-child">
+                <div class="instruction-section__icon-block">
+                       <span class="instruction-section__icon">
+                           <div class="instruction-section__icon-pulse"></div>
+                           <i class="fas fa-home instruction-section__icon-self"></i>
+                </div>
+                <div class="instruction-section__body">
+                        <h5 class="instruction-section__body-header">Sell Or Lease a Property</h5>
+                        <p class="instruction-section__body-text">Are you interested in selling or leasing out?. Sign Up to post your adverts and get fast feedback.</p>  
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- How it Works Section end-->
+    <!-- Footer-->
+    <section class="footer">
+            &copy; 2019 Andela Challenge Cycle 47, by Ayodele. All Rights Reserved.
+    </section>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

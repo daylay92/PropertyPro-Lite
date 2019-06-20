@@ -127,10 +127,34 @@ const markOrUnSoldOrRented = () => {
        btn.addEventListener('click',popUpModal);
    })
 }
-
+//Delete property Functions
+//Popup Modal on click of the delete button
+const proceedWithDelete = (id) => {
+    const modalDeleteBtn = document.querySelector(id);
+    const proceed = (e) => {
+        window.location.assign('/UI/manage-properties.html');
+        e.preventDefault();
+        }
+        modalDeleteBtn.addEventListener('click',proceed);
+}
+const deleteProperty = () => {
+    const deleteBtns = document.querySelectorAll('.property-list__delete');
+    const innerhtml = generateHTML('Do you want to this Delete Property?','delete','Yes');
+    const popUpModal = (e) => {
+        addModalToDOM(innerhtml,'.properties-dialog-overlay','afterbegin');
+        enableCloseModal();
+        proceedWithDelete('#delete');
+        e.preventDefault();
+   }
+   if(!deleteBtns) return;
+   deleteBtns.forEach((btn)=> {
+       btn.addEventListener('click',popUpModal);
+   })
+}
 const startDashApp = () => {
     showSideNav();
     selectNextPropertyPage();
     markOrUnSoldOrRented();
+    deleteProperty();
 }
 startDashApp();

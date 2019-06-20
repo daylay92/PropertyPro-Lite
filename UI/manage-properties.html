@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PropertyPro Lite | Dashboard</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A platform for posting or searching properties for sale or rent">
+	<meta name="keywords" content="Rent, Property Sales, Real Estate, Property Advert">
+  	<meta name="author" content="Ayodele Akinbohun">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+   
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/dashboard.css" />
+</head>
+<body page="property">
+    <!-- Page Preloader -->
+    <div class="preloader">
+        <div class="preloader__loader"></div>
+    </div>
+    <!-- Page Preloader Ends-->
+    <!-- Dashboard -->
+    <section class="dashboard-grid">
+        <!-- Dashboard header-->
+        <header class="dashboard-header">
+            <nav class="dashboard-header__navbar">
+                <div class="dashboard-header__sidenav-toggle">
+                    <span class="dashboard-header__sidenav-toggle-button">
+                        <i class="fas fa-bars  dashboard-header__sidenav-icon dashboard-header__sidenav-icon--transform-anti-clockwise"></i>
+                    </span>
+                </div>
+                <div class="dashboard-header__brand">
+                    <a href="index.html" class="navbar__brand">PropertyPro<sup class="navbar__brand-sup-text">Lite</sup></a>
+                </div>
+                <button class="dashboard-header__logout-btn">log out</button>
+            </nav>
+        </header>
+        <!-- Dashboard header Ends-->
+        <!-- Dashboard SideNav -->
+        <aside class="dashboard-sidenav">
+            <div class="dashboard-sidenav__board">
+                <ul class="dashboard-sidenav__board-menu">
+                    <li class="dashboard-sidenav__board-menu-item">
+                        <a href="dashboard.html" class="dashboard-sidenav__board-menu-link">
+                            <span class="dashboard-sidenav__board-menu-icon">
+                                <i class="fab fa-wpforms"></i>
+                            </span> 
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="dashboard-sidenav__board-menu-item">
+                        <a href="#" class="dashboard-sidenav__board-menu-link">
+                            <span class="dashboard-sidenav__board-menu-icon">
+                                <i class="fas fa-home"></i>
+                            </span> 
+                            Post a Property
+                        </a>
+                    </li>
+                    <li class="dashboard-sidenav__board-menu-item">
+                            <a href="manage-properties.html" class="dashboard-sidenav__board-menu-link dashboard-sidenav__board-menu-link--active">
+                                <span class="dashboard-sidenav__board-menu-icon">
+                                    <i class="fas fa-brush"></i>
+                                </span> 
+                                Manage Properties
+                            </a>
+                    </li>
+                    <li class="dashboard-sidenav__board-menu-item">
+                            <a href="#" class="dashboard-sidenav__board-menu-link">
+                                <span class="dashboard-sidenav__board-menu-icon">
+                                    <i class="fas fa-user-cog"></i>
+                                </span> 
+                                My Account
+                            </a>
+                    </li>
+                    <li class="dashboard-sidenav__board-menu-item">
+                            <a href="#" class="dashboard-sidenav__board-menu-link">
+                                <span class="dashboard-sidenav__board-menu-icon">
+                                    <i class="fas fa-unlock-alt"></i>
+                                </span> 
+                                Change Password
+                            </a>
+                    </li>
+                    <li class="dashboard-sidenav__board-menu-item dashboard-sidenav__board-menu-item--display">
+                            <a href="#" class="dashboard-sidenav__board-menu-link">
+                                <span class="dashboard-sidenav__board-menu-icon">
+                                    <i class="fas fa-home"></i>
+                                </span> 
+                                Log Out
+                            </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        <!-- Dashboard SideNav -->
+        <!-- Dashboard Main Content -->
+        <main class="dashboard-main">
+            <div class="dashboard-main__overlay">
+            </div>
+            <div class="dashboard-main__heading">
+                <h3 class="dashboard-main__header-others">
+                    Manage Properties
+                </h3>
+                <div class="dashboard-main__divider">
+                </div>
+            </div>
+            <div class="properties-list-container">
+                <ul class="property-list">
+                    <li class="property-list__item" propertyId transactMode>
+                        <div class="property-list__img-block">
+                            <p class="property-list__img-block-mode">For Rent</p>
+                            <p class="property-list__img-block-mode--sold">Rented</p>
+                            <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+                        </div>
+                        <div class="property-list__summary">
+                            <div class="property-list__content-header">
+                                <h5 class="property-list__content-heading">
+                                    Summary
+                                </h5>
+                            </div>
+                            <div class="property-list__content-body">
+                                <p class="property-list__content-body-text">
+                                    The most interesting thing about this apartment is the beautify of its environment....
+                                </p>
+                                <p class="property-list__content-body-item">
+                                    <span class="property-list__content-body-icon">
+                                        <i class="fas fa-wallet"></i>
+                                    </span>
+                                    &#8358;500,000
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-location-arrow"></i>
+                                        </span>
+                                    28, Ojumu Crescent, Ijapo Estate, Akure
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </span>
+                                        Akure, Ondo State
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                        19-6-2019
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fab fa-creative-commons-share"></i>
+                                        </span>
+                                                Available
+                                </p>
+                                
+                            </div>
+
+                            <div class="property-list__btns">
+                                <button class="property-list__preview">Preview</button>
+                                <button class="property-list__edit">Edit</button>
+                                <button class="property-list__mark">mark sold/rented</button>
+                                <button class="property-list__delete">delete</button>
+                            </div>
+                        </div>
+
+                    </li>
+                    <li class="property-list__item" propertyId transactMode>
+                            <div class="property-list__img-block">
+                                <p class="property-list__img-block-mode">For Rent</p>
+                                <p class="property-list__img-block-mode--sold">Rented</p>
+                                <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+                            </div>
+                            <div class="property-list__summary">
+                                <div class="property-list__content-header">
+                                    <h5 class="property-list__content-heading">
+                                        Summary
+                                    </h5>
+                                </div>
+                                <div class="property-list__content-body">
+                                    <p class="property-list__content-body-text">
+                                        The most interesting thing about this apartment is the beautify of its environment....
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-wallet"></i>
+                                        </span>
+                                        &#8358;500,000
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fas fa-location-arrow"></i>
+                                            </span>
+                                        28, Ojumu Crescent, Ijapo Estate, Akure
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </span>
+                                            Akure, Ondo State
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                            19-6-2019
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fab fa-creative-commons-share"></i>
+                                            </span>
+                                                    Available
+                                    </p>
+                                    
+                                </div>
+    
+                                <div class="property-list__btns">
+                                    <button class="property-list__preview">Preview</button>
+                                    <button class="property-list__edit">Edit</button>
+                                    <button class="property-list__mark">mark sold/rented</button>
+                                    <button class="property-list__delete">delete</button>
+                                </div>
+                            </div>                        
+                    </li>
+                    
+                    <li class="property-list__item" propertyId transactMode>
+                            <div class="property-list__img-block">
+                                <p class="property-list__img-block-mode">For Rent</p>
+                                <p class="property-list__img-block-mode--sold">Rented</p>
+                                <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+                            </div>
+                            <div class="property-list__summary">
+                                <div class="property-list__content-header">
+                                    <h5 class="property-list__content-heading">
+                                        Summary
+                                    </h5>
+                                </div>
+                                <div class="property-list__content-body">
+                                    <p class="property-list__content-body-text">
+                                        The most interesting thing about this apartment is the beautify of its environment....
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-wallet"></i>
+                                        </span>
+                                        &#8358;500,000
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fas fa-location-arrow"></i>
+                                            </span>
+                                        28, Ojumu Crescent, Ijapo Estate, Akure
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                            </span>
+                                            Akure, Ondo State
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                            19-6-2019
+                                    </p>
+                                    <p class="property-list__content-body-item">
+                                            <span class="property-list__content-body-icon">
+                                                <i class="fab fa-creative-commons-share"></i>
+                                            </span>
+                                                    Available
+                                    </p>
+                                    
+                                </div>
+    
+                                <div class="property-list__btns">
+                                    <button class="property-list__preview">Preview</button>
+                                    <button class="property-list__edit">Edit</button>
+                                    <button class="property-list__mark">mark sold/rented</button>
+                                    <button class="property-list__delete">delete</button>
+                                </div>
+                            </div>                        
+                    </li>  
+                    <li class="property-list__item" propertyId transactMode>
+                        <div class="property-list__img-block">
+                            <p class="property-list__img-block-mode">For Rent</p>
+                            <p class="property-list__img-block-mode--sold">Rented</p>
+                            <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+                        </div>
+                        <div class="property-list__summary">
+                            <div class="property-list__content-header">
+                                <h5 class="property-list__content-heading">
+                                    Summary
+                                </h5>
+                            </div>
+                            <div class="property-list__content-body">
+                                <p class="property-list__content-body-text">
+                                    The most interesting thing about this apartment is the beautify of its environment....
+                                </p>
+                                <p class="property-list__content-body-item">
+                                    <span class="property-list__content-body-icon">
+                                        <i class="fas fa-wallet"></i>
+                                    </span>
+                                    &#8358;500,000
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-location-arrow"></i>
+                                        </span>
+                                    28, Ojumu Crescent, Ijapo Estate, Akure
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </span>
+                                        Akure, Ondo State
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                        19-6-2019
+                                </p>
+                                <p class="property-list__content-body-item">
+                                        <span class="property-list__content-body-icon">
+                                            <i class="fab fa-creative-commons-share"></i>
+                                        </span>
+                                                Available
+                                </p>
+                                
+                            </div>
+
+                            <div class="property-list__btns">
+                                <button class="property-list__preview">Preview</button>
+                                <button class="property-list__edit">Edit</button>
+                                <button class="property-list__mark">mark sold/rented</button>
+                                <button class="property-list__delete">delete</button>
+                            </div>
+                        </div>                        
+                </li>                
+                <li class="property-list__item" propertyId transactMode>
+                    <div class="property-list__img-block">
+                        <p class="property-list__img-block-mode">For Rent</p>
+                        <p class="property-list__img-block-mode--sold">Rented</p>
+                        <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+                    </div>
+                    <div class="property-list__summary">
+                        <div class="property-list__content-header">
+                            <h5 class="property-list__content-heading">
+                                Summary
+                            </h5>
+                        </div>
+                        <div class="property-list__content-body">
+                            <p class="property-list__content-body-text">
+                                The most interesting thing about this apartment is the beautify of its environment....
+                            </p>
+                            <p class="property-list__content-body-item">
+                                <span class="property-list__content-body-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </span>
+                                &#8358;500,000
+                            </p>
+                            <p class="property-list__content-body-item">
+                                    <span class="property-list__content-body-icon">
+                                        <i class="fas fa-location-arrow"></i>
+                                    </span>
+                                28, Ojumu Crescent, Ijapo Estate, Akure
+                            </p>
+                            <p class="property-list__content-body-item">
+                                    <span class="property-list__content-body-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </span>
+                                    Akure, Ondo State
+                            </p>
+                            <p class="property-list__content-body-item">
+                                    <span class="property-list__content-body-icon">
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </span>
+                                    19-6-2019
+                            </p>
+                            <p class="property-list__content-body-item">
+                                    <span class="property-list__content-body-icon">
+                                        <i class="fab fa-creative-commons-share"></i>
+                                    </span>
+                                            Available
+                            </p>
+                            
+                        </div>
+
+                        <div class="property-list__btns">
+                            <button class="property-list__preview">Preview</button>
+                            <button class="property-list__edit">Edit</button>
+                            <button class="property-list__mark">mark sold/rented</button>
+                            <button class="property-list__delete">delete</button>
+                        </div>
+                    </div>                        
+            </li>                
+            <li class="property-list__item" propertyId transactMode>
+                <div class="property-list__img-block">
+                    <p class="property-list__img-block-mode">For Rent</p>
+                    <p class="property-list__img-block-mode--sold">Rented</p>
+                    <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+                </div>
+                <div class="property-list__summary">
+                    <div class="property-list__content-header">
+                        <h5 class="property-list__content-heading">
+                            Summary
+                        </h5>
+                    </div>
+                    <div class="property-list__content-body">
+                        <p class="property-list__content-body-text">
+                            The most interesting thing about this apartment is the beautify of its environment....
+                        </p>
+                        <p class="property-list__content-body-item">
+                            <span class="property-list__content-body-icon">
+                                <i class="fas fa-wallet"></i>
+                            </span>
+                            &#8358;500,000
+                        </p>
+                        <p class="property-list__content-body-item">
+                                <span class="property-list__content-body-icon">
+                                    <i class="fas fa-location-arrow"></i>
+                                </span>
+                            28, Ojumu Crescent, Ijapo Estate, Akure
+                        </p>
+                        <p class="property-list__content-body-item">
+                                <span class="property-list__content-body-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                                Akure, Ondo State
+                        </p>
+                        <p class="property-list__content-body-item">
+                                <span class="property-list__content-body-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </span>
+                                19-6-2019
+                        </p>
+                        <p class="property-list__content-body-item">
+                                <span class="property-list__content-body-icon">
+                                    <i class="fab fa-creative-commons-share"></i>
+                                </span>
+                                        Available
+                        </p>
+                        
+                    </div>
+
+                    <div class="property-list__btns">
+                        <button class="property-list__preview">Preview</button>
+                        <button class="property-list__edit">Edit</button>
+                        <button class="property-list__mark">mark sold/rented</button>
+                        <button class="property-list__delete">delete</button>
+                    </div>
+                </div>                        
+        </li>                
+        <li class="property-list__item" propertyId transactMode>
+            <div class="property-list__img-block">
+                <p class="property-list__img-block-mode">For Rent</p>
+                <p class="property-list__img-block-mode--sold">Rented</p>
+                <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+            </div>
+            <div class="property-list__summary">
+                <div class="property-list__content-header">
+                    <h5 class="property-list__content-heading">
+                        Summary
+                    </h5>
+                </div>
+                <div class="property-list__content-body">
+                    <p class="property-list__content-body-text">
+                        The most interesting thing about this apartment is the beautify of its environment....
+                    </p>
+                    <p class="property-list__content-body-item">
+                        <span class="property-list__content-body-icon">
+                            <i class="fas fa-wallet"></i>
+                        </span>
+                        &#8358;500,000
+                    </p>
+                    <p class="property-list__content-body-item">
+                            <span class="property-list__content-body-icon">
+                                <i class="fas fa-location-arrow"></i>
+                            </span>
+                        28, Ojumu Crescent, Ijapo Estate, Akure
+                    </p>
+                    <p class="property-list__content-body-item">
+                            <span class="property-list__content-body-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                            Akure, Ondo State
+                    </p>
+                    <p class="property-list__content-body-item">
+                            <span class="property-list__content-body-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </span>
+                            19-6-2019
+                    </p>
+                    <p class="property-list__content-body-item">
+                            <span class="property-list__content-body-icon">
+                                <i class="fab fa-creative-commons-share"></i>
+                            </span>
+                                    Available
+                    </p>
+                    
+                </div>
+
+                <div class="property-list__btns">
+                    <button class="property-list__preview">Preview</button>
+                    <button class="property-list__edit">Edit</button>
+                    <button class="property-list__mark">mark sold/rented</button>
+                    <button class="property-list__delete">delete</button>
+                </div>
+            </div>                        
+    </li>                
+    <li class="property-list__item" propertyId transactMode>
+        <div class="property-list__img-block">
+            <p class="property-list__img-block-mode">For Rent</p>
+            <p class="property-list__img-block-mode--sold">Rented</p>
+            <img src="assets/images/property-1.jpg" class="property-list__img" alt="Property Image">
+        </div>
+        <div class="property-list__summary">
+            <div class="property-list__content-header">
+                <h5 class="property-list__content-heading">
+                    Summary
+                </h5>
+            </div>
+            <div class="property-list__content-body">
+                <p class="property-list__content-body-text">
+                    The most interesting thing about this apartment is the beautify of its environment....
+                </p>
+                <p class="property-list__content-body-item">
+                    <span class="property-list__content-body-icon">
+                        <i class="fas fa-wallet"></i>
+                    </span>
+                    &#8358;500,000
+                </p>
+                <p class="property-list__content-body-item">
+                        <span class="property-list__content-body-icon">
+                            <i class="fas fa-location-arrow"></i>
+                        </span>
+                    28, Ojumu Crescent, Ijapo Estate, Akure
+                </p>
+                <p class="property-list__content-body-item">
+                        <span class="property-list__content-body-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                        Akure, Ondo State
+                </p>
+                <p class="property-list__content-body-item">
+                        <span class="property-list__content-body-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                        19-6-2019
+                </p>
+                <p class="property-list__content-body-item">
+                        <span class="property-list__content-body-icon">
+                            <i class="fab fa-creative-commons-share"></i>
+                        </span>
+                                Available
+                </p>
+                
+            </div>
+
+            <div class="property-list__btns">
+                <button class="property-list__preview">Preview</button>
+                <button class="property-list__edit">Edit</button>
+                <button class="property-list__mark">mark sold/rented</button>
+                <button class="property-list__delete">delete</button>
+            </div>
+        </div>                        
+</li>                
+
+                </ul>
+            </div>
+            <div class="pagination-dashboard">
+                <div class="pagination-dashboard__block-wrapper">
+                    <a href="#" class="pagination-dashboard__prev pagination-dashboard__btn--disabled">
+                        <span class="pagination-dashboard__prev-icon">
+                            <i class="fas fa-chevron-circle-left"></i>
+                        </span>
+                    </a>
+                    <span class="pagination-dashboard__current ">1</span>
+                    <span class="pagination-dashboard__of">of</span>
+                    <span class="pagination-dashboard__count">3</span>
+                    <a href="#" class="pagination-dashboard__next">
+                        <span class="pagination-dashboard__next-icon">
+                            <i class="fas fa-chevron-circle-right"></i>
+                        </span>
+                    </a>
+                </div>
+            </div> 
+        </main>
+        <!-- Dashboard Main Content Ends-->
+        <!-- footer  -->
+        <footer class="footer">
+                &copy; 2019 Andela Challenge Cycle 47, by Ayodele. All Rights Reserved.
+        </footer>
+        <!-- footer Ends -->
+    <!-- Dashboard Ends -->
+    </section>
+    <!-- scripts-->
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

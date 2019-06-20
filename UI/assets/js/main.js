@@ -89,6 +89,7 @@ const toggleHeroDropDown = () => {
 //Opens a view properties page which displays properties under the categories selected in the dropdown
 const searchForPropRedirect = () => {
     const searchButton = document.querySelector('.hero-section__search-icon');
+    if(!searchButton) return;
     searchButton.onclick = () => {
         window.location.assign('/UI/view-properties.html');
     }
@@ -117,7 +118,42 @@ function codeAddress() {
         }  
     })
 }
+//Sign Up Page Functions
+ //controls gender dropdown
+ const toggleGenderDropdown = () => {
+    const body = document.querySelector('body');
+    const dropDown = document.querySelector('.sign-up__block-form-drop-down');
+    const dropDownMimicWrapper = document.querySelector('.sign-up__block-form-input-gender-mimic');
+    const mainIcon = document.querySelector('.fa-chevron-down');
+    if(!dropDown) return;
+    const toggleDrop = ({ target }) => {
+       if(target === dropDownMimicWrapper) return;
+       if(target === mainIcon) return;
+       dropDown.classList.remove('sign-up__block-form-drop-down--block');
+    }
+    body.addEventListener('click',toggleDrop);
+    dropDownMimicWrapper.onclick = () => {
+       dropDown.classList.toggle('sign-up__block-form-drop-down--block');
+       mainIcon.classList.toggle('fa-chevron-down--animate-clockwise');
+       mainIcon.classList.toggle('fa-chevron-down--animate-anti-clockwise');
+    }
 
+}
+//add the selected option as input field value
+const genderSelector = () => {
+   const genderInputField = document.querySelector('#hiddenGender');
+   const genderInputTextMimic = document.querySelector('#genderText');
+   const genderLists = document.querySelectorAll('.sign-up__block-form-drop-down-item');
+   if(!genderLists) return;
+   const selectValue = ({target}) => {
+       genderInputField.value = target.textContent;
+       genderInputTextMimic.textContent = target.textContent;
+       genderInputTextMimic.className ='sign-up__block-form-input--color';
+   }
+   genderLists.forEach(el => {
+       el.addEventListener('click',selectValue);
+   })
+}
 const startApp = () => {
     assignNavbarColor();
     colorNav();
@@ -125,5 +161,7 @@ const startApp = () => {
     HometypeSelector();
     toggleHeroDropDown();
     searchForPropRedirect();
+    toggleGenderDropdown();
+    genderSelector();
 }
 startApp();

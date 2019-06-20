@@ -154,6 +154,128 @@ const genderSelector = () => {
        el.addEventListener('click',selectValue);
    })
 }
+
+// Filter functions and Pagination on view-properties Page
+    //Assigns fixed position to Filter Bar
+    const fixFilterPosition = () => {
+        const height = window.innerHeight;
+        const diffInHeight = Math.round(height/2);
+        const filterSection = document.querySelector('.filter-section');
+        if(!filterSection) return;
+        window.onscroll = () => {
+            if(window.pageYOffset > diffInHeight || document.documentElement.scrollTop > diffInHeight)
+            filterSection.classList.add('filter-section--fixed');
+            else
+            filterSection.classList.remove('filter-section--fixed');
+        }
+    }
+    //Shows and closes the custom select drop down for filter by type
+    const toggleTypeDropDown = () => {
+        const body = document.querySelector('body');
+        const dropDown = document.querySelector('.filter-section__by-type-drop-down');
+        const dropDownMimicWrapper = document.querySelector('.filter-section__by-type');
+        const mainIcon = document.querySelector('.chevron-type');
+        if(!dropDown) return;
+        const toggleDrop = ({ target }) => {
+           if(target === dropDownMimicWrapper) return;
+           if(target === mainIcon) return;
+           dropDown.classList.remove('filter-section__by-type-drop-down--block');
+        }
+        body.addEventListener('click',toggleDrop);
+        dropDownMimicWrapper.onclick = () => {
+           dropDown.classList.toggle('filter-section__by-type-drop-down--block');
+           mainIcon.classList.toggle('fa-chevron-down--animate-clockwise');
+           mainIcon.classList.toggle('fa-chevron-down--animate-anti-clockwise');
+        }
+    }
+    const typeSelector = () => {
+        const typeInputTextMimic = document.querySelector('#typeText');
+        const typeList = document.querySelectorAll('.filter-section__by-type-item');
+        if(!typeList) return;
+        const selectValue = ({target}) => {
+            typeInputTextMimic.textContent = target.textContent;
+        }
+        typeList.forEach(el => {
+            el.addEventListener('click',selectValue);
+        })
+    }
+    //Shows and closes the custom select drop down for filter by purpose
+    const togglePurposeDropDown = () => {
+        const body = document.querySelector('body');
+        const dropDown = document.querySelector('.filter-section__by-purpose-drop-down');
+        const dropDownMimicWrapper = document.querySelector('.filter-section__by-purpose');
+        const mainIcon = document.querySelector('.chevron-purpose');
+        if(!dropDown) return;
+        const toggleDrop = ({ target }) => {
+           if(target === dropDownMimicWrapper) return;
+           if(target === mainIcon) return;
+           dropDown.classList.remove('filter-section__by-purpose-drop-down--block');
+        }
+        body.addEventListener('click',toggleDrop);
+        dropDownMimicWrapper.onclick = () => {
+           dropDown.classList.toggle('filter-section__by-purpose-drop-down--block');
+           mainIcon.classList.toggle('fa-chevron-down--animate-clockwise');
+           mainIcon.classList.toggle('fa-chevron-down--animate-anti-clockwise');
+        }
+    }
+    const purposeSelector = () => {
+        const purposeInputTextMimic = document.querySelector('#purposeText');
+        const purposeList = document.querySelectorAll('.filter-section__by-purpose-item');
+        if(!purposeList) return;
+        const selectValue = ({target}) => {
+            purposeInputTextMimic.textContent = target.textContent;
+        }
+        purposeList.forEach(el => {
+            el.addEventListener('click',selectValue);
+        })
+    }
+    //Controls the behavior of the pagination buttons
+    const selectNextPage = () => {
+        const prevBtn = document.querySelector('.pagination__prev');
+        const nextBtn = document.querySelector('.pagination__next');
+        const currentPageNum = document.querySelector('.pagination__current');
+        const lastPageNum = document.querySelector('.pagination__count');
+        if(!prevBtn) return;
+        if(!nextBtn) return;
+        prevBtn.onclick = (e) => {
+            const diff = parseInt(currentPageNum.textContent) - 1;
+            if(diff === 1)
+                prevBtn.classList.add('pagination__btn--disabled');
+            if(parseInt(lastPageNum.textContent) === parseInt(currentPageNum.textContent))
+                nextBtn.classList.remove('pagination__btn--disabled');
+            currentPageNum.textContent --;
+            e.preventDefault();
+        }
+        nextBtn.onclick = (e) => {
+            if(parseInt(currentPageNum.textContent) >= 1)
+                prevBtn.classList.remove('pagination__btn--disabled');
+            const diff = parseInt(lastPageNum.textContent) - parseInt(currentPageNum.textContent);
+            if(diff === 1)
+                nextBtn.classList.add('pagination__btn--disabled');
+            currentPageNum.textContent ++;
+            e.preventDefault();
+        }
+    }
+    //Adapts Filters to fit screen
+    const manageFilterResponsive = () => {
+        const body = document.querySelector('body');
+        const filterFields = document.querySelector('.filter-section__filter-options');
+        const filterBtn = document.querySelector('.filter-section__filter-btn-wrapper');
+        const toggleBtn = document.querySelector('.filter__toggle-button');
+        if(!toggleBtn) return;
+        body.onresize = () => {
+            if(parseInt(window.innerWidth) < 943) 
+            filterFields.classList.remove('filter-section__filter-options--display-flex');
+            filterBtn.classList.remove('filter-section__filter-btn-wrapper--display-block');
+        }
+        
+        toggleBtn.onclick = () => {
+            filterFields.classList.toggle('filter-section__filter-options--display-flex');
+            filterBtn.classList.toggle('filter-section__filter-btn-wrapper--display-block');
+            toggleBtn.classList.toggle('filter__toggle-icon--transform-clockwise');
+            toggleBtn.classList.toggle('filter__toggle-icon--transform-anti-clockwise');     
+        }
+    }
 const startApp = () => {
     assignNavbarColor();
     colorNav();
@@ -163,5 +285,12 @@ const startApp = () => {
     searchForPropRedirect();
     toggleGenderDropdown();
     genderSelector();
+    fixFilterPosition();
+    toggleTypeDropDown();
+    togglePurposeDropDown();
+    typeSelector();
+    purposeSelector();
+    selectNextPage();
+    manageFilterResponsive();
 }
 startApp();

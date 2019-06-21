@@ -312,6 +312,29 @@ const updateGenderSelector = () => {
         el.addEventListener('click',selectValue);
     })
 }
+// Update property details
+const updateLabelWithFileName = () => {
+    const fileElement = document.querySelector('#imageUpload');
+    const label = document.querySelector('#imageUploadLabel');
+    if(!fileElement) return;
+    fileElement.onchange = ()=>{
+        if(fileElement.value === '') return;
+        let fileName = fileElement.value;
+        fileName = fileName.replace(/.*[\/\\]/, '');
+        label.textContent = fileName; 
+    }
+}
+const handleUpdatePropertyEvent = ()=> {
+    const editButtons = document.querySelectorAll('.property-list__edit');
+    if(!editButtons) return;
+    editButtons.forEach(el =>{
+        el.onclick = () => {
+            window.location.assign('/UI/update-property.html');
+        }
+    })
+}
+
+
 const startDashApp = () => {
     showSideNav();
     selectNextPropertyPage();
@@ -325,5 +348,7 @@ const startDashApp = () => {
     propertyTypeSelector();
     toggleUpdateDropdown();
     updateGenderSelector();
+    updateLabelWithFileName();
+    handleUpdatePropertyEvent();
 }
 startDashApp();

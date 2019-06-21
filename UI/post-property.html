@@ -105,67 +105,82 @@
                 <div class="dashboard-main__overlay">
                 </div>
             <div class="dashboard-main__heading">
-                <h3 class="dashboard-main__header">
-                    Welcome Ayodele Akinbohun. We are thrilled to have you here!!!.
+                <h3 class="dashboard-main__header-others">
+                    Post A Property
                 </h3>
                 <div class="dashboard-main__divider">
                 </div>
             </div>
-            <div class="dashboard-main__basic-content">
-                <div class="dashboard-main__menu">
-                   <a href="#" class="dashboard-main__menu-link">
-                        <div class="dashboard-main__menu-img-block">
-                                <span class="dashboard-main__menu-icon">
-                                    <div class="dashboard-main__menu-icon-pulse"></div>
-                                    <i class="fas fa-home dashboard-main__menu-icon-self"></i>
-                                </span>  
-                            </div>
-                            <div class="dashboard-main__menu-body">
-                                <h5 class="dashboard-main__menu-body-header">
-                                    Post A Property
-                                </h5>
-                                <p class="dashboard-main__menu-body-text">
-                                    Post your property advert
-                                </p>
-                        </div>
-                   </a> 
-                </div>
-                <div class="dashboard-main__menu">
-                        <a href="manage-properties.html" class="dashboard-main__menu-link">
-                             <div class="dashboard-main__menu-img-block">
-                                     <span class="dashboard-main__menu-icon">
-                                         <div class="dashboard-main__menu-icon-pulse"></div>
-                                         <i class="fas fa-brush dashboard-main__menu-icon-self"></i>
-                                     </span>  
-                                 </div>
-                                 <div class="dashboard-main__menu-body">
-                                     <h5 class="dashboard-main__menu-body-header">
-                                         Manage Properties
-                                     </h5>
-                                     <p class="dashboard-main__menu-body-text">
-                                         Edit, Delete, Change status and More
-                                     </p>
-                             </div>
-                        </a> 
-                </div>
-                <div class="dashboard-main__menu">
-                        <a href="#" class="dashboard-main__menu-link">
-                             <div class="dashboard-main__menu-img-block">
-                                     <span class="dashboard-main__menu-icon">
-                                         <div class="dashboard-main__menu-icon-pulse"></div>
-                                         <i class="fas fa-user-cog dashboard-main__menu-icon-self"></i>
-                                     </span>  
-                                 </div>
-                                 <div class="dashboard-main__menu-body">
-                                     <h5 class="dashboard-main__menu-body-header">
-                                         My Account
-                                     </h5>
-                                     <p class="dashboard-main__menu-body-text">
-                                         Update your details
-                                     </p>
-                             </div>
-                        </a> 
-                </div>
+            <div class="prop-form-container">
+               <div class="prop-form-wrapper">
+                    <div class="prop-form-container__header">
+                            <h5 class="prop-form-container__heading">
+                                    Create Your Property Advert
+                            </h5>
+                    </div>
+                    <div class="prop-form-container__body">
+                            <form action="#" class="post-prop">
+                                <div class="post-prop__form-group post-prop__form-group--relative">
+                                        <input type="text" id="propTypeInput" class="post-prop__form-input" placeholder="State" hidden>
+                                        <div class="post-prop__form-type-input-mimic">
+                                            <span id="propTypeText">Select Property Type</span> <span class="post-prop__drop-down-btn"><i class="fas fa-chevron-down--animate-clockwise fa-chevron-down fa-chevron-prop-type"></i>
+                                                </span>
+                                            </div>
+                                        <ul class="post-prop__form-type-drop-down">
+                                            <li class="post-prop__form-type-drop-down-item">All Properties</li>
+                                            <li class="post-prop__form-type-drop-down-item">Studio Flat</li>
+                                            <li class="post-prop__form-type-drop-down-item">Mini Flat</li>
+                                            <li class="post-prop__form-type-drop-down-item">2 Bedroom</li>
+                                            <li class="post-prop__form-type-drop-down-item">3 Bedroom</li>
+                                            <li class="post-prop__form-type-drop-down-item">Duplex</li>
+                                            <li class="post-prop__form-type-drop-down-item">Twin Duplex</li>
+                                            <li class="post-prop__form-type-drop-down-item">Office Apartment</li>
+                                            <li class="post-prop__form-type-drop-down-item">Land</li>
+                                            <li class="post-prop__form-type-drop-down-item">Others</li>
+                                        </ul>
+                                </div>
+                                <div class="post-prop__form-group post-prop__form-group--hidden" id="OthersId">
+                                        <input type="text" class="post-prop__form-input" placeholder="Define Your Property Type">
+                                    </div> 
+                                <div class="post-prop__form-group post-prop__form-group--relative">
+                                    <input type="text" id="stateInput" class="post-prop__form-input" placeholder="State" hidden>
+                                    <div class="post-prop__form-input-state-mimic">
+                                        <span id="stateText">Pick a State</span> <span class="post-prop__drop-down-btn"><i class="fas fa-chevron-down--animate-clockwise fa-chevron-down fa-chevron-drop"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="post-prop__form-drop-down">  
+                                    </ul>
+                                </div>
+                                <div class="post-prop__form-group">
+                                    <input type="text" class="post-prop__form-input" placeholder="City">
+                                </div> 
+                                <div class="post-prop__form-group">
+                                    <input type="text" class="post-prop__form-input" placeholder="Address">
+                                </div>
+                                <div class="post-prop__form-group post-prop__form-group--relative">
+                                    <input type="text" id="statusInput" class="post-prop__form-input" placeholder="State" hidden>
+                                    <div class="post-prop__form-input-status-mimic">
+                                        <span id="statusText">Available</span> <span class="post-prop__drop-down-btn"><i class="fas fa-chevron-down--animate-clockwise fa-chevron-down fa-chevron-status"></i>
+                                        </span>
+                                    </div>
+                                    <ul class="post-prop__form-status-drop-down">
+                                        <li class="post-prop__form-status-drop-down-item">Available</li> 
+                                        <li class="post-prop__form-status-drop-down-item">Sold</li> 
+                                        <li class="post-prop__form-status-drop-down-item">Rented</li>
+                                    </ul>
+                                </div> 
+                                <div class="post-prop__form-group">
+                                    <input type="text" class="post-prop__form-input" placeholder="Price in Naira">
+                                </div>
+                                <div class="post-prop__form-group">
+                                  <textarea name="" id=""  rows="10" class="post-prop__form-input" placeholder="Briefly description your property"></textarea>
+                                </div>
+                                <div class="post-prop__form-group post-prop__form-group--center">
+                                    <input type="submit" class="post-prop__form-group-btn" value="Post Property">
+                                  </div>
+                            </form>
+                    </div>
+               </div>  
             </div>
         </main>
         <!-- Dashboard Main Content Ends-->

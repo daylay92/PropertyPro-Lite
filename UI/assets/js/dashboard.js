@@ -169,10 +169,11 @@ const stateSelector = () => {
 }
 //Add states from json object to dropdown
 const populateDrop = ()=> {
+    const dropDown = document.querySelector('.post-prop__form-drop-down');
+    if(!dropDown) return;
     fetch('assets/utils/states.json')
     .then(res => res.json())
     .then(result => {
-        const dropDown = document.querySelector('.post-prop__form-drop-down');
         result.forEach(state => {
             const dropDownItem = document.createElement('li');
             dropDownItem.className = 'post-prop__form-drop-down-item';
@@ -277,6 +278,40 @@ const propertyTypeSelector = () => {
         el.addEventListener('click',selectValue);
     })
 }
+//Update Profile Functions
+//Control toggle of GenderType dropdown on update profile page
+const toggleUpdateDropdown = () => {
+    const body = document.querySelector('body');
+    const dropDown = document.querySelector('.update__form-drop-down');
+    const dropDownMimicWrapper = document.querySelector('.update__form-input-mimic');
+    const mainIcon = document.querySelector('.fa-chevron-update');
+    if(!dropDown) return;
+    const toggleDrop = ({ target }) => {
+       if(target === dropDownMimicWrapper) return;
+       if(target === mainIcon) return;
+       dropDown.classList.remove('update__form-drop-down--block');
+    }
+    body.addEventListener('click',toggleDrop);
+    dropDownMimicWrapper.onclick = () => {
+       dropDown.classList.toggle('update__form-drop-down--block');
+       mainIcon.classList.toggle('fa-chevron-down--animate-clockwise');
+       mainIcon.classList.toggle('fa-chevron-down--animate-anti-clockwise');
+    }
+}
+// Assigns selected value to hidden gender input field and the mimic span field when dropdown is clicked
+const updateGenderSelector = () => {
+    const genderInput = document.querySelector('#genderUpdate');
+    const genderSpanMimic = document.querySelector('#genderUpdateText');
+    const genders = document.querySelectorAll('.update__form-drop-down-item');
+    if(!genders) return;
+    const selectValue = ({ target }) => {
+        genderInput.value = target.textContent;
+        genderSpanMimic.textContent = target.textContent;
+    }
+    genders.forEach(el => {
+        el.addEventListener('click',selectValue);
+    })
+}
 const startDashApp = () => {
     showSideNav();
     selectNextPropertyPage();
@@ -288,5 +323,7 @@ const startDashApp = () => {
     statusSelector();
     togglePropTypeDropdown();
     propertyTypeSelector();
+    toggleUpdateDropdown();
+    updateGenderSelector();
 }
 startDashApp();

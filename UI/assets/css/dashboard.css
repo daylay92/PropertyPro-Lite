@@ -742,7 +742,9 @@
     outline: none;
     transition: all ease-in-out 0.6s;
     resize: none;
-    font-family: 'Poppins',sans-serif
+    font-family: 'Poppins',sans-serif;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 .post-prop__form-input:hover{
     box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
@@ -1160,4 +1162,10 @@
     .update-form-container__header{
         padding: 0.75rem 0.7rem;
     }
+}
+/* Update Profile */
+.post-prop__form-file{
+    width: 100%;
+    display: inline-block;
+    cursor: pointer;
 }

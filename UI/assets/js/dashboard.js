@@ -333,8 +333,16 @@ const handleUpdatePropertyEvent = ()=> {
         }
     })
 }
-
-
+//Preview Property 
+const handlePropertyPreview = ()=> {
+    const previewButtons = document.querySelectorAll('.property-list__preview');
+    if(!previewButtons) return;
+    previewButtons.forEach(el =>{
+        el.onclick = () => {
+            window.location.assign('/UI/view-property.html');
+        }
+    })
+}
 const startDashApp = () => {
     showSideNav();
     selectNextPropertyPage();
@@ -350,5 +358,6 @@ const startDashApp = () => {
     updateGenderSelector();
     updateLabelWithFileName();
     handleUpdatePropertyEvent();
+    handlePropertyPreview();
 }
 startDashApp();

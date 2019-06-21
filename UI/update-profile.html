@@ -106,46 +106,56 @@
                 </div>
             <div class="dashboard-main__heading">
                 <h3 class="dashboard-main__header-others">
-                    Profile Information
+                    Edit Your Profile
                 </h3>
                 <div class="dashboard-main__divider">
                 </div>
-            
-                <div class="account-container">
-                    <div class="account-wrapper">
-                         <div class="account-wrapper__header">
-                                 <h5 class="account-wrapper__heading">
-                                         What we know about You
-                                 </h5>
-                                 <span class="account-wrapper__icon">
-                                     <a href="update-profile.html" title="Edit Profile" class="account-wrapper__link"><i class="fas fa-cog"></i></a> 
-                                </span>
-                         </div>
-                         <div class="account-wrapper__body">
-                             <div class="account-detail">
-                                 <span class="account-detail__icon"><i class="fas fa-id-badge"></i></span>
-                                 <p class="account-detail__info">Ayodele Akinbohun</p>
-                             </div>
-                             <div class="account-detail">
-                                    <span class="account-detail__icon"><i class="fas fa-user"></i></span>
-                                    <p class="account-detail__info">Male</p>
-                             </div>
-                             <div class="account-detail">
-                                    <span class="account-detail__icon"><i class="fas fa-envelope"></i></span>
-                                    <p class="account-detail__info">Daylay92@yahoo.com</p>
-                             </div>
-                             <div class="account-detail">
-                                    <span class="account-detail__icon"><i class="fas fa-map-marker-alt"></i></span>
-                                    <p class="account-detail__info">28, Ojumu Crescent, Ijapo Estate, Akure, Ondo State</p>
-                             </div> 
-                             <div class="account-detail">
-                                    <span class="account-detail__icon">
-                                        <i class="fas fa-mobile-alt"></i></span>
-                                    <p class="account-detail__info">08063805598</p>
-                             </div>                           
-                        </div>
+            </div>
+            <div class="update-form-container">
+               <div class="update-form-wrapper">
+                    <div class="update-form-container__header">
+                            <h5 class="update-form-container__heading">
+                                    Help Us Know You Better
+                            </h5>
+                            <span class="update-wrapper__icon">
+                                    <a href="view-profile.html" title="View Profile" class="update-wrapper__link"><i class="fas fa-arrow-circle-left"></i></a> 
+                               </span>
                     </div>
-                </div>       
+                    <div class="update-form-container__body">
+                            <form action="#" class="update">
+                                <div class="update__form-group">
+                                    <input type="text"  value="Ayodele" class="update__form-input" placeholder="First Name">
+                                </div> 
+                                <div class="update__form-group">
+                                        <input type="text" value="Akinbohun" class="update__form-input" placeholder="Last Name">
+                                </div>
+                                <div class="update__form-group update__form-group--relative">
+                                        <input type="text" id="genderUpdate" class="update__form-input" hidden>
+                                        <div class="update__form-input-mimic">
+                                            <span id="genderUpdateText">Male</span> <span class="update__drop-down-btn"><i class="fas fa-chevron-down--animate-clockwise fa-chevron-down fa-chevron-update"></i>
+                                            </span>
+                                        </div>
+                                        <ul class="update__form-drop-down">
+                                            <li class="update__form-drop-down-item">Male</li> 
+                                            <li class="update__form-drop-down-item">Female</li> 
+                                        </ul>
+                                    </div>
+                                <div class="update__form-group">
+                                        <input type="text" value="daylay92@yahoo.com" class="update__form-input" placeholder="Email">
+                                </div>
+                                <div class="update__form-group">
+                                    <input type="text" value="08063805598" class="update__form-input" placeholder="Mobile Number">
+                                </div>
+                                <div class="update__form-group">
+                                        <input type="text"value="28, Ojumu Crescent, Ijapo Estate, Akure, Ondo State" class="update__form-input" placeholder="Address">
+                                    </div>
+                                <div class="update__form-group update__form-group--center">
+                                    <input type="submit" class="update__form-group-btn" value="Update Profile">
+                                  </div>
+                            </form>
+                    </div>
+               </div>  
+            </div>
         </main>
         <!-- Dashboard Main Content Ends-->
         <!-- footer  -->

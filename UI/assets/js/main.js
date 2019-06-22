@@ -91,7 +91,7 @@ const searchForPropRedirect = () => {
     const searchButton = document.querySelector('.hero-section__search-icon');
     if(!searchButton) return;
     searchButton.onclick = () => {
-        window.location.assign('/UI/view-properties.html');
+        window.location.assign('view-properties.html');
     }
 }
 

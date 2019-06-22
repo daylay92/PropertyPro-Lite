@@ -107,7 +107,7 @@ const enableCloseModal = () => {
 const proceedWithMark = (selector) => {
     const modalProceedBtn = document.querySelector(selector);
     const proceed = (e) => {
-        window.location.assign('/UI/manage-properties.html');
+        window.location.assign('manage-properties.html');
         e.preventDefault();
         }
         modalProceedBtn.addEventListener('click',proceed);
@@ -132,7 +132,7 @@ const markOrUnSoldOrRented = () => {
 const proceedWithDelete = (id) => {
     const modalDeleteBtn = document.querySelector(id);
     const proceed = (e) => {
-        window.location.assign('/UI/manage-properties.html');
+        window.location.assign('manage-properties.html');
         e.preventDefault();
         }
         modalDeleteBtn.addEventListener('click',proceed);
@@ -329,7 +329,7 @@ const handleUpdatePropertyEvent = ()=> {
     if(!editButtons) return;
     editButtons.forEach(el =>{
         el.onclick = () => {
-            window.location.assign('/UI/update-property.html');
+            window.location.assign('update-property.html');
         }
     })
 }
@@ -339,7 +339,7 @@ const handlePropertyPreview = ()=> {
     if(!previewButtons) return;
     previewButtons.forEach(el =>{
         el.onclick = () => {
-            window.location.assign('/UI/view-property.html');
+            window.location.assign('view-property.html');
         }
     })
 }

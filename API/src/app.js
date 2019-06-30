@@ -30,3 +30,6 @@ app.all('*', (req, res) =>
 app.listen(port, () =>
   console.log(`Amazing stuff is happening on port: ${app.get('port')}`)
 );
+
+// Export app for use in test modules
+export default app;

@@ -4,11 +4,10 @@
   "description": "A server built for a platform where people can create and/or search properties for sale or rent.",
   "main": "./API/lib/app.js",
   "scripts": {
-    "test": "mocha ./API/lib/**/*.test.js --timeout 20000 --exit",
+    "test": "mocha ./API/src/**/*.test.js -r @babel/register --exit true",
     "start": "node ./API/lib/app.js",
     "dev": "nodemon --exec babel-node ./API/src/app.js",
-    "build": "babel ./API/src -d ./API/lib",
-    "test-watch": "npm run build && npm test"
+    "build": "babel ./API/src -d ./API/lib"
   },
   "repository": {
     "type": "git",
@@ -34,6 +33,7 @@
     "@babel/node": "^7.4.5",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
     "babel-plugin-dynamic-import-node": "^2.3.0",
     "chai": "^4.2.0",
     "eslint": "^5.16.0",
@@ -53,6 +53,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1"
   }
 }

@@ -1,5 +1,8 @@
 import { config } from 'dotenv';
 import express from 'express';
+import { urlencoded, json } from 'body-parser';
+import cors from 'cors';
+import authRoutes from './routes/auth';
 
 // Initialize process.env variables for the .env file
 config();
@@ -10,6 +13,20 @@ const app = express();
 // Set server port
 const port = process.env.PORT || 3000;
 app.set('port', port);
+
+// Middlewares For All Requests
+
+// Parse Response Header to include cross resource sharing
+app.use(cors());
+
+// parse application/x-www-form-urlencoded
+app.use(urlencoded({ extended: false }));
+
+// parse application/json
+app.use(json());
+
+// Main Routes
+app.use('/api/v1/auth', authRoutes);
 
 // Default Route
 app.get('/api/v1', (req, res) =>

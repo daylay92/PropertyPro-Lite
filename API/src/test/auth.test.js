@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../app';
-import user from './dummy';
+import user from '../utils/dummy';
 
 // Unit Test for Authentication Route
 describe('Auth Route Endpoints', () => {
@@ -12,7 +12,7 @@ describe('Auth Route Endpoints', () => {
         .send(user)
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
-        .expect(200)
+        .expect(201)
         .expect(res => {
           const { status, data } = res.body;
           expect(status).to.equal('Success');

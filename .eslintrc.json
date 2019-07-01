@@ -7,11 +7,13 @@
         "airbnb-base","prettier"
     ],
     "plugins": [
-        "prettier"
+        "prettier","mocha"
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "describe": "readonly",
+        "it": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 2018,
@@ -19,6 +21,7 @@
     },
     "rules": {
         "prettier/prettier": "error",
-        "no-console" : 0
+        "no-console" : 0,
+        "mocha/no-exclusive-tests": "error"
     }
 }

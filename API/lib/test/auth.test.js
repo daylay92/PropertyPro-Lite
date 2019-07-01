@@ -8,13 +8,13 @@ var _chai = require("chai");
 
 var _app = _interopRequireDefault(require("../app"));
 
-var _dummy = _interopRequireDefault(require("./dummy"));
+var _dummy = _interopRequireDefault(require("../utils/dummy"));
 
 // Unit Test for Authentication Route
 describe('Auth Route Endpoints', function () {
   describe('POST api/v1/auth/signup', function () {
     it('should successfully register a user if all required inputs are provided', function (done) {
-      (0, _supertest["default"])(_app["default"]).post('/api/v1/auth/signup').send(_dummy["default"]).set('Accept', 'application/json').expect('Content-Type', /json/).expect(200).expect(function (res) {
+      (0, _supertest["default"])(_app["default"]).post('/api/v1/auth/signup').send(_dummy["default"]).set('Accept', 'application/json').expect('Content-Type', /json/).expect(201).expect(function (res) {
         var _res$body = res.body,
             status = _res$body.status,
             data = _res$body.data;

@@ -41,7 +41,7 @@ describe('Auth Route Endpoints', () => {
         .expect(res => {
           const { status } = res.body;
           expect(status).to.equal('400 Invalid Request');
-          expect(res.body).to.have.all.keys('status', 'error');
+          expect(res.body).to.have.all.keys('status', 'error', 'errors');
         })
         .end(done);
     });
@@ -55,7 +55,7 @@ describe('Auth Route Endpoints', () => {
         .expect(res => {
           const { status } = res.body;
           expect(status).to.equal('400 Invalid Request');
-          expect(res.body).to.have.all.keys('status', 'error');
+          expect(res.body).to.have.all.keys('status', 'error', 'errors');
         })
         .end(done);
     });

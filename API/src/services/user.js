@@ -88,6 +88,11 @@ class User extends UserModel {
     );
     return token;
   }
+
+  static async getUserByEmail(emailAddress) {
+    const user = users.find(({ email }) => email === emailAddress);
+    return user;
+  }
 }
 
 export default User;

@@ -1,5 +1,6 @@
 import faker from 'faker';
 
+// signup data
 //  valid user data
 const validUserData = {
   email: faker.internet.email(),
@@ -48,9 +49,29 @@ const alreadyExistingUserData = {
   gender: 'Male'
 };
 
+// login credentials
+// Valid credentials
+const validLoginCredentials = {
+  email: 'zaylay92@yahoo.com',
+  password: 'ayo1234'
+};
+// Invalid credentials
+const invalidLoginCredentials = {
+  email: 'desk@yahoo.com',
+  password: 'ayo1234'
+};
+// Invalid credentials
+const incompleteLoginCredentials = {
+  email: 'zaylay92@yahoo.com',
+  password: ''
+};
+
 export {
   validUserData,
   incompleteUserData,
   invalidUserData,
-  alreadyExistingUserData
+  alreadyExistingUserData,
+  validLoginCredentials,
+  invalidLoginCredentials,
+  incompleteLoginCredentials
 };

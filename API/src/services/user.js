@@ -89,6 +89,17 @@ class User extends UserModel {
     return token;
   }
 
+  static generateToken(id, is_admin) {
+    const token = jwt.sign(
+      {
+        data: { id, is_admin }
+      },
+      process.env.SIGN_SECRET,
+      { expiresIn: '24h' }
+    );
+    return token;
+  }
+
   static async getUserByEmail(emailAddress) {
     const user = users.find(({ email }) => email === emailAddress);
     return user;

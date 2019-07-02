@@ -12,5 +12,5 @@ router.post(
   SignUp.isEmailAlreadyExist,
   Auth.signUp
 );
-
+router.post('/signin', Auth.signIn);
 export default router;

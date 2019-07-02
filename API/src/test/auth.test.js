@@ -5,7 +5,10 @@ import {
   validUserData,
   incompleteUserData,
   invalidUserData,
-  alreadyExistingUserData
+  alreadyExistingUserData,
+  validLoginCredentials,
+  invalidLoginCredentials,
+  incompleteLoginCredentials
 } from '../utils/dummy';
 
 // Unit Test for Authentication Route
@@ -69,6 +72,57 @@ describe('Auth Route Endpoints', () => {
         .expect(res => {
           const { status } = res.body;
           expect(status).to.equal('409 Conflict');
+          expect(res.body).to.have.all.keys('status', 'error');
+        })
+        .end(done);
+    });
+  });
+  //    tests for login
+  describe('POST api/v1/auth/signin', () => {
+    it('should successfully login a user if user provides valid login credentials', done => {
+      request(app)
+        .post('/api/v1/auth/signin')
+        .send(validLoginCredentials)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const { status, data } = res.body;
+          expect(status).to.equal('Success');
+          expect(data).to.have.all.keys(
+            'token',
+            'id',
+            'first_name',
+            'last_name',
+            'email'
+          );
+        })
+        .end(done);
+    });
+    it('should prevent user from logging in if any or all of the login credentials is/are not provided', done => {
+      request(app)
+        .post('/api/v1/auth/signin')
+        .send(incompleteLoginCredentials)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(401)
+        .expect(res => {
+          const { status } = res.body;
+          expect(status).to.equal('401 Unauthorized');
+          expect(res.body).to.have.all.keys('status', 'error');
+        })
+        .end(done);
+    });
+    it('should prevent a user from logging in with invalid login credentials', done => {
+      request(app)
+        .post('/api/v1/auth/signin')
+        .send(invalidLoginCredentials)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(401)
+        .expect(res => {
+          const { status } = res.body;
+          expect(status).to.equal('401 Unauthorized');
           expect(res.body).to.have.all.keys('status', 'error');
         })
         .end(done);

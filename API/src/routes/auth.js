@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import SignUp from '../middlewares/signup-validation';
+import SignIn from '../middlewares/signin-validation';
 import Auth from '../controllers/authController';
 
 const router = Router();
@@ -12,5 +13,10 @@ router.post(
   SignUp.isEmailAlreadyExist,
   Auth.signUp
 );
-router.post('/signin', Auth.signIn);
+router.post(
+  '/signin',
+  SignIn.validate(),
+  SignIn.verifyValidationResult,
+  Auth.signIn
+);
 export default router;

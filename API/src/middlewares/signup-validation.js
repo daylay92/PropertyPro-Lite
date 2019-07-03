@@ -55,7 +55,7 @@ export default class SignUp {
         .exists()
         .withMessage('Field is Required')
         .not()
-        .isEmpty({ ignore_whitespace: true })
+        .isEmpty()
         .withMessage('Field cannot be empty')
         .isLength({ min: 6 })
         .withMessage('Should be atleast 6 characters Long')

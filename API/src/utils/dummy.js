@@ -57,7 +57,7 @@ const validLoginCredentials = {
 };
 // Invalid credentials
 const invalidLoginCredentials = {
-  email: 'desk@yahoo.com',
+  email: 'deskyahoo.com',
   password: 'ayo1234'
 };
 // Invalid credentials

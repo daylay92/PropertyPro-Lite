@@ -42,7 +42,7 @@ app.all('*', (req, res) =>
     .status(404)
     .json({ status: '404 Not Found', message: "This route doesn't exist" })
 );
-
+/* eslint no-console : 0 */
 // Listen for Requests to Server
 app.listen(port, () =>
   console.log(`Amazing stuff is happening on port: ${app.get('port')}`)

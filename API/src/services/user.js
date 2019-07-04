@@ -50,7 +50,7 @@ class User extends UserModel {
   }
 
   /* eslint camelcase: 0 */
-  save() {
+  async save() {
     const currentNoOfUsers = users.length;
     const {
       id,
@@ -74,7 +74,12 @@ class User extends UserModel {
       gender,
       is_admin
     });
-    return newNoOfUsers > currentNoOfUsers;
+    const isSaved =
+      newNoOfUsers > currentNoOfUsers
+        ? true
+        : new Error('User was not Created');
+    if (isSaved) return true;
+    throw isSaved;
   }
 
   generateToken() {

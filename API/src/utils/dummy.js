@@ -1,4 +1,5 @@
 import faker from 'faker';
+import UserServices from '../services/user';
 
 // signup data
 //  valid user data
@@ -66,6 +67,21 @@ const incompleteLoginCredentials = {
   password: ''
 };
 
+// Property Test Data
+// Valid Token
+const validToken = UserServices.generateToken(490, false);
+const inValidToken = 'eyJhbGciOiJI.UzI1NiIsInR5c.CI6IkpXVCJ9';
+const validPropertyData = {
+  status: 'Available',
+  price: 800000.0,
+  state: 'Lagos',
+  city: 'Ikeja',
+  address: '30, Caleb Road',
+  type: '2 bedroom',
+  image_url: '',
+  purpose: 'For Rent'
+};
+
 export {
   validUserData,
   incompleteUserData,
@@ -73,5 +89,8 @@ export {
   alreadyExistingUserData,
   validLoginCredentials,
   invalidLoginCredentials,
-  incompleteLoginCredentials
+  incompleteLoginCredentials,
+  validToken,
+  validPropertyData,
+  inValidToken
 };

@@ -92,7 +92,7 @@ export default class SignUp {
           : newErrObj[errObj.param];
         return newErrObj;
       }, {});
-      if (isRequiredError === true)
+      if (isRequiredError)
         return res.status(400).json({
           status: '400 Invalid Request',
           error: 'Some required fields are missing',

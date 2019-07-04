@@ -78,7 +78,7 @@ class User extends UserModel {
       newNoOfUsers > currentNoOfUsers
         ? true
         : new Error('User was not Created');
-    if (isSaved) return true;
+    if (isSaved) return isSaved;
     throw isSaved;
   }
 

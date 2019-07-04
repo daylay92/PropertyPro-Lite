@@ -36,7 +36,8 @@ describe('Property Route Endpoints', () => {
             'price',
             'created_on',
             'image_url',
-            'purpose'
+            'purpose',
+            'imageName'
           );
         })
         .end(done);
@@ -86,7 +87,7 @@ describe('Property Route Endpoints', () => {
         .expect(res => {
           const { status, error } = res.body;
           expect(status).to.equal('401 Unauthorized');
-          expect(error).to.equal('Access token is Required');
+          expect(error).to.equal('Access token is Invalid');
         })
         .end(done);
     });

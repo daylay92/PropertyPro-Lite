@@ -64,7 +64,7 @@ class Auth {
           error: 'Incorrect Password'
         });
       const { id, first_name, last_name } = user;
-      const token = User.generateToken();
+      const token = User.generateToken(id, false);
       return res.status(200).json({
         status: 'Success',
         data: {

@@ -27,24 +27,17 @@ class Auth {
         pass,
         phoneNumber
       );
-      const isSaved = user.save();
-      if (isSaved) {
-        const token = user.generateToken();
-        return res.status(201).json({
-          status: 'Success',
-          data: {
-            token,
-            id,
-            first_name,
-            last_name,
-            email
-          }
-        });
-      }
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+      await user.save();
+      const token = user.generateToken();
+      return res.status(201).json({
+        status: 'Success',
+        data: {
+          token,
+          id,
+          first_name,
+          last_name,
+          email
+        }
       });
     } catch (e) {
       return res.status(500).json({

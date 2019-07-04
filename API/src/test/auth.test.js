@@ -1,4 +1,4 @@
-import request from 'supertest';
+import supertest from 'supertest';
 import { expect } from 'chai';
 import app from '../app';
 import {
@@ -11,11 +11,13 @@ import {
   incompleteLoginCredentials
 } from '../utils/dummy';
 
+const request = supertest(app);
+
 // Unit Test for Authentication Route
 describe('Auth Route Endpoints', () => {
   describe('POST api/v1/auth/signup', () => {
     it('should successfully register a user if all required inputs are provided', done => {
-      request(app)
+      request
         .post('/api/v1/auth/signup')
         .send(validUserData)
         .set('Accept', 'application/json')
@@ -35,7 +37,7 @@ describe('Auth Route Endpoints', () => {
         .end(done);
     });
     it('should not signup a user if any or all of the required fields is/are not provided', done => {
-      request(app)
+      request
         .post('/api/v1/auth/signup')
         .send(incompleteUserData)
         .set('Accept', 'application/json')
@@ -49,7 +51,7 @@ describe('Auth Route Endpoints', () => {
         .end(done);
     });
     it('should not signup a user if any of the input parameters is/are invalid', done => {
-      request(app)
+      request
         .post('/api/v1/auth/signup')
         .send(invalidUserData)
         .set('Accept', 'application/json')
@@ -63,7 +65,7 @@ describe('Auth Route Endpoints', () => {
         .end(done);
     });
     it('should not signup a user if he/she provides an already existing email address', done => {
-      request(app)
+      request
         .post('/api/v1/auth/signup')
         .send(alreadyExistingUserData)
         .set('Accept', 'application/json')
@@ -80,7 +82,7 @@ describe('Auth Route Endpoints', () => {
   //    tests for login
   describe('POST api/v1/auth/signin', () => {
     it('should successfully login a user if user provides valid login credentials', done => {
-      request(app)
+      request
         .post('/api/v1/auth/signin')
         .send(validLoginCredentials)
         .set('Accept', 'application/json')
@@ -100,7 +102,7 @@ describe('Auth Route Endpoints', () => {
         .end(done);
     });
     it('should prevent user from logging in if any or all of the login credentials is/are not provided', done => {
-      request(app)
+      request
         .post('/api/v1/auth/signin')
         .send(incompleteLoginCredentials)
         .set('Accept', 'application/json')
@@ -114,7 +116,7 @@ describe('Auth Route Endpoints', () => {
         .end(done);
     });
     it('should prevent a user from logging in with invalid login credentials', done => {
-      request(app)
+      request
         .post('/api/v1/auth/signin')
         .send(invalidLoginCredentials)
         .set('Accept', 'application/json')
@@ -129,3 +131,5 @@ describe('Auth Route Endpoints', () => {
     });
   });
 });
+
+export default request;

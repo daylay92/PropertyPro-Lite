@@ -4,7 +4,7 @@
   "description": "A server built for a platform where people can create and/or search properties for sale or rent.",
   "main": "./API/lib/app.js",
   "scripts": {
-    "test": "mocha ./API/src/**/*.test.js -r @babel/register --exit true",
+    "test": "mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
     "start": "node ./API/lib/app.js",
     "dev": "nodemon --exec babel-node ./API/src/app.js",
     "build": "babel ./API/src -d ./API/lib"

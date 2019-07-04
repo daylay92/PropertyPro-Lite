@@ -21,7 +21,6 @@
     },
     "rules": {
         "prettier/prettier": "error",
-        "no-console" : 0,
         "mocha/no-exclusive-tests": "error"
     }
 }

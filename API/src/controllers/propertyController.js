@@ -8,7 +8,7 @@ export default class PropertyController {
     try {
       const { price, state, city, address, type, purpose } = req.body;
       const owner = req.auth.id;
-      const { url, originalname } = req.file;
+      const { url, originalname, public_id } = req.file;
       const id = await Helpers.createId(properties);
       let { status } = req.body;
       let { otherType } = req.body;
@@ -23,6 +23,7 @@ export default class PropertyController {
         address,
         type,
         originalname,
+        public_id,
         url,
         purpose,
         status,

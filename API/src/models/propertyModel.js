@@ -8,6 +8,7 @@ export default class Property {
     address,
     type,
     imageName,
+    imageId,
     imageUrl,
     purpose,
     status,
@@ -22,6 +23,7 @@ export default class Property {
     this.address = address;
     this.type = type;
     this.imageName = imageName;
+    this.imageId = imageId;
     this.image_url = imageUrl;
     this.purpose = purpose;
     this.created_on = new Date().toLocaleString();

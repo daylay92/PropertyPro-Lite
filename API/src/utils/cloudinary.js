@@ -28,4 +28,9 @@ const deleteImage = publicId => {
   cloudinary.uploader.destroy(publicId);
 };
 
-export { storage, deleteImage };
+const deleteImgWithReturn = async publicId => {
+  const result = await cloudinary.uploader.destroy(publicId, async err => err);
+  return result;
+};
+
+export { storage, deleteImage, deleteImgWithReturn };

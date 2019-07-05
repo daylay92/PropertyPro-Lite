@@ -3,6 +3,8 @@ import path from 'path';
 import request from './auth.test';
 import { validToken, inValidToken } from '../utils/dummy';
 
+let testId = null;
+
 describe('Property Route Endpoints', () => {
   describe('POST api/v1/property', () => {
     it('should allow a authenticated user(Agent) to successfully post a property advert if he/she provides all the required data', done => {
@@ -25,6 +27,7 @@ describe('Property Route Endpoints', () => {
         .expect(201)
         .expect(res => {
           const { status, data } = res.body;
+          testId = data.id;
           expect(status).to.equal('Success');
           expect(data).to.have.all.keys(
             'id',
@@ -147,7 +150,7 @@ describe('Property Route Endpoints', () => {
   describe('UPDATE api/v1/property/:id', () => {
     it('should allow an authenticated user(Agent) to successfully update his/her property advert if he/she provides valid parameters', done => {
       request
-        .patch('/api/v1/property/2')
+        .patch(`/api/v1/property/${testId}`)
         .field('price', 700000)
         .field('state', 'Ekiti')
         .field('city', 'Ado')

@@ -24,5 +24,8 @@ const storage = cloudinaryStorage({
     { if: 'end' }
   ]
 });
+const deleteImage = publicId => {
+  cloudinary.uploader.destroy(publicId);
+};
 
-export default storage;
+export { storage, deleteImage };

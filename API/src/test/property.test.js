@@ -9,11 +9,11 @@ describe('Property Route Endpoints', () => {
       request
         .post('/api/v1/property')
         .field('status', 'Available')
-        .field('price', 80000.0)
+        .field('price', 800000)
         .field('state', 'Lagos')
         .field('city', 'Ikeja')
         .field('address', '30, Caleb Road')
-        .field('type', '2 bedroom')
+        .field('type', 'Mini Flat')
         .field('purpose', 'For Rent')
         .attach(
           'image',
@@ -37,7 +37,8 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'purpose',
-            'imageName'
+            'imageName',
+            'otherType'
           );
         })
         .end(done);
@@ -108,7 +109,7 @@ describe('Property Route Endpoints', () => {
         .set('Connection', 'keep-alive')
         .set('x-access-token', validToken)
         .expect('Content-Type', /json/)
-        .expect(401)
+        .expect(400)
         .expect(res => {
           const { status } = res.body;
           expect(status).to.equal('400 Bad Request');
@@ -133,7 +134,7 @@ describe('Property Route Endpoints', () => {
         .set('Connection', 'keep-alive')
         .set('x-access-token', validToken)
         .expect('Content-Type', /json/)
-        .expect(401)
+        .expect(400)
         .expect(res => {
           const { status } = res.body;
           expect(status).to.equal('400 Bad Request');

@@ -2,13 +2,16 @@ import { Router } from 'express';
 import propertyController from '../controllers/propertyController';
 import ImageUpload from '../middlewares/image-upload';
 import Authenticate from '../middlewares/authenticate';
+import PostProperty from '../middlewares/post-property-validation';
 
 const router = Router();
 
 router.post(
   '/',
-  Authenticate.verify,
   ImageUpload.multerUploader,
+  Authenticate.verify,
+  PostProperty.validate(),
+  PostProperty.verifyValidationResult,
   propertyController.postProperty
 );
 

@@ -1,5 +1,5 @@
 import multer from 'multer';
-import storage from '../utils/cloudinary';
+import { storage } from '../utils/cloudinary';
 
 export default class ImageUpload {
   static multerUploader(req, res, next) {
@@ -19,8 +19,11 @@ export default class ImageUpload {
           status: '400 Bad Request',
           error: 'Invalid File Format'
         });
-      const { url, originalname } = req.file;
-      req.imageContent = { url, originalname };
+      if (!req.file)
+        return res.status(400).json({
+          status: '400 Bad Request',
+          error: 'An Image is Required'
+        });
       return next();
     });
   }

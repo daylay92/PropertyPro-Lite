@@ -12,7 +12,8 @@ const properties = [
     image_url: faker.image.imageUrl(),
     purpose: 'For Rent',
     status: 'Available',
-    created_on: new Date().toLocaleString()
+    created_on: new Date().toLocaleString(),
+    other_type: null
   },
   {
     id: 2,
@@ -25,7 +26,8 @@ const properties = [
     image_url: faker.image.imageUrl(),
     purpose: 'For Rent',
     status: 'Available',
-    created_on: new Date().toLocaleString()
+    created_on: new Date().toLocaleString(),
+    other_type: null
   }
 ];
 export default properties;

@@ -3,16 +3,23 @@ import propertyController from '../controllers/propertyController';
 import ImageUpload from '../middlewares/image-upload';
 import Authenticate from '../middlewares/authenticate';
 import PostProperty from '../middlewares/post-property-validation';
+import authorize from '../middlewares/authorize';
 
 const router = Router();
 
 router.post(
   '/',
-  ImageUpload.multerUploader,
   Authenticate.verify,
+  ImageUpload.multerUploader,
   PostProperty.validate(),
   PostProperty.verifyValidationResult,
   propertyController.postProperty
+);
+router.patch(
+  '/:id',
+  Authenticate.verify,
+  authorize,
+  ImageUpload.multerUploader
 );
 
 export default router;

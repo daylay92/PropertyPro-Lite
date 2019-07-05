@@ -266,7 +266,7 @@ describe('Property Route Endpoints', () => {
     });
     it('should prevent any user except an Admin from updating a property advert posted by another user', done => {
       request
-        .patch('/api/v1/property/2')
+        .patch('/api/v1/property/1')
         .field('status', 'Available')
         .field('state', 'Lagos')
         .field('purpose', 'For Rent')

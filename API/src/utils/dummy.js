@@ -69,7 +69,7 @@ const incompleteLoginCredentials = {
 
 // Property Test Data
 // Valid Token
-const validToken = UserServices.generateToken(490, false);
+const validToken = UserServices.generateToken(2, false);
 const inValidToken = 'eyJhbGciOiJI.UzI1NiIsInR5c.CI6IkpXVCJ9';
 const validPropertyData = {
   status: 'Available',

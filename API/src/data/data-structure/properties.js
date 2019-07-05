@@ -1,5 +1,3 @@
-import faker from 'faker';
-
 const properties = [
   {
     id: 1,
@@ -9,13 +7,14 @@ const properties = [
     city: 'Ojota',
     address: '20, Ojuka Street',
     type: 'Studio Flat',
-    imageName: '',
-    imageId: '',
-    image_url: faker.image.imageUrl(),
+    imageName: 'o4yjhkbrmluwdzicmhih',
+    imageId: 'o4yjhkbrmluwdzicmhih',
+    image_url:
+      'https://res.cloudinary.com/propertypro/image/upload/v1562334792/samples/test/mp0ba2f8izg3eefiehbl.jpg',
     purpose: 'For Rent',
     status: 'Available',
     created_on: new Date().toLocaleString(),
-    other_type: null
+    otherType: null
   },
   {
     id: 2,
@@ -25,13 +24,14 @@ const properties = [
     city: 'Akure',
     address: '20, Donga Street',
     type: 'Mini Flat',
-    imageName: '',
-    imageId: '',
-    image_url: faker.image.imageUrl(),
+    imageName: 'o4yjhkbrmluwdzicmhih',
+    imageId: 'o4yjhkbrmluwdzicmhih',
+    image_url:
+      'https://res.cloudinary.com/propertypro/image/upload/v1562334790/samples/test/iifzizmkrle6coaswlap.jpg',
     purpose: 'For Rent',
     status: 'Available',
     created_on: new Date().toLocaleString(),
-    other_type: null
+    otherType: null
   }
 ];
 export default properties;

@@ -50,7 +50,8 @@ export default class Property extends PropertyModel {
       image_url,
       purpose,
       status,
-      created_on
+      created_on,
+      otherType
     } = this;
     const newLength = properties.push({
       id,
@@ -65,11 +66,17 @@ export default class Property extends PropertyModel {
       image_url,
       purpose,
       status,
-      created_on
+      created_on,
+      otherType
     });
     const isSaved =
       newLength > oldLength ? true : new Error('Property was not saved');
     if (isSaved) return isSaved;
     throw isSaved;
+  }
+
+  static async findById(propId) {
+    const property = properties.find(prop => prop.id === parseInt(propId, 10));
+    return property;
   }
 }

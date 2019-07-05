@@ -19,7 +19,8 @@ router.patch(
   '/:id',
   Authenticate.verify,
   authorize,
-  ImageUpload.multerUploader
+  ImageUpload.multerUpdateUpload,
+  propertyController.updateProperty
 );
 
 export default router;

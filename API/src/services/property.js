@@ -13,7 +13,8 @@ export default class Property extends PropertyModel {
     imageName,
     imageUrl,
     purpose,
-    status
+    status = 'Available',
+    otherType = null
   ) {
     super(
       id,
@@ -26,7 +27,8 @@ export default class Property extends PropertyModel {
       imageName,
       imageUrl,
       purpose,
-      status
+      status,
+      otherType
     );
   }
 

@@ -7,10 +7,12 @@ export default class PropertyController {
   static async postProperty(req, res) {
     try {
       const { price, state, city, address, type, purpose } = req.body;
-      let { status } = req.body;
       const owner = req.auth.id;
-      const { url, originalname } = req.imageContent;
+      const { url, originalname } = req.file;
       const id = await Helpers.createId(properties);
+      let { status } = req.body;
+      let { otherType } = req.body;
+      otherType = !otherType ? null : otherType;
       status = !status ? 'Available' : status;
       const property = new Property(
         id,
@@ -23,7 +25,8 @@ export default class PropertyController {
         originalname,
         url,
         purpose,
-        status
+        status,
+        otherType
       );
       const { created_on } = property;
       await property.save();
@@ -40,7 +43,8 @@ export default class PropertyController {
           created_on,
           image_url: url,
           imageName: originalname,
-          purpose
+          purpose,
+          otherType
         }
       });
     } catch (err) {

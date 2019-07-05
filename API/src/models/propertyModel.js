@@ -10,7 +10,8 @@ export default class Property {
     imageName,
     imageUrl,
     purpose,
-    status = 'Available'
+    status,
+    otherType
   ) {
     this.id = id;
     this.owner = owner;
@@ -24,5 +25,6 @@ export default class Property {
     this.image_url = imageUrl;
     this.purpose = purpose;
     this.created_on = new Date().toLocaleString();
+    this.otherType = otherType;
   }
 }

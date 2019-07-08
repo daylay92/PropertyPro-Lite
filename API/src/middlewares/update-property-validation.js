@@ -1,13 +1,12 @@
-import { check, validationResult } from 'express-validator';
+import { check } from 'express-validator';
 import { states, type, purpose, status } from '../utils/validation-data';
-import { deleteImage } from '../utils/cloudinary';
+import PostProperty from './post-property-validation';
 
-export default class PostProperty {
+export default class UpdateProperty extends PostProperty {
   static validate() {
     return [
       check('status')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
@@ -15,8 +14,7 @@ export default class PostProperty {
         .withMessage('should be either Available, Sold or Rented')
         .trim(),
       check('price')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
@@ -27,8 +25,7 @@ export default class PostProperty {
         .withMessage('should be a float or numbers')
         .escape(),
       check('state')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
@@ -36,8 +33,7 @@ export default class PostProperty {
         .withMessage('should be one of the states listed')
         .trim(),
       check('city')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
@@ -48,8 +44,7 @@ export default class PostProperty {
         .withMessage('Should be atleast 3 characters long')
         .escape(),
       check('address')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
@@ -58,8 +53,7 @@ export default class PostProperty {
         .trim()
         .escape(),
       check('type')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
@@ -71,11 +65,19 @@ export default class PostProperty {
         })
         .withMessage(
           'the type selected requires that you fill the other-type field'
+        )
+        .custom((value, { req }) => {
+          if (value.trim() !== 'Others') return !req.body.otherType;
+          return true;
+        })
+        .withMessage(
+          'the type selected implies you do not need to fill the other-type field'
         ),
       check('otherType')
         .optional()
         .custom((value, { req }) => {
-          if (value) return req.body.type === 'Others';
+          if (value)
+            return req.body.type === 'Others' || req.prop.type === 'Others';
           return true;
         })
         .withMessage('should only be used when the selected type is Others')
@@ -87,44 +89,12 @@ export default class PostProperty {
         .trim()
         .escape(),
       check('purpose')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
         .isIn([...purpose])
         .withMessage('should be one of the types listed')
     ];
-  }
-  /* eslint no-param-reassign: 0 */
-
-  static async verifyValidationResult(req, res, next) {
-    const errors = validationResult(req);
-    let isRequiredError = false;
-    if (!errors.isEmpty()) {
-      const validateErrors = errors.array();
-      const errorObj = validateErrors.reduce((newErrObj, errObj) => {
-        if (errObj.msg === 'Field is Required') isRequiredError = true;
-        if (errObj.msg === 'Field cannot be empty') isRequiredError = true;
-        newErrObj[errObj.param] = !newErrObj[errObj.param]
-          ? errObj.msg
-          : newErrObj[errObj.param];
-        return newErrObj;
-      }, {});
-      if (req.file) deleteImage(req.file.public_id);
-      if (isRequiredError)
-        return res.status(400).json({
-          status: '400 Bad Request',
-          error: 'Some required fields are missing',
-          errors: errorObj
-        });
-      return res.status(400).json({
-        status: '400 Bad Request',
-        error: 'Your request contains invalid parameters',
-        errors: errorObj
-      });
-    }
-
-    return next();
   }
 }

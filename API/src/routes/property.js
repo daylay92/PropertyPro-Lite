@@ -4,6 +4,7 @@ import ImageUpload from '../middlewares/image-upload';
 import Authenticate from '../middlewares/authenticate';
 import PostProperty from '../middlewares/post-property-validation';
 import authorize from '../middlewares/authorize';
+import UpdateProperty from '../middlewares/update-property-validation';
 
 const router = Router();
 
@@ -20,6 +21,8 @@ router.patch(
   Authenticate.verify,
   authorize,
   ImageUpload.multerUpdateUpload,
+  UpdateProperty.validate(),
+  UpdateProperty.verifyValidationResult,
   propertyController.updateProperty
 );
 

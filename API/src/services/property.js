@@ -79,4 +79,40 @@ export default class Property extends PropertyModel {
     const property = properties.find(prop => prop.id === parseInt(propId, 10));
     return property;
   }
+
+  static updateType(
+    { otherType: savedOthers, type: savedType },
+    type,
+    otherType
+  ) {
+    let newOtherType;
+    let newType;
+    switch (type) {
+      case undefined:
+        newOtherType = !otherType ? savedOthers : otherType;
+        newType = savedType;
+        break;
+      case 'Others':
+        newType = type;
+        newOtherType = otherType;
+        break;
+      default:
+        newType = type;
+        newOtherType = null;
+        break;
+    }
+    return {
+      newOtherType,
+      newType
+    };
+  }
+
+  static async updateAndSave(property) {
+    try {
+      const propIndex = properties.findIndex(({ id }) => id === property.id);
+      properties.splice(propIndex, 1, property);
+    } catch (e) {
+      throw e;
+    }
+  }
 }

@@ -61,7 +61,15 @@ export default class PropertyController {
   static async updateProperty(req, res) {
     try {
       const { prop } = req;
-      const { price, state, city, address, type, purpose } = req.body;
+      const {
+        price,
+        state,
+        city,
+        address,
+        type,
+        purpose,
+        otherType
+      } = req.body;
       prop.purpose =
         prop.purpose === purpose || !purpose ? prop.purpose : purpose;
       prop.price =
@@ -72,9 +80,14 @@ export default class PropertyController {
       prop.city = prop.city === city || !city ? prop.city : city;
       prop.address =
         prop.address === address || !address ? prop.address : address;
-      prop.type = prop.type === type || !type ? prop.type : type;
-      const propIndex = properties.findIndex(({ id }) => id === prop.id);
-      properties.splice(propIndex, 1, prop);
+      const { newOtherType, newType } = Property.updateType(
+        prop,
+        type,
+        otherType
+      );
+      prop.type = newType;
+      prop.otherType = newOtherType;
+      await Property.updateAndSave(prop);
       return res.status(200).json({
         status: 'Success',
         data: {

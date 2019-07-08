@@ -49,7 +49,7 @@ export default class ImageUpload {
       if (req.file) {
         const { imageId } = req.prop;
         const { result } = await deleteImgWithReturn(imageId);
-        if (result !== 'ok')
+        if (result !== 'ok' && result !== 'not found')
           return res.status(500).json({
             status: '500 Server Interval Error',
             error:

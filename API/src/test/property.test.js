@@ -357,7 +357,7 @@ describe('Property Route Endpoints', () => {
     });
     it('should prevent any user except an Admin from marking a property advert posted by another user as sold/rented', done => {
       request
-        .patch(`/api/v1/property/2/sold`)
+        .patch(`/api/v1/property/1/sold`)
         .set('x-access-token', validToken)
         .expect('Content-Type', /json/)
         .expect(403)

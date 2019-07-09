@@ -67,6 +67,7 @@ export default class PropertyController {
         city,
         address,
         type,
+        status,
         purpose,
         otherType
       } = req.body;
@@ -77,6 +78,7 @@ export default class PropertyController {
           ? prop.price
           : parseFloat(price);
       prop.state = prop.state === state || !state ? prop.state : state;
+      prop.status = prop.status === status || !status ? prop.status : status;
       prop.city = prop.city === city || !city ? prop.city : city;
       prop.address =
         prop.address === address || !address ? prop.address : address;
@@ -103,6 +105,40 @@ export default class PropertyController {
           imageName: prop.imageName,
           purpose: prop.purpose,
           otherType: prop.otherType
+        }
+      });
+    } catch (e) {
+      return res.status(500).json({
+        status: '500 Server Interval Error',
+        error:
+          'Something went wrong while processing your request, Do try again'
+      });
+    }
+  }
+
+  static async markProperty(req, res) {
+    try {
+      const { prop: property } = req;
+      const { available } = req.query;
+      if (available === 'true') property.status = 'Available';
+      if (!available)
+        property.status = property.purpose === 'For Rent' ? 'Rented' : 'Sold';
+      await Property.updateAndSave(property);
+      return res.status(200).json({
+        status: 'Success',
+        data: {
+          id: property.id,
+          status: property.status,
+          type: property.type,
+          state: property.state,
+          city: property.city,
+          address: property.address,
+          price: property.price,
+          created_on: property.created_on,
+          image_url: property.image_url,
+          imageName: property.imageName,
+          purpose: property.purpose,
+          otherType: property.otherType
         }
       });
     } catch (e) {

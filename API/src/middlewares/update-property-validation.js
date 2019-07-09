@@ -12,6 +12,22 @@ export default class UpdateProperty extends PostProperty {
         .withMessage('Field cannot be empty')
         .isIn([...status])
         .withMessage('should be either Available, Sold or Rented')
+        .custom((value, { req }) => {
+          if (value === 'Rented')
+            return (
+              req.body.purpose === 'For Rent' || req.prop.purpose === 'For Rent'
+            );
+          return true;
+        })
+        .withMessage('status can only be rented if the purpose is For Rent')
+        .custom((value, { req }) => {
+          if (value === 'Sold')
+            return (
+              req.body.purpose === 'For Sale' || req.prop.purpose === 'For Sale'
+            );
+          return true;
+        })
+        .withMessage('status can only be Sold if the purpose is For Sale')
         .trim(),
       check('price')
         .optional()

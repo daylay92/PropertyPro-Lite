@@ -26,4 +26,10 @@ router.patch(
   propertyController.updateProperty
 );
 
+router.patch(
+  '/:id/sold',
+  Authenticate.verify,
+  authorize,
+  propertyController.markProperty
+);
 export default router;

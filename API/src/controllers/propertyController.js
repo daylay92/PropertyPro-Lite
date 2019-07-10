@@ -149,4 +149,25 @@ export default class PropertyController {
       });
     }
   }
+
+  static async deleteProperty(req, res) {
+    const {
+      prop: { id: propertyId }
+    } = req;
+    try {
+      await Property.deleteById(propertyId);
+      return res.status(200).json({
+        status: 'Success',
+        data: {
+          message: `Successfully deleted property of id : ${propertyId}`
+        }
+      });
+    } catch (e) {
+      return res.status(500).json({
+        status: '500 Server Interval Error',
+        error:
+          'Something went wrong while processing your request, Do try again'
+      });
+    }
+  }
 }

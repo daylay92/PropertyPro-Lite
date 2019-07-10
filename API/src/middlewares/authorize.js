@@ -2,7 +2,7 @@ import Property from '../services/property';
 /* eslint camelcase: 0 */
 const authorize = async (req, res, next) => {
   try {
-    const propId = req.params.id;
+    const propId = req.params.propertyId;
     const property = await Property.findById(propId);
     if (!property)
       return res.status(404).json({

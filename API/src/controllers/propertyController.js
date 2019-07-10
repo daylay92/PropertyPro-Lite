@@ -4,6 +4,22 @@ import Property from '../services/property';
 
 export default class PropertyController {
   /* eslint camelcase: 0 */
+  static async getAllProperties(req, res) {
+    try {
+      const allProperties = await Property.fetchAll();
+      return res.status(200).json({
+        status: 'Success',
+        data: allProperties
+      });
+    } catch (e) {
+      return res.status(500).json({
+        status: '500 Server Interval Error',
+        error:
+          'Something went wrong while processing your request, Do try again'
+      });
+    }
+  }
+
   static async postProperty(req, res) {
     try {
       const { price, state, city, address, type, purpose } = req.body;

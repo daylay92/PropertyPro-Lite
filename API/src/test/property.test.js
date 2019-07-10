@@ -170,9 +170,8 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'ownerEmail',
-            'ownerPhoneEmail',
+            'ownerPhoneNumber',
             'purpose',
-            'imageName',
             'otherType'
           );
         })

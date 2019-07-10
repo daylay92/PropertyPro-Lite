@@ -1,5 +1,6 @@
 import PropertyModel from '../models/propertyModel';
 import properties from '../data/data-structure/properties';
+import UserServices from './user';
 
 export default class Property extends PropertyModel {
   constructor(
@@ -118,5 +119,46 @@ export default class Property extends PropertyModel {
     const isDeleted = removed.length === 1 ? true : new Error('not deleted');
     if (isDeleted) return isDeleted;
     throw isDeleted;
+  }
+
+  static async fetchAll() {
+    const allProperties = properties.map(
+      async ({
+        id,
+        status,
+        type,
+        state,
+        city,
+        address,
+        price,
+        created_on,
+        image_url,
+        purpose,
+        otherType,
+        owner
+      }) => {
+        const {
+          email: ownerEmail,
+          phoneNumber: ownerPhoneNumber
+        } = await UserServices.findById(owner);
+        return {
+          id,
+          status,
+          type,
+          state,
+          city,
+          address,
+          price,
+          created_on,
+          image_url,
+          ownerEmail,
+          ownerPhoneNumber,
+          purpose,
+          otherType
+        };
+      }
+    );
+    const result = await Promise.all(allProperties);
+    return result;
   }
 }

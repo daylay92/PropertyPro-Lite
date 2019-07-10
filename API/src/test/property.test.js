@@ -146,6 +146,40 @@ describe('Property Route Endpoints', () => {
         .end(done);
     });
   });
+  // get property
+  describe('GET api/v1/property', () => {
+    it('should return all property adverts at once or in chunks', done => {
+      request
+        .get(`/api/v1/property`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const {
+            body: { status, data }
+          } = res;
+          expect(status).to.equal('Success');
+          expect(data).to.be.an('array');
+          expect(data[0]).to.have.all.keys(
+            'id',
+            'status',
+            'type',
+            'state',
+            'city',
+            'address',
+            'price',
+            'created_on',
+            'image_url',
+            'ownerEmail',
+            'ownerPhoneEmail',
+            'purpose',
+            'imageName',
+            'otherType'
+          );
+        })
+        .end(done);
+    });
+  });
+
   // update property
   describe('UPDATE api/v1/property/:property-id', () => {
     it('should allow an authenticated user(Agent) to successfully update his/her property advert if he/she provides valid parameters', done => {

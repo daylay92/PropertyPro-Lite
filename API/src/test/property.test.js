@@ -178,7 +178,71 @@ describe('Property Route Endpoints', () => {
         .end(done);
     });
   });
-
+  // get properties by type
+  describe('GET api/v1/property?type=propertyType', () => {
+    it('should return all property adverts whose type is of Mini Flat', done => {
+      request
+        .get(`/api/v1/property?type=Mini Flat`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const {
+            body: { status, data }
+          } = res;
+          const { type } = data[0];
+          expect(type).to.equal('Mini Flat');
+          expect(status).to.equal('Success');
+          expect(data).to.be.an('array');
+          expect(data[0]).to.have.all.keys(
+            'id',
+            'status',
+            'type',
+            'state',
+            'city',
+            'address',
+            'price',
+            'created_on',
+            'image_url',
+            'ownerEmail',
+            'ownerPhoneNumber',
+            'purpose',
+            'otherType'
+          );
+        })
+        .end(done);
+    });
+    it('should return all property adverts whose type is of 2 Bedroom', done => {
+      request
+        .get(`/api/v1/property?type=2 Bedroom`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const {
+            body: { status, data }
+          } = res;
+          const { type } = data[0];
+          expect(type).to.equal('2 Bedroom');
+          expect(status).to.equal('Success');
+          expect(data).to.be.an('array');
+          expect(data[0]).to.have.all.keys(
+            'id',
+            'status',
+            'type',
+            'state',
+            'city',
+            'address',
+            'price',
+            'created_on',
+            'image_url',
+            'ownerEmail',
+            'ownerPhoneNumber',
+            'purpose',
+            'otherType'
+          );
+        })
+        .end(done);
+    });
+  });
   // update property
   describe('UPDATE api/v1/property/:property-id', () => {
     it('should allow an authenticated user(Agent) to successfully update his/her property advert if he/she provides valid parameters', done => {

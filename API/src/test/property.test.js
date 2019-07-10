@@ -382,4 +382,72 @@ describe('Property Route Endpoints', () => {
         .end(done);
     });
   });
+  describe('DELETE api/v1/property/:property-id', () => {
+    it('should allow an authenticated user(Agent) to successfully delete his/her property advert', done => {
+      request
+        .delete(`/api/v1/property/${testPropertyId}`)
+        .set('x-access-token', validToken)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const {
+            body: { status, data }
+          } = res;
+          expect(status).to.equal('Success');
+          expect(data).to.have.all.keys('message');
+        })
+        .end(done);
+    });
+    it("should prevent a user who doesn't provide an access token from deleting a property", done => {
+      request
+        .delete(`/api/v1/property/${testPropertyId}/sold`)
+        .expect('Content-Type', /json/)
+        .expect(401)
+        .expect(res => {
+          const { status, error } = res.body;
+          expect(status).to.equal('401 Unauthorized');
+          expect(error).to.equal('Access token is Required');
+        })
+        .end(done);
+    });
+    it('should prevent a user with an Invalid token from deleting a property', done => {
+      request
+        .delete(`/api/v1/property/${testPropertyId}/sold`)
+        .set('x-access-token', inValidToken)
+        .expect('Content-Type', /json/)
+        .expect(401)
+        .expect(res => {
+          const { status, error } = res.body;
+          expect(status).to.equal('401 Unauthorized');
+          expect(error).to.equal('Access token is Invalid');
+        })
+        .end(done);
+    });
+    it('should prevent any user except an Admin from deleting a property advert posted by another user', done => {
+      request
+        .delete(`/api/v1/property/1`)
+        .set('x-access-token', validToken)
+        .expect('Content-Type', /json/)
+        .expect(403)
+        .expect(res => {
+          const { status } = res.body;
+          expect(status).to.equal('403 Forbidden Request');
+          expect(res.body).to.have.all.keys('status', 'error');
+        })
+        .end(done);
+    });
+    it("should return a resource not found error response whenever a user attempts to delete a property that doesn't exist", done => {
+      request
+        .delete('/api/v1/property/78787058689')
+        .set('x-access-token', validToken)
+        .expect('Content-Type', /json/)
+        .expect(404)
+        .expect(res => {
+          const { status } = res.body;
+          expect(status).to.equal('404 Not Found');
+          expect(res.body).to.have.all.keys('status', 'error');
+        })
+        .end(done);
+    });
+  });
 });

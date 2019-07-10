@@ -400,7 +400,7 @@ describe('Property Route Endpoints', () => {
     });
     it("should prevent a user who doesn't provide an access token from deleting a property", done => {
       request
-        .delete(`/api/v1/property/${testPropertyId}/sold`)
+        .delete(`/api/v1/property/${testPropertyId}`)
         .expect('Content-Type', /json/)
         .expect(401)
         .expect(res => {
@@ -412,7 +412,7 @@ describe('Property Route Endpoints', () => {
     });
     it('should prevent a user with an Invalid token from deleting a property', done => {
       request
-        .delete(`/api/v1/property/${testPropertyId}/sold`)
+        .delete(`/api/v1/property/${testPropertyId}`)
         .set('x-access-token', inValidToken)
         .expect('Content-Type', /json/)
         .expect(401)

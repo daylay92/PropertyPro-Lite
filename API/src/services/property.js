@@ -108,11 +108,15 @@ export default class Property extends PropertyModel {
   }
 
   static async updateAndSave(property) {
-    try {
-      const propIndex = properties.findIndex(({ id }) => id === property.id);
-      properties.splice(propIndex, 1, property);
-    } catch (e) {
-      throw e;
-    }
+    const propIndex = properties.findIndex(({ id }) => id === property.id);
+    properties.splice(propIndex, 1, property);
+  }
+
+  static async deleteById(propertyId) {
+    const propIndex = properties.findIndex(({ id }) => id === propertyId);
+    const removed = properties.splice(propIndex, 1);
+    const isDeleted = removed.length === 1 ? true : new Error('not deleted');
+    if (isDeleted) return isDeleted;
+    throw isDeleted;
   }
 }

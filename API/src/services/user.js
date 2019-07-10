@@ -109,6 +109,11 @@ class User extends UserModel {
     const user = users.find(({ email }) => email === emailAddress);
     return user;
   }
+
+  static async findById(userId) {
+    const user = users.find(({ id }) => id === parseInt(userId, 10));
+    return user;
+  }
 }
 
 export default User;

@@ -77,8 +77,46 @@ export default class Property extends PropertyModel {
   }
 
   static async findById(propId) {
-    const property = properties.find(prop => prop.id === parseInt(propId, 10));
+    const property = properties.find(({ id }) => id === parseInt(propId, 10));
     return property;
+  }
+
+  static async fetchById(propertyId) {
+    const property = await Property.findById(propertyId);
+    if (!property) return property;
+    const {
+      id,
+      status,
+      type,
+      state,
+      city,
+      address,
+      price,
+      created_on,
+      image_url,
+      purpose,
+      otherType,
+      owner
+    } = property;
+    const {
+      email: ownerEmail,
+      phoneNumber: ownerPhoneNumber
+    } = await UserServices.findById(owner);
+    return {
+      id,
+      status,
+      type,
+      state,
+      city,
+      address,
+      price,
+      created_on,
+      image_url,
+      ownerEmail,
+      ownerPhoneNumber,
+      purpose,
+      otherType
+    };
   }
 
   static updateType(

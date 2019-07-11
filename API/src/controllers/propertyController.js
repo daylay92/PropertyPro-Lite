@@ -28,6 +28,30 @@ export default class PropertyController {
     }
   }
 
+  static async getProperty(req, res) {
+    const {
+      params: { propertyId }
+    } = req;
+    try {
+      const property = await Property.fetchById(propertyId);
+      if (!property)
+        return res.status(404).json({
+          status: '404 Not Found',
+          error: 'The property advert you have requested is not available'
+        });
+      return res.status(200).json({
+        status: 'Success',
+        data: property
+      });
+    } catch (e) {
+      return res.status(500).json({
+        status: '500 Server Interval Error',
+        error:
+          'Something went wrong while processing your request, Do try again'
+      });
+    }
+  }
+
   static async postProperty(req, res) {
     try {
       const { price, state, city, address, type, purpose } = req.body;

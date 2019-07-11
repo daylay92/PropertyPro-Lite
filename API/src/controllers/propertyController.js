@@ -54,14 +54,15 @@ export default class PropertyController {
 
   static async postProperty(req, res) {
     try {
-      const { price, state, city, address, type, purpose } = req.body;
+      const { price, state, city, address, type } = req.body;
       const owner = req.auth.id;
       const { url, originalname, public_id } = req.file;
       const id = await Helpers.createId(properties);
-      let { status } = req.body;
-      let { otherType } = req.body;
+      let { status, otherType, purpose } = req.body;
       otherType = !otherType ? null : otherType;
       status = !status ? 'Available' : status;
+      purpose = !purpose ? 'For Sale' : purpose;
+      purpose = status === 'Rented' ? 'For Rent' : purpose;
       const newPrice = parseFloat(price);
       const property = new Property(
         id,

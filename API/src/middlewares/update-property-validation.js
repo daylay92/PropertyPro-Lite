@@ -1,6 +1,7 @@
 import { check } from 'express-validator';
 import { states, type, purpose, status } from '../utils/validation-data';
 import PostProperty from './post-property-validation';
+import Helpers from '../utils/helpers';
 
 export default class UpdateProperty extends PostProperty {
   static validate() {
@@ -10,20 +11,31 @@ export default class UpdateProperty extends PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeFirst)
         .isIn([...status])
         .withMessage('should be either Available, Sold or Rented')
         .custom((value, { req }) => {
+          const {
+            body: { purpose: selectedPurpose },
+            prop: { purpose: storedPurpose }
+          } = req;
           if (value === 'Rented')
             return (
-              req.body.purpose === 'For Rent' || req.prop.purpose === 'For Rent'
+              Helpers.capitalizeEachWord(selectedPurpose) === 'For Rent' ||
+              storedPurpose === 'For Rent'
             );
           return true;
         })
         .withMessage('status can only be rented if the purpose is For Rent')
         .custom((value, { req }) => {
+          const {
+            body: { purpose: selectedPurpose },
+            prop: { purpose: storedPurpose }
+          } = req;
           if (value === 'Sold')
             return (
-              req.body.purpose === 'For Sale' || req.prop.purpose === 'For Sale'
+              Helpers.capitalizeEachWord(selectedPurpose) === 'For Sale' ||
+              storedPurpose === 'For Sale'
             );
           return true;
         })
@@ -45,6 +57,7 @@ export default class UpdateProperty extends PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeFirst)
         .isIn([...states])
         .withMessage('should be one of the states listed')
         .trim(),
@@ -73,6 +86,7 @@ export default class UpdateProperty extends PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeEachWord)
         .isIn([...type])
         .withMessage('should be one of the types listed')
         .custom((value, { req }) => {
@@ -109,6 +123,7 @@ export default class UpdateProperty extends PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeEachWord)
         .isIn([...purpose])
         .withMessage('should be one of the types listed')
     ];

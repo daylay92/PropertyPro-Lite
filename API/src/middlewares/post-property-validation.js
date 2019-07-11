@@ -1,4 +1,5 @@
 import { check, validationResult } from 'express-validator';
+import Helpers from '../utils/helpers';
 import { states, type, purpose, status } from '../utils/validation-data';
 import { deleteImage } from '../utils/cloudinary';
 
@@ -6,11 +7,11 @@ export default class PostProperty {
   static validate() {
     return [
       check('status')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeFirst)
         .isIn([...status])
         .withMessage('should be either Available, Sold or Rented')
         .trim(),
@@ -32,6 +33,7 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeFirst)
         .isIn([...states])
         .withMessage('should be one of the states listed')
         .trim(),
@@ -63,6 +65,7 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeEachWord)
         .isIn([...type])
         .withMessage('should be one of the types listed')
         .custom((value, { req }) => {
@@ -87,13 +90,43 @@ export default class PostProperty {
         .trim()
         .escape(),
       check('purpose')
-        .exists()
-        .withMessage('Field is Required')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.capitalizeEachWord)
         .isIn([...purpose])
-        .withMessage('should be one of the types listed')
+        .withMessage('should either be For Sale or For Rent')
+        .custom((value, { req }) => {
+          const {
+            body: { status: propertyStatus }
+          } = req;
+          if (value === 'For Sale')
+            return (
+              !status ||
+              Helpers.capitalizeFirst(propertyStatus) === 'Available' ||
+              Helpers.capitalizeFirst(propertyStatus) === 'Sold'
+            );
+          return true;
+        })
+        .withMessage(
+          'should be selected only if status was set to Available or Sold'
+        )
+        .custom((value, { req }) => {
+          const {
+            body: { status: propertyStatus }
+          } = req;
+          if (value === 'For Rent')
+            return (
+              !status ||
+              Helpers.capitalizeFirst(propertyStatus) === 'Available' ||
+              Helpers.capitalizeFirst(propertyStatus) === 'Rented'
+            );
+          return true;
+        })
+        .withMessage(
+          'should be selected only if status was set to Available or Rented'
+        )
     ];
   }
   /* eslint no-param-reassign: 0 */

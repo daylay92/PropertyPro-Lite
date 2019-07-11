@@ -10,6 +10,11 @@ export default class PropertyController {
       const isQueryExist = Object.keys(req.query).length;
       if (isQueryExist) allProperties = await Property.fetchByType(req.query);
       else allProperties = await Property.fetchAll();
+      if (!allProperties)
+        return res.status(404).json({
+          status: '404 Not Found',
+          error: "The property adverts you request aren't available"
+        });
       return res.status(200).json({
         status: 'Success',
         data: allProperties

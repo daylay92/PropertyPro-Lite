@@ -123,14 +123,10 @@ export default class Property extends PropertyModel {
 
   static async fetchByType(queryObj) {
     const { type: mainType } = queryObj;
-    let filteredProperties;
-    filteredProperties = properties.filter(
+    const filteredProperties = properties.filter(
       ({ type }) => type.toLowerCase() === mainType.toLowerCase()
     );
-    if (!filteredProperties.length)
-      filteredProperties = properties.filter(
-        ({ type }) => type.toLowerCase() === 'others'
-      );
+    if (!filteredProperties.length) return false;
     const allProperties = filteredProperties.map(async property => {
       const {
         id,

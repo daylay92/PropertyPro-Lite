@@ -121,6 +121,55 @@ export default class Property extends PropertyModel {
     throw isDeleted;
   }
 
+  static async fetchByType(queryObj) {
+    const { type: mainType } = queryObj;
+    let filteredProperties;
+    filteredProperties = properties.filter(
+      ({ type }) => type.toLowerCase() === mainType.toLowerCase()
+    );
+    if (!filteredProperties.length)
+      filteredProperties = properties.filter(
+        ({ type }) => type.toLowerCase() === 'others'
+      );
+    const allProperties = filteredProperties.map(async property => {
+      const {
+        id,
+        status,
+        type,
+        state,
+        city,
+        address,
+        price,
+        created_on,
+        image_url,
+        purpose,
+        otherType,
+        owner
+      } = property;
+      const {
+        email: ownerEmail,
+        phoneNumber: ownerPhoneNumber
+      } = await UserServices.findById(owner);
+      return {
+        id,
+        status,
+        type,
+        state,
+        city,
+        address,
+        price,
+        created_on,
+        image_url,
+        ownerEmail,
+        ownerPhoneNumber,
+        purpose,
+        otherType
+      };
+    });
+    const result = await Promise.all(allProperties);
+    return result;
+  }
+
   static async fetchAll() {
     const allProperties = properties.map(
       async ({

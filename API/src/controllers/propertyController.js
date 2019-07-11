@@ -6,7 +6,10 @@ export default class PropertyController {
   /* eslint camelcase: 0 */
   static async getAllProperties(req, res) {
     try {
-      const allProperties = await Property.fetchAll();
+      let allProperties;
+      const isQueryExist = Object.keys(req.query).length;
+      if (isQueryExist) allProperties = await Property.fetchByType(req.query);
+      else allProperties = await Property.fetchAll();
       return res.status(200).json({
         status: 'Success',
         data: allProperties

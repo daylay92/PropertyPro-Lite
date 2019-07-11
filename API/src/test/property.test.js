@@ -255,6 +255,49 @@ describe('Property Route Endpoints', () => {
         .end(done);
     });
   });
+  // get single property
+  describe('GET api/v1/property/:property-id', () => {
+    it('should successfully return the property advert whose ID is specified', done => {
+      request
+        .get(`/api/v1/property/1`)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const {
+            body: { status, data }
+          } = res;
+          expect(status).to.equal('Success');
+          expect(data).to.have.all.keys(
+            'id',
+            'status',
+            'type',
+            'state',
+            'city',
+            'address',
+            'price',
+            'created_on',
+            'image_url',
+            'ownerEmail',
+            'ownerPhoneNumber',
+            'purpose',
+            'otherType'
+          );
+        })
+        .end(done);
+    });
+    it("should return a resource not found error response if the property ID specified doesn't match the existing property adverts", done => {
+      request
+        .get(`/api/v1/property/67585959500`)
+        .expect('Content-Type', /json/)
+        .expect(404)
+        .expect(res => {
+          const { status } = res.body;
+          expect(status).to.equal('404 Not Found');
+          expect(res.body).to.have.all.keys('status', 'error');
+        })
+        .end(done);
+    });
+  });
   // update property
   describe('UPDATE api/v1/property/:property-id', () => {
     it('should allow an authenticated user(Agent) to successfully update his/her property advert if he/she provides valid parameters', done => {

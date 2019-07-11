@@ -242,6 +242,18 @@ describe('Property Route Endpoints', () => {
         })
         .end(done);
     });
+    it('should return a resource not found error response when a user filters for property adverts of a specific type that is currently not available on the App', done => {
+      request
+        .get(`/api/v1/property?type=Land`)
+        .expect('Content-Type', /json/)
+        .expect(404)
+        .expect(res => {
+          const { status } = res.body;
+          expect(status).to.equal('404 Not Found');
+          expect(res.body).to.have.all.keys('status', 'error');
+        })
+        .end(done);
+    });
   });
   // update property
   describe('UPDATE api/v1/property/:property-id', () => {

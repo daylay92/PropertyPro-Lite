@@ -9,6 +9,7 @@ import UpdateProperty from '../middlewares/update-property-validation';
 const router = Router();
 
 router.get('/', propertyController.getAllProperties);
+router.get('/:propertyId', propertyController.getProperty);
 router.post(
   '/',
   Authenticate.verify,

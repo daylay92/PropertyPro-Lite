@@ -8,9 +8,9 @@
     "start": "node ./API/lib/app.js",
     "dev": "nodemon --exec babel-node ./API/src/app.js",
     "build": "babel ./API/src -d ./API/lib",
-    "test-build": "mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
+    "test-build": "nyc --reporter=lcov mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
     "coveralls": "nyc npm run test-build && nyc report --reporter=text-lcov | coveralls",
-    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",

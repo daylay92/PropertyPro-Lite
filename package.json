@@ -4,7 +4,7 @@
   "description": "A server built for a platform where people can create and/or search properties for sale or rent.",
   "main": "./API/lib/app.js",
   "scripts": {
-    "test": "mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
+    "test": "nyc --reporter=text mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
     "start": "node ./API/lib/app.js",
     "dev": "nodemon --exec babel-node ./API/src/app.js",
     "build": "babel ./API/src -d ./API/lib"
@@ -43,6 +43,7 @@
     "eslint-plugin-mocha": "^5.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
     "prettier": "^1.18.2",
     "supertest": "^4.0.2"
   },

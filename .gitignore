@@ -2,3 +2,5 @@
 /node_modules
 #Ignore .env
 .env
+#Ignore .nyc_output
+.nyc_output

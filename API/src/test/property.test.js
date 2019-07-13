@@ -21,14 +21,14 @@ describe('Property Route Endpoints', () => {
           'image',
           path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
         )
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .set('Connection', 'keep-alive')
         .expect('Content-Type', /json/)
         .expect(201)
         .expect(res => {
           const { status, data } = res.body;
           testPropertyId = data.id;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.have.all.keys(
             'id',
             'status',
@@ -40,8 +40,8 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'purpose',
-            'imageName',
-            'otherType'
+            'image_name',
+            'other_type'
           );
         })
         .end(done);
@@ -85,7 +85,7 @@ describe('Property Route Endpoints', () => {
           path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
         )
         .set('Connection', 'keep-alive')
-        .set('x-access-token', inValidToken)
+        .set('token', inValidToken)
         .expect('Content-Type', /json/)
         .expect(401)
         .expect(res => {
@@ -110,7 +110,7 @@ describe('Property Route Endpoints', () => {
           path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
         )
         .set('Connection', 'keep-alive')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(400)
         .expect(res => {
@@ -135,7 +135,7 @@ describe('Property Route Endpoints', () => {
           path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
         )
         .set('Connection', 'keep-alive')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(400)
         .expect(res => {
@@ -151,13 +151,14 @@ describe('Property Route Endpoints', () => {
     it('should return all property adverts at once or in chunks', done => {
       request
         .get(`/api/v1/property`)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
           const {
             body: { status, data }
           } = res;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.be.an('array');
           expect(data[0]).to.have.all.keys(
             'id',
@@ -169,10 +170,10 @@ describe('Property Route Endpoints', () => {
             'price',
             'created_on',
             'image_url',
-            'ownerEmail',
-            'ownerPhoneNumber',
+            'owner_email',
+            'owner_phone_number',
             'purpose',
-            'otherType'
+            'other_type'
           );
         })
         .end(done);
@@ -183,6 +184,7 @@ describe('Property Route Endpoints', () => {
     it('should return all property adverts whose type is of Mini Flat', done => {
       request
         .get(`/api/v1/property?type=Mini Flat`)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
@@ -191,7 +193,7 @@ describe('Property Route Endpoints', () => {
           } = res;
           const { type } = data[0];
           expect(type).to.equal('Mini Flat');
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.be.an('array');
           expect(data[0]).to.have.all.keys(
             'id',
@@ -203,10 +205,10 @@ describe('Property Route Endpoints', () => {
             'price',
             'created_on',
             'image_url',
-            'ownerEmail',
-            'ownerPhoneNumber',
+            'owner_email',
+            'owner_phone_number',
             'purpose',
-            'otherType'
+            'other_type'
           );
         })
         .end(done);
@@ -214,6 +216,7 @@ describe('Property Route Endpoints', () => {
     it('should return all property adverts whose type is of 2 Bedroom', done => {
       request
         .get(`/api/v1/property?type=2 Bedroom`)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
@@ -222,7 +225,7 @@ describe('Property Route Endpoints', () => {
           } = res;
           const { type } = data[0];
           expect(type).to.equal('2 Bedroom');
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.be.an('array');
           expect(data[0]).to.have.all.keys(
             'id',
@@ -234,10 +237,10 @@ describe('Property Route Endpoints', () => {
             'price',
             'created_on',
             'image_url',
-            'ownerEmail',
-            'ownerPhoneNumber',
+            'owner_email',
+            'owner_phone_number',
             'purpose',
-            'otherType'
+            'other_type'
           );
         })
         .end(done);
@@ -245,6 +248,7 @@ describe('Property Route Endpoints', () => {
     it('should return a resource not found error response when a user filters for property adverts of a specific type that is currently not available on the App', done => {
       request
         .get(`/api/v1/property?type=Land`)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(404)
         .expect(res => {
@@ -260,13 +264,14 @@ describe('Property Route Endpoints', () => {
     it('should successfully return the property advert whose ID is specified', done => {
       request
         .get(`/api/v1/property/1`)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
           const {
             body: { status, data }
           } = res;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.have.all.keys(
             'id',
             'status',
@@ -277,10 +282,10 @@ describe('Property Route Endpoints', () => {
             'price',
             'created_on',
             'image_url',
-            'ownerEmail',
-            'ownerPhoneNumber',
+            'owner_email',
+            'owner_phone_number',
             'purpose',
-            'otherType'
+            'other_type'
           );
         })
         .end(done);
@@ -288,6 +293,7 @@ describe('Property Route Endpoints', () => {
     it("should return a resource not found error response if the property ID specified doesn't match the existing property adverts", done => {
       request
         .get(`/api/v1/property/67585959500`)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(404)
         .expect(res => {
@@ -312,13 +318,13 @@ describe('Property Route Endpoints', () => {
           'image',
           path.resolve(__dirname, '../../../UI/assets/images/2.jpg')
         )
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .set('Connection', 'keep-alive')
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
           const { status, data } = res.body;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.have.all.keys(
             'id',
             'status',
@@ -330,8 +336,8 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'purpose',
-            'imageName',
-            'otherType'
+            'image_name',
+            'other_type'
           );
         })
         .end(done);
@@ -367,7 +373,7 @@ describe('Property Route Endpoints', () => {
         .field('type', '2 bedroom')
         .field('purpose', 'For Rent')
         .set('Connection', 'keep-alive')
-        .set('x-access-token', inValidToken)
+        .set('token', inValidToken)
         .expect('Content-Type', /json/)
         .expect(401)
         .expect(res => {
@@ -388,7 +394,7 @@ describe('Property Route Endpoints', () => {
         .field('type', '2 bedroom')
         .field('purpose', 'For Rent')
         .set('Connection', 'keep-alive')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(400)
         .expect(res => {
@@ -409,7 +415,7 @@ describe('Property Route Endpoints', () => {
         .field('type', '2 bedroom')
         .field('purpose', 'For Rent')
         .set('Connection', 'keep-alive')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(400)
         .expect(res => {
@@ -426,7 +432,7 @@ describe('Property Route Endpoints', () => {
         .field('state', 'Lagos')
         .field('purpose', 'For Rent')
         .set('Connection', 'keep-alive')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(403)
         .expect(res => {
@@ -443,7 +449,7 @@ describe('Property Route Endpoints', () => {
         .field('state', 'Lagos')
         .field('purpose', 'For Rent')
         .set('Connection', 'keep-alive')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(404)
         .expect(res => {
@@ -459,12 +465,12 @@ describe('Property Route Endpoints', () => {
     it('should allow an authenticated user(Agent) to successfully mark his/her property as sold/rented', done => {
       request
         .patch(`/api/v1/property/${testPropertyId}/sold`)
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
           const { status, data } = res.body;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.have.all.keys(
             'id',
             'status',
@@ -476,7 +482,7 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'purpose',
-            'imageName',
+            'image_name',
             'otherType'
           );
         })
@@ -497,7 +503,7 @@ describe('Property Route Endpoints', () => {
     it('should prevent a user with an Invalid token from marking a property as sold/rented', done => {
       request
         .patch(`/api/v1/property/${testPropertyId}/sold`)
-        .set('x-access-token', inValidToken)
+        .set('token', inValidToken)
         .expect('Content-Type', /json/)
         .expect(401)
         .expect(res => {
@@ -510,7 +516,7 @@ describe('Property Route Endpoints', () => {
     it('should prevent any user except an Admin from marking a property advert posted by another user as sold/rented', done => {
       request
         .patch(`/api/v1/property/1/sold`)
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(403)
         .expect(res => {
@@ -523,7 +529,7 @@ describe('Property Route Endpoints', () => {
     it("should return a resource not found error response whenever a user attempts to mark a property that doesn't exist sold/rented", done => {
       request
         .patch('/api/v1/property/78787058689/sold')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(404)
         .expect(res => {
@@ -538,14 +544,14 @@ describe('Property Route Endpoints', () => {
     it('should allow an authenticated user(Agent) to successfully delete his/her property advert', done => {
       request
         .delete(`/api/v1/property/${testPropertyId}`)
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(200)
         .expect(res => {
           const {
             body: { status, data }
           } = res;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.have.all.keys('message');
         })
         .end(done);
@@ -565,7 +571,7 @@ describe('Property Route Endpoints', () => {
     it('should prevent a user with an Invalid token from deleting a property', done => {
       request
         .delete(`/api/v1/property/${testPropertyId}`)
-        .set('x-access-token', inValidToken)
+        .set('token', inValidToken)
         .expect('Content-Type', /json/)
         .expect(401)
         .expect(res => {
@@ -578,7 +584,7 @@ describe('Property Route Endpoints', () => {
     it('should prevent any user except an Admin from deleting a property advert posted by another user', done => {
       request
         .delete(`/api/v1/property/1`)
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(403)
         .expect(res => {
@@ -591,7 +597,7 @@ describe('Property Route Endpoints', () => {
     it("should return a resource not found error response whenever a user attempts to delete a property that doesn't exist", done => {
       request
         .delete('/api/v1/property/78787058689')
-        .set('x-access-token', validToken)
+        .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(404)
         .expect(res => {

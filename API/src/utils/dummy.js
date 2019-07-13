@@ -9,9 +9,8 @@ const validUserData = {
   last_name: 'Ayodele',
   password: 'rrft3456',
   confirm_password: 'rrft3456',
-  phoneNumber: '08063805512',
-  address: `${faker.address.streetAddress()}, Lagos, Nigeria`,
-  gender: 'Male'
+  phone_number: '08063805512',
+  address: `${faker.address.streetAddress()}, Lagos, Nigeria`
 };
 
 //  incomplete user data
@@ -21,9 +20,8 @@ const incompleteUserData = {
   last_name: 'Kangodan',
   password: '',
   confirm_password: '',
-  phoneNumber: '',
-  address: `${faker.address.streetAddress()}, Lagos, Nigeria`,
-  gender: 'Male'
+  phone_number: '',
+  address: `${faker.address.streetAddress()}, Lagos, Nigeria`
 };
 
 //  invalid user data
@@ -33,9 +31,8 @@ const invalidUserData = {
   last_name: faker.name.lastName(),
   password: faker.internet.password(),
   confirm_password: faker.internet.password(),
-  phoneNumber: 'hjiojojo',
-  address: `${faker.address.streetAddress()}, Lagos, Nigeria`,
-  gender: 'non'
+  phone_number: 'hjiojojo',
+  address: `${faker.address.streetAddress()}, Lagos, Nigeria`
 };
 
 //  already existing user data
@@ -45,9 +42,8 @@ const alreadyExistingUserData = {
   last_name: 'Sung',
   password: 'King1234',
   confirm_password: 'King1234',
-  phoneNumber: '08063805512',
-  address: `${faker.address.streetAddress()}, Lagos, Nigeria`,
-  gender: 'Male'
+  phone_number: '08063805512',
+  address: `${faker.address.streetAddress()}, Lagos, Nigeria`
 };
 
 // login credentials

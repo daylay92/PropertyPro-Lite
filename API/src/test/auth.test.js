@@ -25,7 +25,7 @@ describe('Auth Route Endpoints', () => {
         .expect(201)
         .expect(res => {
           const { status, data } = res.body;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.have.all.keys(
             'token',
             'id',
@@ -90,7 +90,7 @@ describe('Auth Route Endpoints', () => {
         .expect(200)
         .expect(res => {
           const { status, data } = res.body;
-          expect(status).to.equal('Success');
+          expect(status).to.equal('success');
           expect(data).to.have.all.keys(
             'token',
             'id',

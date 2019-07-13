@@ -10,7 +10,7 @@
     "build": "babel ./API/src -d ./API/lib",
     "test-build": "nyc --reporter=lcov mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
     "coveralls": "nyc npm run test-build && nyc report --reporter=text-lcov | coveralls",
-     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
     "type": "git",
@@ -64,6 +64,7 @@
     "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.1",
-    "multer-storage-cloudinary": "^2.2.1"
+    "multer-storage-cloudinary": "^2.2.1",
+    "swagger-ui-express": "^4.0.7"
   }
 }

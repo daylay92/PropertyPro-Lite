@@ -2,8 +2,10 @@ import { config } from 'dotenv';
 import express from 'express';
 import { urlencoded, json } from 'body-parser';
 import cors from 'cors';
+import swaggerUI from 'swagger-ui-express';
 import authRoutes from './routes/auth';
 import propertyRoutes from './routes/property';
+import doc from '../../swagger.json';
 
 // Initialize process.env variables for the .env file
 config();
@@ -21,10 +23,13 @@ app.set('port', port);
 app.use(cors());
 
 // parse application/x-www-form-urlencoded
-app.use(urlencoded({ extended: false }));
+app.use(urlencoded({ extended: true }));
 
 // parse application/json
 app.use(json());
+
+// render swagger UI
+app.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(doc));
 
 // Main Routes
 app.use('/api/v1/auth', authRoutes);

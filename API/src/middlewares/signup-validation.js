@@ -35,22 +35,13 @@ export default class SignUp {
         .normalizeEmail()
         .isEmail()
         .withMessage('Should be a valid Email Address'),
-      check('gender')
-        .exists()
-        .withMessage('Field is Required')
+      check('confirm_password')
+        .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .isIn(['Male', 'Female'])
-        .withMessage('Should be Male or Female')
-        .trim()
-        .escape(),
-      check('confirm_password')
-        .exists()
-        .withMessage('Field is Required')
-        .not()
-        .isEmpty()
-        .withMessage('Field cannot be empty'),
+        .custom((value, { req }) => value === req.body.confirm_password)
+        .withMessage('should match the Password field'),
       check('password')
         .exists()
         .withMessage('Field is Required')
@@ -59,11 +50,9 @@ export default class SignUp {
         .withMessage('Field cannot be empty')
         .isLength({ min: 6 })
         .withMessage('Should be atleast 6 characters Long')
-        .custom((value, { req }) => value === req.body.confirm_password)
-        .withMessage('should match the confirm Password field')
         .trim()
         .escape(),
-      check('phoneNumber')
+      check('phone_number')
         .exists()
         .withMessage('Field is Required')
         .not()
@@ -84,12 +73,11 @@ export default class SignUp {
     let isRequiredError = false;
     if (!errors.isEmpty()) {
       const validateErrors = errors.array();
-      const errorObj = validateErrors.reduce((newErrObj, errObj) => {
-        if (errObj.msg === 'Field is Required') isRequiredError = true;
-        if (errObj.msg === 'Field cannot be empty') isRequiredError = true;
-        newErrObj[errObj.param] = !newErrObj[errObj.param]
-          ? errObj.msg
-          : newErrObj[errObj.param];
+      const errorObj = validateErrors.reduce((newErrObj, { msg, param }) => {
+        if (msg === 'Field is Required' || msg === 'Field cannot be empty')
+          isRequiredError = true;
+        if (newErrObj[param]) newErrObj[param].push(msg);
+        else newErrObj[param] = [msg];
         return newErrObj;
       }, {});
       if (isRequiredError)

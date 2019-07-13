@@ -1,6 +1,6 @@
 import { check, validationResult } from 'express-validator';
 import Helpers from '../utils/helpers';
-import { states, type, purpose, status } from '../utils/validation-data';
+import { states, purpose, status } from '../utils/validation-data';
 import { deleteImage } from '../utils/cloudinary';
 
 export default class PostProperty {
@@ -35,7 +35,7 @@ export default class PostProperty {
         .withMessage('Field cannot be empty')
         .customSanitizer(Helpers.capitalizeFirst)
         .isIn([...states])
-        .withMessage('should be one of the states listed')
+        .withMessage('should be one of the states in Nigeria')
         .trim(),
       check('city')
         .exists()
@@ -66,16 +66,16 @@ export default class PostProperty {
         .isEmpty()
         .withMessage('Field cannot be empty')
         .customSanitizer(Helpers.capitalizeEachWord)
-        .isIn([...type])
-        .withMessage('should be one of the types listed')
         .custom((value, { req }) => {
-          if (value.trim() === 'Others') return req.body.otherType;
+          if (value.trim() === 'Others') return req.body.other_type;
           return true;
         })
         .withMessage(
           'the type selected requires that you fill the other-type field'
-        ),
-      check('otherType')
+        )
+        .trim()
+        .escape(),
+      check('other_type')
         .optional()
         .custom((value, { req }) => {
           if (value) return req.body.type === 'Others';
@@ -127,6 +127,19 @@ export default class PostProperty {
         .withMessage(
           'should be selected only if status was set to Available or Rented'
         )
+        .trim()
+        .escape(),
+      check('image_url')
+        .exists()
+        .withMessage('Field is Required')
+        .not()
+        .isEmpty()
+        .withMessage('Field cannot be empty'),
+      check('description')
+        .optional()
+        .not()
+        .isEmpty()
+        .withMessage('Field cannot be empty')
     ];
   }
   /* eslint no-param-reassign: 0 */
@@ -136,12 +149,11 @@ export default class PostProperty {
     let isRequiredError = false;
     if (!errors.isEmpty()) {
       const validateErrors = errors.array();
-      const errorObj = validateErrors.reduce((newErrObj, errObj) => {
-        if (errObj.msg === 'Field is Required') isRequiredError = true;
-        if (errObj.msg === 'Field cannot be empty') isRequiredError = true;
-        newErrObj[errObj.param] = !newErrObj[errObj.param]
-          ? errObj.msg
-          : newErrObj[errObj.param];
+      const errorObj = validateErrors.reduce((newErrObj, { msg, param }) => {
+        if (msg === 'Field is Required' || msg === 'Field cannot be empty')
+          isRequiredError = true;
+        if (newErrObj[param]) newErrObj[param].push(msg);
+        else newErrObj[param] = [msg];
         return newErrObj;
       }, {});
       if (req.file) deleteImage(req.file.public_id);

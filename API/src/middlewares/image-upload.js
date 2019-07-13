@@ -19,11 +19,6 @@ export default class ImageUpload {
           status: '400 Bad Request',
           error: 'Invalid File Format'
         });
-      if (!req.file)
-        return res.status(400).json({
-          status: '400 Bad Request',
-          error: 'An Image is Required'
-        });
       return next();
     });
   }

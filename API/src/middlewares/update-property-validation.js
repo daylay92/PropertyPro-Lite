@@ -1,5 +1,5 @@
 import { check } from 'express-validator';
-import { states, type, purpose, status } from '../utils/validation-data';
+import { states, purpose, status } from '../utils/validation-data';
 import PostProperty from './post-property-validation';
 import Helpers from '../utils/helpers';
 
@@ -59,7 +59,7 @@ export default class UpdateProperty extends PostProperty {
         .withMessage('Field cannot be empty')
         .customSanitizer(Helpers.capitalizeFirst)
         .isIn([...states])
-        .withMessage('should be one of the states listed')
+        .withMessage('should be one of the states in Nigeria')
         .trim(),
       check('city')
         .optional()
@@ -87,14 +87,12 @@ export default class UpdateProperty extends PostProperty {
         .isEmpty()
         .withMessage('Field cannot be empty')
         .customSanitizer(Helpers.capitalizeEachWord)
-        .isIn([...type])
-        .withMessage('should be one of the types listed')
         .custom((value, { req }) => {
           if (value.trim() === 'Others') return req.body.otherType;
           return true;
         })
         .withMessage(
-          'the type selected requires that you fill the other-type field'
+          'the type selected requires that you fill the other_type field'
         )
         .custom((value, { req }) => {
           if (value.trim() !== 'Others') return !req.body.otherType;
@@ -103,7 +101,7 @@ export default class UpdateProperty extends PostProperty {
         .withMessage(
           'the type selected implies you do not need to fill the other-type field'
         ),
-      check('otherType')
+      check('other_type')
         .optional()
         .custom((value, { req }) => {
           if (value)
@@ -125,7 +123,17 @@ export default class UpdateProperty extends PostProperty {
         .withMessage('Field cannot be empty')
         .customSanitizer(Helpers.capitalizeEachWord)
         .isIn([...purpose])
-        .withMessage('should be one of the types listed')
+        .withMessage('should be one of the types listed'),
+      check('image_url')
+        .optional()
+        .not()
+        .isEmpty()
+        .withMessage('Field cannot be empty'),
+      check('description')
+        .optional()
+        .not()
+        .isEmpty()
+        .withMessage('Field cannot be empty')
     ];
   }
 }

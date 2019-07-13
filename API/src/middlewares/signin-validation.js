@@ -28,26 +28,19 @@ export default class SignIn {
   static async verifyValidationResult(req, res, next) {
     const errors = validationResult(req);
     let isRequiredError = false;
-    let isInvalidPasswordError = false;
     if (!errors.isEmpty()) {
       const validateErrors = errors.array();
       validateErrors.forEach(err => {
         if (err.msg === 'Field cannot be empty') isRequiredError = true;
-        if (err.msg === 'Invalid Password') isInvalidPasswordError = true;
       });
       if (isRequiredError)
         return res.status(401).json({
           status: '401 Unauthorized',
-          error: 'Email or Password field should not be  empty'
-        });
-      if (isInvalidPasswordError)
-        return res.status(401).json({
-          status: '401 Unauthorized',
-          error: 'Invalid Password'
+          error: 'Email or Password field should not be empty'
         });
       return res.status(401).json({
         status: '401 Unauthorized',
-        error: 'Invalid Email Address'
+        error: 'Invalid login credentials'
       });
     }
 

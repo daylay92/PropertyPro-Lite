@@ -104,6 +104,8 @@ You can see a hosted version of the template at [GitHub Pages](http://daylay92.g
 
 The API is currently in version 1 (v1) and it is hosted on heroku at [Base URL](https://propertypro-l-ite.herokuapp.com/api/v1/)
 
+## API Documentation
+You can find the documentation here [API DOCS](https://propertypro-l-ite.herokuapp.com/api/v1/api-docs)
 
 ## Author
 

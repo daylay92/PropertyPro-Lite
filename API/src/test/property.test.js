@@ -192,7 +192,7 @@ describe('Property Route Endpoints', () => {
             body: { status, data }
           } = res;
           const { type } = data[0];
-          expect(type).to.equal('Mini Flat');
+          expect(type).to.equal('mini flat');
           expect(status).to.equal('success');
           expect(data).to.be.an('array');
           expect(data[0]).to.have.all.keys(

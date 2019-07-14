@@ -7,10 +7,11 @@
     "test": "nyc --reporter=text mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
     "start": "node ./API/lib/app.js",
     "dev": "nodemon --exec babel-node ./API/src/app.js",
-    "build": "babel ./API/src -d ./API/lib",
+    "build": "babel ./API/src -d ./API/lib --cppy-files",
     "test-build": "nyc --reporter=lcov mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
     "coveralls": "nyc npm run test-build && nyc report --reporter=text-lcov | coveralls",
-    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls"
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "migrations" : "babel-node ./API/src/data/db/migrations.js"
   },
   "repository": {
     "type": "git",
@@ -65,6 +66,7 @@
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.1",
     "multer-storage-cloudinary": "^2.2.1",
+    "pg": "^7.11.0",
     "swagger-ui-express": "^4.0.7"
   }
 }

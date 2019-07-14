@@ -13,7 +13,7 @@ const states = [
   'Enugu',
   'Edo',
   'Ekiti',
-  'FCT - Abuja',
+  'Abuja',
   'Gombe',
   'Imo',
   'Jigawa',
@@ -39,19 +39,19 @@ const states = [
 ];
 
 const type = [
-  'Studio Flat',
-  'Mini Flat',
-  '2 Bedroom',
-  '3 Bedroom',
-  'Duplex',
-  'Twin Duplex',
-  'Office Apartment',
-  'Land',
-  'Others'
+  'studio flat',
+  'mini flat',
+  '2 bedroom',
+  '3 bedroom',
+  'duplex',
+  'twin duplex',
+  'office apartment',
+  'land',
+  'others'
 ];
 
-const status = ['Available', 'Sold', 'Rented'];
+const status = ['available', 'sold', 'rented'];
 
-const purpose = ['For Rent', 'For Sale'];
+const purpose = ['for rent', 'for sale'];
 
 export { type, states, status, purpose };

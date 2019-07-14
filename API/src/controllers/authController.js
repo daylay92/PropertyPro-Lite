@@ -30,29 +30,26 @@ class Auth {
   static async signIn(req, res) {
     const { email, password } = req.body;
     try {
-      const user = await User.getUserByEmail(email);
-      if (!user)
-        return res.status(401).json({
-          status: '401 Unauthorized',
-          error: 'No User with this Email Address Exist'
+      const user = await User.findByEmail(email);
+      let isMatch;
+      if (user) isMatch = await User.verifyPassword(password, user.password);
+      if (isMatch) {
+        const { id, first_name, last_name, is_admin } = user;
+        const token = User.generateToken(id, is_admin);
+        return res.status(200).json({
+          status: 'success',
+          data: {
+            token,
+            id,
+            first_name,
+            last_name,
+            email
+          }
         });
-      const isMatch = await User.verifyPassword(password, user.password);
-      if (!isMatch)
-        return res.status(401).json({
-          status: '401 Unauthorized',
-          error: 'Incorrect Password'
-        });
-      const { id, first_name, last_name } = user;
-      const token = User.generateToken(id, false);
-      return res.status(200).json({
-        status: 'Success',
-        data: {
-          token,
-          id,
-          first_name,
-          last_name,
-          email
-        }
+      }
+      return res.status(401).json({
+        status: '401 Unauthorized',
+        error: 'Invalid login credentials'
       });
     } catch (e) {
       return res.status(500).json({

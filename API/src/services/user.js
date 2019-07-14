@@ -46,7 +46,7 @@ class User extends UserModel {
             VALUES($1, $2, $3, $4, $5, $6, $7)
             returning id`;
     const values = [
-      email,
+      email.toLowerCase(),
       first_name,
       last_name,
       password,
@@ -86,7 +86,7 @@ class User extends UserModel {
 
   static async findByEmail(email) {
     const text = `SELECT * FROM users WHERE email= $1`;
-    const value = [email];
+    const value = [email.toLowerCase()];
     const {
       rows: [user]
     } = await db.queryWithParams(text, value);

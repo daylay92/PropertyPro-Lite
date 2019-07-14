@@ -70,9 +70,7 @@ export default class PostProperty {
           if (value.trim() === 'Others') return req.body.other_type;
           return true;
         })
-        .withMessage(
-          'the type selected requires that you fill the other-type field'
-        )
+        .withMessage('the type selected requires that you fill the other-type field')
         .trim()
         .escape(),
       check('other_type')
@@ -109,9 +107,7 @@ export default class PostProperty {
             );
           return true;
         })
-        .withMessage(
-          'should be selected only if status was set to Available or Sold'
-        )
+        .withMessage('should be selected only if status was set to Available or Sold')
         .custom((value, { req }) => {
           const {
             body: { status: propertyStatus }
@@ -124,9 +120,7 @@ export default class PostProperty {
             );
           return true;
         })
-        .withMessage(
-          'should be selected only if status was set to Available or Rented'
-        )
+        .withMessage('should be selected only if status was set to Available or Rented')
         .trim()
         .escape(),
       check('image_url')

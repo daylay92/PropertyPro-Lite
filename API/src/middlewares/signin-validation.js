@@ -9,7 +9,6 @@ export default class SignIn {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .normalizeEmail()
         .isEmail()
         .withMessage('Invalid Email Address'),
       check('password')

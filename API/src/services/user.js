@@ -3,32 +3,13 @@ import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 import UserModel from '../models/userModel';
 import users from '../data/data-structure/users';
+import db from '../data/db/index';
 
 config();
 
 class User extends UserModel {
-  constructor(
-    id,
-    firstName,
-    lastName,
-    gender,
-    email,
-    address,
-    password,
-    phone,
-    isAdmin = false
-  ) {
-    super(
-      id,
-      firstName,
-      lastName,
-      gender,
-      email,
-      address,
-      password,
-      phone,
-      isAdmin
-    );
+  constructor(firstName, lastName, email, address, password, phone, isAdmin = false) {
+    super(null, firstName, lastName, email, address, password, phone, isAdmin);
   }
 
   static async hashPassword(password) {
@@ -51,35 +32,33 @@ class User extends UserModel {
 
   /* eslint camelcase: 0 */
   async save() {
-    const currentNoOfUsers = users.length;
     const {
-      id,
       email,
       first_name,
       last_name,
       password,
-      phoneNumber,
+      phone_number,
       address,
-      gender,
       is_admin
     } = this;
-    const newNoOfUsers = users.push({
-      id,
+    const query = `INSERT INTO
+            users(email, first_name, last_name, password, phone_number, address, is_admin)
+            VALUES($1, $2, $3, $4, $5, $6, $7)
+            returning id`;
+    const values = [
       email,
       first_name,
       last_name,
       password,
-      phoneNumber,
+      phone_number,
       address,
-      gender,
       is_admin
-    });
-    const isSaved =
-      newNoOfUsers > currentNoOfUsers
-        ? true
-        : new Error('User was not Created');
-    if (isSaved) return isSaved;
-    throw isSaved;
+    ];
+    const {
+      rows: [{ id }]
+    } = await db.queryWithParams(query, values);
+    if (!id) throw new Error('User was not Created');
+    return { id, is_admin };
   }
 
   generateToken() {
@@ -105,8 +84,12 @@ class User extends UserModel {
     return token;
   }
 
-  static async getUserByEmail(emailAddress) {
-    const user = users.find(({ email }) => email === emailAddress);
+  static async findByEmail(email) {
+    const text = `SELECT * FROM users WHERE email= $1`;
+    const value = [email];
+    const {
+      rows: [user]
+    } = await db.queryWithParams(text, value);
     return user;
   }
 

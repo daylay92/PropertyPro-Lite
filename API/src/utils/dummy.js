@@ -4,7 +4,7 @@ import UserServices from '../services/user';
 // signup data
 //  valid user data
 const validUserData = {
-  email: faker.internet.email(),
+  email: 'daylay863@gmail.com',
   first_name: 'King',
   last_name: 'Ayodele',
   password: 'rrft3456',
@@ -37,7 +37,7 @@ const invalidUserData = {
 
 //  already existing user data
 const alreadyExistingUserData = {
-  email: 'zaylay92@yahoo.com',
+  email: 'john.doe@gmail.com',
   first_name: 'Sam',
   last_name: 'Sung',
   password: 'King1234',
@@ -49,8 +49,8 @@ const alreadyExistingUserData = {
 // login credentials
 // Valid credentials
 const validLoginCredentials = {
-  email: 'zaylay92@yahoo.com',
-  password: 'ayo1234'
+  email: 'john.doe@gmail.com',
+  password: 'johnny'
 };
 // Invalid credentials
 const invalidLoginCredentials = {

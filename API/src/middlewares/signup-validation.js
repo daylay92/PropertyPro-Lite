@@ -32,7 +32,6 @@ export default class SignUp {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .normalizeEmail()
         .isEmail()
         .withMessage('Should be a valid Email Address'),
       check('confirm_password')
@@ -59,9 +58,7 @@ export default class SignUp {
         .isEmpty()
         .withMessage('Field cannot be empty')
         .isNumeric()
-        .withMessage(
-          'Should be plain numbers without a country code or a + sign'
-        )
+        .withMessage('Should be plain numbers without a country code or a + sign')
         .isLength({ max: 11, min: 9 })
         .withMessage('Should be atleast 9-11 characters')
     ];
@@ -98,7 +95,7 @@ export default class SignUp {
 
   static async isEmailAlreadyExist(req, res, next) {
     const { email } = req.body;
-    const user = await UserServices.getUserByEmail(email);
+    const user = await UserServices.findByEmail(email);
     if (user)
       return res.status(409).json({
         status: '409 Conflict',

@@ -1,36 +1,16 @@
 import User from '../services/user';
-import Helpers from '../utils/helpers';
-import users from '../data/data-structure/users';
 
 class Auth {
   /* eslint camelcase: 0 */
   static async signUp(req, res) {
-    const {
-      first_name,
-      last_name,
-      address,
-      gender,
-      email,
-      password,
-      phoneNumber
-    } = req.body;
+    const { first_name, last_name, address, email, password, phone_number } = req.body;
     try {
-      const id = await Helpers.createId(users);
       const pass = await User.hashPassword(password);
-      const user = new User(
-        id,
-        first_name,
-        last_name,
-        gender,
-        email,
-        address,
-        pass,
-        phoneNumber
-      );
-      await user.save();
-      const token = user.generateToken();
+      const user = new User(first_name, last_name, email, address, pass, phone_number);
+      const { id, is_admin } = await user.save();
+      const token = User.generateToken(id, is_admin);
       return res.status(201).json({
-        status: 'Success',
+        status: 'success',
         data: {
           token,
           id,
@@ -42,8 +22,7 @@ class Auth {
     } catch (e) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }
@@ -78,8 +57,7 @@ class Auth {
     } catch (e) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }

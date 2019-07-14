@@ -70,8 +70,7 @@ export default class Property extends PropertyModel {
       created_on,
       otherType
     });
-    const isSaved =
-      newLength > oldLength ? true : new Error('Property was not saved');
+    const isSaved = newLength > oldLength ? true : new Error('Property was not saved');
     if (isSaved) return isSaved;
     throw isSaved;
   }
@@ -119,11 +118,7 @@ export default class Property extends PropertyModel {
     };
   }
 
-  static updateType(
-    { otherType: savedOthers, type: savedType },
-    type,
-    otherType
-  ) {
+  static updateType({ otherType: savedOthers, type: savedType }, type, otherType) {
     let newOtherType;
     let newType;
     switch (type) {

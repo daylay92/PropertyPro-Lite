@@ -22,8 +22,7 @@ export default class PropertyController {
     } catch (e) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }
@@ -46,8 +45,7 @@ export default class PropertyController {
     } catch (e) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }
@@ -101,8 +99,7 @@ export default class PropertyController {
     } catch (err) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }
@@ -110,18 +107,8 @@ export default class PropertyController {
   static async updateProperty(req, res) {
     try {
       const { prop } = req;
-      const {
-        price,
-        state,
-        city,
-        address,
-        type,
-        status,
-        purpose,
-        otherType
-      } = req.body;
-      prop.purpose =
-        prop.purpose === purpose || !purpose ? prop.purpose : purpose;
+      const { price, state, city, address, type, status, purpose, otherType } = req.body;
+      prop.purpose = prop.purpose === purpose || !purpose ? prop.purpose : purpose;
       prop.price =
         prop.price === parseFloat(price) || !parseFloat(price)
           ? prop.price
@@ -129,13 +116,8 @@ export default class PropertyController {
       prop.state = prop.state === state || !state ? prop.state : state;
       prop.status = prop.status === status || !status ? prop.status : status;
       prop.city = prop.city === city || !city ? prop.city : city;
-      prop.address =
-        prop.address === address || !address ? prop.address : address;
-      const { newOtherType, newType } = Property.updateType(
-        prop,
-        type,
-        otherType
-      );
+      prop.address = prop.address === address || !address ? prop.address : address;
+      const { newOtherType, newType } = Property.updateType(prop, type, otherType);
       prop.type = newType;
       prop.otherType = newOtherType;
       await Property.updateAndSave(prop);
@@ -159,8 +141,7 @@ export default class PropertyController {
     } catch (e) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }
@@ -193,8 +174,7 @@ export default class PropertyController {
     } catch (e) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }
@@ -214,8 +194,7 @@ export default class PropertyController {
     } catch (e) {
       return res.status(500).json({
         status: '500 Server Interval Error',
-        error:
-          'Something went wrong while processing your request, Do try again'
+        error: 'Something went wrong while processing your request, Do try again'
       });
     }
   }

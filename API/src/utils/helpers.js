@@ -11,13 +11,16 @@ class Helpers {
       if (!value || typeof value !== 'string') return value;
       const convertedToLowerCase = value.toLowerCase();
       const capitalized =
-        convertedToLowerCase.charAt(0).toUpperCase() +
-        convertedToLowerCase.slice(1);
+        convertedToLowerCase.charAt(0).toUpperCase() + convertedToLowerCase.slice(1);
 
       return capitalized;
     } catch (e) {
       return value;
     }
+  }
+
+  static toSmallLetters(value) {
+    return value.toLowerCase();
   }
 
   static capitalizeEachWord(value) {
@@ -27,8 +30,7 @@ class Helpers {
       const formatEachWord = splitedBySpace.map(word => {
         const convertedToLowerCase = word.toLowerCase();
         const capitalized =
-          convertedToLowerCase.charAt(0).toUpperCase() +
-          convertedToLowerCase.slice(1);
+          convertedToLowerCase.charAt(0).toUpperCase() + convertedToLowerCase.slice(1);
         return capitalized;
       });
       const reCombinedWords = formatEachWord.join(' ');

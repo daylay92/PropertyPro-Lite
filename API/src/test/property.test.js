@@ -17,10 +17,7 @@ describe('Property Route Endpoints', () => {
         .field('address', '30, Caleb Road')
         .field('type', 'Mini Flat')
         .field('purpose', 'For Rent')
-        .attach(
-          'image',
-          path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
-        )
+        .attach('image', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
         .set('token', validToken)
         .set('Connection', 'keep-alive')
         .expect('Content-Type', /json/)
@@ -56,10 +53,7 @@ describe('Property Route Endpoints', () => {
         .field('address', '30, Caleb Road')
         .field('type', '2 bedroom')
         .field('purpose', 'For Rent')
-        .attach(
-          'image',
-          path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
-        )
+        .attach('image', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
         .set('Connection', 'keep-alive')
         .expect('Content-Type', /json/)
         .expect(401)
@@ -80,10 +74,7 @@ describe('Property Route Endpoints', () => {
         .field('address', '30, Caleb Road')
         .field('type', '2 bedroom')
         .field('purpose', 'For Rent')
-        .attach(
-          'image',
-          path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
-        )
+        .attach('image', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
         .set('Connection', 'keep-alive')
         .set('token', inValidToken)
         .expect('Content-Type', /json/)
@@ -105,10 +96,7 @@ describe('Property Route Endpoints', () => {
         .field('address', '30, Caleb Road')
         .field('type', '2 bedroom')
         .field('purpose', 'For Rent')
-        .attach(
-          'image',
-          path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
-        )
+        .attach('image', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
         .set('Connection', 'keep-alive')
         .set('token', validToken)
         .expect('Content-Type', /json/)
@@ -130,10 +118,7 @@ describe('Property Route Endpoints', () => {
         .field('address', '')
         .field('type', '2 bedroom')
         .field('purpose', 'For Rent')
-        .attach(
-          'image',
-          path.resolve(__dirname, '../../../UI/assets/images/1.jpg')
-        )
+        .attach('image', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
         .set('Connection', 'keep-alive')
         .set('token', validToken)
         .expect('Content-Type', /json/)
@@ -314,10 +299,7 @@ describe('Property Route Endpoints', () => {
         .field('city', 'Ado')
         .field('address', '40, Caleb Road')
         .field('type', 'Studio Flat')
-        .attach(
-          'image',
-          path.resolve(__dirname, '../../../UI/assets/images/2.jpg')
-        )
+        .attach('image', path.resolve(__dirname, '../../../UI/assets/images/2.jpg'))
         .set('token', validToken)
         .set('Connection', 'keep-alive')
         .expect('Content-Type', /json/)

@@ -19,6 +19,7 @@ export default class ImageUpload {
           status: '400 Bad Request',
           error: 'Invalid File Format'
         });
+      if (req.file) req.image_url = req.file.url;
       return next();
     });
   }
@@ -42,18 +43,17 @@ export default class ImageUpload {
         });
 
       if (req.file) {
-        const { imageId } = req.prop;
-        const { result } = await deleteImgWithReturn(imageId);
+        const { image_id } = req.prop;
+        const { result } = await deleteImgWithReturn(image_id);
         if (result !== 'ok' && result !== 'not found')
           return res.status(500).json({
             status: '500 Server Interval Error',
-            error:
-              'Something went wrong while processing your request, Do try again'
+            error: 'Something went wrong while processing your request, Do try again'
           });
         const { url, originalname, public_id } = req.file;
         req.prop.image_url = url;
-        req.prop.imageId = public_id;
-        req.prop.imageName = originalname;
+        req.prop.image_id = public_id;
+        req.prop.image_name = originalname;
       }
       return next();
     });

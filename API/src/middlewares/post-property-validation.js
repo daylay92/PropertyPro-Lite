@@ -11,9 +11,9 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeFirst)
+        .customSanitizer(Helpers.toSmallLetters)
         .isIn([...status])
-        .withMessage('should be either Available, Sold or Rented')
+        .withMessage('should be either available, sold or rented')
         .trim(),
       check('price')
         .exists()
@@ -65,9 +65,9 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeEachWord)
+        .customSanitizer(Helpers.toSmallLetters)
         .custom((value, { req }) => {
-          if (value.trim() === 'Others') return req.body.other_type;
+          if (value.trim() === 'others') return req.body.other_type;
           return true;
         })
         .withMessage('the type selected requires that you fill the other-type field')
@@ -76,7 +76,7 @@ export default class PostProperty {
       check('other_type')
         .optional()
         .custom((value, { req }) => {
-          if (value) return req.body.type === 'Others';
+          if (value) return req.body.type.toLowerCase() === 'others';
           return true;
         })
         .withMessage('should only be used when the selected type is Others')
@@ -92,18 +92,18 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeEachWord)
+        .customSanitizer(Helpers.toSmallLetters)
         .isIn([...purpose])
         .withMessage('should either be For Sale or For Rent')
         .custom((value, { req }) => {
           const {
             body: { status: propertyStatus }
           } = req;
-          if (value === 'For Sale')
+          if (value === 'for sale')
             return (
               !status ||
-              Helpers.capitalizeFirst(propertyStatus) === 'Available' ||
-              Helpers.capitalizeFirst(propertyStatus) === 'Sold'
+              propertyStatus.toLowerCase() === 'available' ||
+              propertyStatus.toLowerCase() === 'sold'
             );
           return true;
         })
@@ -112,11 +112,11 @@ export default class PostProperty {
           const {
             body: { status: propertyStatus }
           } = req;
-          if (value === 'For Rent')
+          if (value === 'for rent')
             return (
               !status ||
-              Helpers.capitalizeFirst(propertyStatus) === 'Available' ||
-              Helpers.capitalizeFirst(propertyStatus) === 'Rented'
+              propertyStatus.toLowerCase() === 'available' ||
+              propertyStatus.toLowerCase() === 'rented'
             );
           return true;
         })

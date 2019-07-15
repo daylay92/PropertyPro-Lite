@@ -1,29 +1,9 @@
 class Helpers {
-  static async createId(arr) {
-    const { length } = arr;
-    if (length === 0) return 1;
-    const id = arr[length - 1].id + 1;
-    return id;
-  }
-
-  static capitalizeFirst(value) {
-    try {
-      if (!value || typeof value !== 'string') return value;
-      const convertedToLowerCase = value.toLowerCase();
-      const capitalized =
-        convertedToLowerCase.charAt(0).toUpperCase() + convertedToLowerCase.slice(1);
-
-      return capitalized;
-    } catch (e) {
-      return value;
-    }
-  }
-
   static toSmallLetters(value) {
     return value.toLowerCase();
   }
 
-  static capitalizeEachWord(value) {
+  static capitalize(value) {
     try {
       if (!value || typeof value !== 'string') return value;
       const splitedBySpace = value.split(' ');

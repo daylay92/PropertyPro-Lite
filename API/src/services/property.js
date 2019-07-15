@@ -1,10 +1,10 @@
 import PropertyModel from '../models/propertyModel';
 import properties from '../data/data-structure/properties';
 import UserServices from './user';
+import db from '../data/db/index';
 
 export default class Property extends PropertyModel {
   constructor(
-    id = null,
     owner,
     price,
     state,
@@ -15,11 +15,13 @@ export default class Property extends PropertyModel {
     imageId,
     imageUrl,
     purpose,
-    status = 'Available',
-    otherType = null
+    status,
+    otherType,
+    updatedOn,
+    description
   ) {
     super(
-      id,
+      null,
       owner,
       price,
       state,
@@ -31,48 +33,81 @@ export default class Property extends PropertyModel {
       imageUrl,
       purpose,
       status,
-      otherType
+      otherType,
+      description,
+      updatedOn,
+      null
     );
   }
 
   /* eslint camelcase : 0 */
   async save() {
-    const oldLength = properties.length;
     const {
-      id,
       owner,
       price,
       state,
       city,
       address,
       type,
-      imageName,
-      imageId,
+      image_name,
+      image_id,
       image_url,
       purpose,
       status,
-      created_on,
-      otherType
+      other_type,
+      description
     } = this;
-    const newLength = properties.push({
-      id,
+    const stateID = Property.getRelationId('states', state);
+    const statusID = Property.getRelationId('status', status);
+    const typeID = Property.getRelationId('types', type);
+    const purposeID = Property.getRelationId('purposes', purpose);
+    const [stateId, statusId, typeId, purposeId] = await Promise.all([
+      stateID,
+      statusID,
+      typeID,
+      purposeID
+    ]);
+    const text = `INSERT INTO 
+    properties(owner, status, price, state, city, address, type, image_name, image_url
+    , image_id, other_type, description,purpose)
+    VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) returning id, created_on;
+    `;
+    const values = [
       owner,
-      price,
-      state,
+      statusId,
+      parseFloat(price),
+      stateId,
       city,
       address,
-      type,
-      imageName,
-      imageId,
+      typeId,
+      image_name,
       image_url,
-      purpose,
-      status,
-      created_on,
-      otherType
-    });
-    const isSaved = newLength > oldLength ? true : new Error('Property was not saved');
-    if (isSaved) return isSaved;
-    throw isSaved;
+      image_id,
+      other_type,
+      description,
+      purposeId
+    ];
+    const {
+      rows: [user]
+    } = await db.queryWithParams(text, values);
+    return user;
+  }
+
+  static async getRelationId(Table, name) {
+    const text = `SELECT * FROM ${Table} WHERE name = $1`;
+    const value = [name];
+    const { rows } = await db.queryWithParams(text, value);
+    if (rows[0]) return rows[0].id;
+    const query = `
+        INSERT INTO ${Table}
+        (name)
+        VALUES($1) returning *;
+      `;
+    const param = [name];
+    const {
+      rows: [{ id }]
+    } = await db.queryWithParams(query, param);
+    return id;
   }
 
   static async findById(propId) {

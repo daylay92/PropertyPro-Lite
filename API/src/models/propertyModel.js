@@ -12,7 +12,10 @@ export default class Property {
     imageUrl,
     purpose,
     status,
-    otherType
+    otherType,
+    description,
+    updatedOn,
+    createdOn
   ) {
     this.id = id;
     this.owner = owner;
@@ -22,11 +25,13 @@ export default class Property {
     this.city = city;
     this.address = address;
     this.type = type;
-    this.imageName = imageName;
-    this.imageId = imageId;
+    this.image_name = imageName;
+    this.image_id = imageId;
     this.image_url = imageUrl;
     this.purpose = purpose;
-    this.created_on = new Date().toLocaleString();
-    this.otherType = otherType;
+    this.created_on = createdOn;
+    this.other_type = otherType;
+    this.description = description;
+    this.updated_on = updatedOn;
   }
 }

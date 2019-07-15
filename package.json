@@ -11,7 +11,7 @@
     "test-build": "nyc --reporter=lcov mocha ./API/src/**/*.test.js -r @babel/register --timeout 30000 --exit true",
     "coveralls": "nyc npm run test-build && nyc report --reporter=text-lcov | coveralls",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "migrations" : "babel-node ./API/src/data/db/migrations.js",
+    "migrations": "babel-node ./API/src/data/db/migrations.js",
     "local-test": "npm run migrations && npm test"
   },
   "repository": {
@@ -65,6 +65,7 @@
     "express-validator": "^6.1.1",
     "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
     "multer": "^1.4.1",
     "multer-storage-cloudinary": "^2.2.1",
     "pg": "^7.11.0",

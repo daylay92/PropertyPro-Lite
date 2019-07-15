@@ -1,5 +1,3 @@
-import Helpers from '../utils/helpers';
-import properties from '../data/data-structure/properties';
 import Property from '../services/property';
 
 export default class PropertyController {
@@ -52,35 +50,45 @@ export default class PropertyController {
 
   static async postProperty(req, res) {
     try {
-      const { price, state, city, address, type } = req.body;
-      const owner = req.auth.id;
-      const { url, originalname, public_id } = req.file;
-      const id = await Helpers.createId(properties);
-      let { status, otherType, purpose } = req.body;
-      otherType = !otherType ? null : otherType;
-      status = !status ? 'Available' : status;
-      purpose = !purpose ? 'For Sale' : purpose;
-      purpose = status === 'Rented' ? 'For Rent' : purpose;
+      const {
+        body: {
+          price,
+          status = 'available',
+          city,
+          address,
+          type,
+          other_type = null,
+          image_url,
+          image_id = null,
+          image_name = null,
+          purpose,
+          state,
+          description = null
+        },
+        auth: { id: owner }
+      } = req;
+      let reason = !purpose ? 'for sale' : purpose;
+      reason = status === 'rented' ? 'for rent' : reason;
       const newPrice = parseFloat(price);
       const property = new Property(
-        id,
         owner,
         newPrice,
         state,
         city,
         address,
         type,
-        originalname,
-        public_id,
-        url,
-        purpose,
+        image_name,
+        image_id,
+        image_url,
+        reason,
         status,
-        otherType
+        other_type,
+        null,
+        description
       );
-      const { created_on } = property;
-      await property.save();
+      const { created_on, id } = await property.save();
       return res.status(201).json({
-        status: 'Success',
+        status: 'success',
         data: {
           id,
           status,
@@ -90,10 +98,11 @@ export default class PropertyController {
           address,
           price: newPrice,
           created_on,
-          image_url: url,
-          imageName: originalname,
-          purpose,
-          otherType
+          image_url,
+          purpose: reason,
+          image_name,
+          other_type,
+          description
         }
       });
     } catch (err) {

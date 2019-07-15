@@ -1,6 +1,6 @@
 import { check, validationResult } from 'express-validator';
 import Helpers from '../utils/helpers';
-import { states, purpose, status } from '../utils/validation-data';
+import { purpose, status } from '../utils/validation-data';
 import { deleteImage } from '../utils/cloudinary';
 
 export default class PostProperty {
@@ -24,8 +24,8 @@ export default class PostProperty {
         .isLength({ min: 3, max: 15 })
         .withMessage('should be between 3-15 characters long')
         .trim()
-        .matches(/^\d+(\.|\d)\d+$/)
-        .withMessage('should be a float or numbers')
+        .matches(/^\d+(\.|\d)\d\d$/)
+        .withMessage('should be a float or a number e.g 5000.00 or 5000')
         .escape(),
       check('state')
         .exists()
@@ -33,9 +33,7 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeFirst)
-        .isIn([...states])
-        .withMessage('should be one of the states in Nigeria')
+        .customSanitizer(Helpers.capitalize)
         .trim(),
       check('city')
         .exists()

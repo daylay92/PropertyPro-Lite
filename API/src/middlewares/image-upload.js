@@ -19,7 +19,11 @@ export default class ImageUpload {
           status: '400 Bad Request',
           error: 'Invalid File Format'
         });
-      if (req.file) req.image_url = req.file.url;
+      if (req.file) {
+        req.body.image_url = req.file.url;
+        req.body.image_id = req.file.public_id;
+        req.body.image_name = req.file.originalname;
+      }
       return next();
     });
   }

@@ -38,7 +38,8 @@ describe('Property Route Endpoints', () => {
             'image_url',
             'purpose',
             'image_name',
-            'other_type'
+            'other_type',
+            'description'
           );
         })
         .end(done);

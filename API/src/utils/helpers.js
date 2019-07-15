@@ -19,5 +19,12 @@ class Helpers {
       return value;
     }
   }
+
+  static serverInternalError(res) {
+    return res.status(500).json({
+      status: '500 Server Interval Error',
+      error: 'Something went wrong while processing your request, Do try again'
+    });
+  }
 }
 export default Helpers;

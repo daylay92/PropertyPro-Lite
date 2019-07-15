@@ -12,7 +12,7 @@
     "coveralls": "nyc npm run test-build && nyc report --reporter=text-lcov | coveralls",
     "report-coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "migrations": "babel-node ./API/src/data/db/migrations.js",
-    "local-test": "npm run migrations && npm test"
+    "test-dev": "npm run migrations && npm test"
   },
   "repository": {
     "type": "git",

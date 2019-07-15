@@ -2,8 +2,8 @@ import Property from '../services/property';
 /* eslint camelcase: 0 */
 const authorize = async (req, res, next) => {
   try {
-    const propId = req.params.propertyId;
-    const property = await Property.findById(propId);
+    const { propertyId } = req.params;
+    const property = await Property.findById(parseInt(propertyId, 10));
     if (!property)
       return res.status(404).json({
         status: '404 Not Found',
@@ -12,7 +12,7 @@ const authorize = async (req, res, next) => {
     req.prop = { ...property };
     const { is_admin } = req.auth;
     if (is_admin) return next();
-    const requesterId = req.auth.id;
+    const { id: requesterId } = req.auth;
     const { owner } = property;
     if (requesterId !== owner)
       return res.status(403).json({

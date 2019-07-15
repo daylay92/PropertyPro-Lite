@@ -1,5 +1,5 @@
 import { check } from 'express-validator';
-import { states, purpose, status } from '../utils/validation-data';
+import { purpose, status } from '../utils/validation-data';
 import PostProperty from './post-property-validation';
 import Helpers from '../utils/helpers';
 
@@ -11,7 +11,7 @@ export default class UpdateProperty extends PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeFirst)
+        .customSanitizer(Helpers.toSmallLetters)
         .isIn([...status])
         .withMessage('should be either Available, Sold or Rented')
         .custom((value, { req }) => {
@@ -19,23 +19,23 @@ export default class UpdateProperty extends PostProperty {
             body: { purpose: selectedPurpose },
             prop: { purpose: storedPurpose }
           } = req;
-          if (value === 'Rented')
+          if (value === 'rented')
             return (
-              Helpers.capitalizeEachWord(selectedPurpose) === 'For Rent' ||
-              storedPurpose === 'For Rent'
+              Helpers.toSmallLetters(selectedPurpose) === 'for rent' ||
+              storedPurpose === 'for rent'
             );
           return true;
         })
-        .withMessage('status can only be rented if the purpose is For Rent')
+        .withMessage('status can only be Rented if the purpose is For Rent')
         .custom((value, { req }) => {
           const {
             body: { purpose: selectedPurpose },
             prop: { purpose: storedPurpose }
           } = req;
-          if (value === 'Sold')
+          if (value === 'sold')
             return (
-              Helpers.capitalizeEachWord(selectedPurpose) === 'For Sale' ||
-              storedPurpose === 'For Sale'
+              Helpers.toSmallLetters(selectedPurpose) === 'for sale' ||
+              storedPurpose === 'for sale'
             );
           return true;
         })
@@ -49,17 +49,15 @@ export default class UpdateProperty extends PostProperty {
         .isLength({ min: 3, max: 15 })
         .withMessage('should be between 3-15 characters long')
         .trim()
-        .matches(/^\d+(\.|\d)\d+$/)
-        .withMessage('should be a float or numbers')
+        .matches(/^\d+(\.|\d)\d\d$/)
+        .withMessage('should be a float or numbers e.g 5000.00 or 5000')
         .escape(),
       check('state')
         .optional()
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeFirst)
-        .isIn([...states])
-        .withMessage('should be one of the states in Nigeria')
+        .customSanitizer(Helpers.capitalize)
         .trim(),
       check('city')
         .optional()
@@ -86,16 +84,14 @@ export default class UpdateProperty extends PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeEachWord)
+        .customSanitizer(Helpers.toSmallLetters)
         .custom((value, { req }) => {
-          if (value.trim() === 'Others') return req.body.otherType;
+          if (value.trim() === 'others') return req.body.other_type;
           return true;
         })
-        .withMessage(
-          'the type selected requires that you fill the other_type field'
-        )
+        .withMessage('the type selected requires that you fill the other_type field')
         .custom((value, { req }) => {
-          if (value.trim() !== 'Others') return !req.body.otherType;
+          if (value.trim() !== 'others') return !req.body.other_type;
           return true;
         })
         .withMessage(
@@ -104,8 +100,7 @@ export default class UpdateProperty extends PostProperty {
       check('other_type')
         .optional()
         .custom((value, { req }) => {
-          if (value)
-            return req.body.type === 'Others' || req.prop.type === 'Others';
+          if (value) return req.body.type === 'others' || req.prop.type === 'others';
           return true;
         })
         .withMessage('should only be used when the selected type is Others')
@@ -121,7 +116,7 @@ export default class UpdateProperty extends PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .customSanitizer(Helpers.capitalizeEachWord)
+        .customSanitizer(Helpers.toSmallLetters)
         .isIn([...purpose])
         .withMessage('should be one of the types listed'),
       check('image_url')

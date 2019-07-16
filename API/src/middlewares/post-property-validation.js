@@ -41,11 +41,7 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .isAlpha()
-        .withMessage('Should be Alphabets only')
         .trim()
-        .isLength({ min: 3 })
-        .withMessage('Should be atleast 3 characters long')
         .escape(),
       check('address')
         .exists()
@@ -148,6 +144,7 @@ export default class PostProperty {
         else newErrObj[param] = [msg];
         return newErrObj;
       }, {});
+      console.log(errorObj);
       if (req.file) deleteImage(req.file.public_id);
       if (isRequiredError)
         return res.status(400).json({

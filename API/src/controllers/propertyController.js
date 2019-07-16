@@ -114,19 +114,22 @@ export default class PropertyController {
       const updated_on = await Property.updatePrice(price, parseInt(propertyId, 10));
       if (!updated_on) return Helpers.serverInternalError(res);
       return res.status(200).json({
-        id: propertyId,
-        status: prop.status,
-        type: prop.property_type,
-        state: prop.state,
-        city: prop.city,
-        address: prop.address,
-        price: parseFloat(price),
-        created_on: prop.created_on,
-        image_url: prop.image_url,
-        purpose: prop.purpose,
-        other_type: prop.other_type,
-        description: prop.description,
-        updated_on
+        status: 'success',
+        data: {
+          id: propertyId,
+          status: prop.status,
+          type: prop.property_type,
+          state: prop.state,
+          city: prop.city,
+          address: prop.address,
+          price: parseFloat(price),
+          created_on: prop.created_on,
+          image_url: prop.image_url,
+          purpose: prop.purpose,
+          other_type: prop.other_type,
+          description: prop.description,
+          updated_on
+        }
       });
     } catch (err) {
       return Helpers.serverInternalError(res);

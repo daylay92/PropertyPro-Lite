@@ -219,18 +219,16 @@ export default class PropertyController {
       prop: { id: propertyId }
     } = req;
     try {
-      await Property.deleteById(propertyId);
+      const id = await Property.deleteById(propertyId);
+      if (!id) return Helpers.serverInternalError(res);
       return res.status(200).json({
-        status: 'Success',
+        status: 'success',
         data: {
           message: `Successfully deleted property of id : ${propertyId}`
         }
       });
     } catch (e) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
-      });
+      return Helpers.serverInternalError(res);
     }
   }
 }

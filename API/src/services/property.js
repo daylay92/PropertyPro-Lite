@@ -254,17 +254,12 @@ export default class Property extends PropertyModel {
     };
   }
 
-  static async updateAndSave(property) {
-    const propIndex = properties.findIndex(({ id }) => id === property.id);
-    properties.splice(propIndex, 1, property);
-  }
-
   static async deleteById(propertyId) {
-    const propIndex = properties.findIndex(({ id }) => id === propertyId);
-    const removed = properties.splice(propIndex, 1);
-    const isDeleted = removed.length === 1 ? true : new Error('not deleted');
-    if (isDeleted) return isDeleted;
-    throw isDeleted;
+    const text = `DELETE FROM properties WHERE id = $1 RETURNING id`;
+    const {
+      rows: [{ id }]
+    } = await db.queryWithParams(text, [propertyId]);
+    return id;
   }
 
   static async fetchByType(queryObj) {

@@ -7,7 +7,7 @@ const authorize = async (req, res, next) => {
     if (!property)
       return res.status(404).json({
         status: '404 Not Found',
-        error: "The property you requested to update doesn't exist"
+        error: "The property doesn't exist"
       });
     req.prop = { ...property };
     const { is_admin } = req.auth;

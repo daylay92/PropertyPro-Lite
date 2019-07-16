@@ -15,10 +15,11 @@ export default class PropertyController {
           error: "The property adverts you request aren't available"
         });
       return res.status(200).json({
-        status: 'Success',
+        status: 'success',
         data: allProperties
       });
     } catch (e) {
+      console.log(e.stack);
       return Helpers.serverInternalError(res);
     }
   }

@@ -35,7 +35,7 @@ export default class PropertyController {
           error: 'The property advert you have requested is not available'
         });
       return res.status(200).json({
-        status: 'Success',
+        status: 'success',
         data: property
       });
     } catch (e) {

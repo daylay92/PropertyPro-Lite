@@ -6,10 +6,10 @@ export default class PropertyController {
   static async getAllProperties(req, res) {
     try {
       let allProperties;
-      const isQueryExist = Object.keys(req.query).length;
-      if (isQueryExist) allProperties = await Property.fetchByType(req.query);
+      const isQueryExist = req.query.type;
+      if (isQueryExist) allProperties = await Property.fetchByType(req.query.type);
       else allProperties = await Property.fetchAll();
-      if (!allProperties)
+      if (!allProperties.length)
         return res.status(404).json({
           status: '404 Not Found',
           error: "The property adverts you request aren't available"
@@ -19,7 +19,6 @@ export default class PropertyController {
         data: allProperties
       });
     } catch (e) {
-      console.log(e.stack);
       return Helpers.serverInternalError(res);
     }
   }

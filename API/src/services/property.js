@@ -1,6 +1,5 @@
 import moment from 'moment';
 import PropertyModel from '../models/propertyModel';
-import properties from '../data/data-structure/properties';
 import UserServices from './user';
 import db from '../data/db/index';
 
@@ -231,29 +230,6 @@ export default class Property extends PropertyModel {
     };
   }
 
-  static updateType({ otherType: savedOthers, type: savedType }, type, otherType) {
-    let newOtherType;
-    let newType;
-    switch (type) {
-      case undefined:
-        newOtherType = !otherType ? savedOthers : otherType;
-        newType = savedType;
-        break;
-      case 'Others':
-        newType = type;
-        newOtherType = otherType;
-        break;
-      default:
-        newType = type;
-        newOtherType = null;
-        break;
-    }
-    return {
-      newOtherType,
-      newType
-    };
-  }
-
   static async deleteById(propertyId) {
     const text = `DELETE FROM properties WHERE id = $1 RETURNING id`;
     const {
@@ -262,49 +238,38 @@ export default class Property extends PropertyModel {
     return id;
   }
 
-  static async fetchByType(queryObj) {
-    const { type: mainType } = queryObj;
-    const filteredProperties = properties.filter(
-      ({ type }) => type.toLowerCase() === mainType.toLowerCase()
-    );
-    if (!filteredProperties.length) return false;
-    const allProperties = filteredProperties.map(async property => {
-      const {
-        id,
-        status,
-        type,
-        state,
-        city,
-        address,
-        price,
-        created_on,
-        image_url,
-        purpose,
-        otherType,
-        owner
-      } = property;
-      const {
-        email: ownerEmail,
-        phoneNumber: ownerPhoneNumber
-      } = await UserServices.findById(owner);
-      return {
-        id,
-        status,
-        type,
-        state,
-        city,
-        address,
-        price,
-        created_on,
-        image_url,
-        ownerEmail,
-        ownerPhoneNumber,
-        purpose,
-        otherType
-      };
-    });
-    const result = await Promise.all(allProperties);
-    return result;
+  static async fetchByType(type) {
+    const queryType = `SELECT id FROM types WHERE name = $1`;
+    const { rows: row } = await db.queryWithParams(queryType, [type.toLowerCase()]);
+    if (!row.length) return [];
+    const [{ id }] = row;
+    const text = `
+    SELECT
+    properties.id,
+    status.name status,
+	  types.name "type",
+    states.name state,
+    properties.city,
+    properties.address,
+	  properties.price,
+    properties.created_on,
+    properties.image_url,
+    users.email owner_email,
+	  users.phone_number owner_phone_number,
+	  purposes.name purpose,
+    properties.other_type,
+    properties.description
+ FROM
+    properties
+ INNER JOIN status ON status.id = properties.status
+ INNER JOIN states ON states.id = properties.state
+ INNER JOIN types ON types.id = properties.type
+ INNER JOIN purposes ON purposes.id = properties.purpose
+ INNER JOIN users ON users.id = properties.owner
+ WHERE properties.type = $1
+    `;
+    const { rows } = await db.queryWithParams(text, [id]);
+    return rows;
   }
 
   static async fetchAll() {

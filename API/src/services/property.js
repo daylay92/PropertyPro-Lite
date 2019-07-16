@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropertyModel from '../models/propertyModel';
 import properties from '../data/data-structure/properties';
 import UserServices from './user';
@@ -57,16 +58,12 @@ export default class Property extends PropertyModel {
       other_type,
       description
     } = this;
-    const stateID = Property.getRelationId('states', state);
-    const statusID = Property.getRelationId('status', status);
-    const typeID = Property.getRelationId('types', type);
-    const purposeID = Property.getRelationId('purposes', purpose);
-    const [stateId, statusId, typeId, purposeId] = await Promise.all([
-      stateID,
-      statusID,
-      typeID,
-      purposeID
-    ]);
+    const [stateId, statusId, typeId, purposeId] = await Property.generateAllRelationId(
+      state,
+      status,
+      type,
+      purpose
+    );
     const text = `INSERT INTO 
     properties(owner, status, price, state, city, address, type, image_name, image_url
     , image_id, other_type, description,purpose)
@@ -93,6 +90,15 @@ export default class Property extends PropertyModel {
     return user;
   }
 
+  static async generateAllRelationId(state, status, type, purpose) {
+    const stateID = Property.getRelationId('states', state);
+    const statusID = Property.getRelationId('status', status);
+    const typeID = Property.getRelationId('types', type);
+    const purposeID = Property.getRelationId('purposes', purpose);
+    const result = await Promise.all([stateID, statusID, typeID, purposeID]);
+    return result;
+  }
+
   static async getRelationId(Table, name) {
     const text = `SELECT * FROM ${Table} WHERE name = $1`;
     const value = [name];
@@ -110,8 +116,67 @@ export default class Property extends PropertyModel {
     return id;
   }
 
+  static async updatePrice(price, id) {
+    const newPrice = parseFloat(price);
+    const text = `UPDATE properties SET price = $1, updated_on = $3 WHERE id = $2
+      RETURNING updated_on;
+    `;
+    const {
+      rows: [{ updated_on }]
+    } = await db.queryWithParams(text, [newPrice, id, moment()]);
+    return updated_on;
+  }
+
+  static async update(valueArr, id) {
+    const [purpose, state, status, type, ...others] = valueArr;
+    console.log(purpose, state, status, type);
+    const relationsId = await Property.generateAllRelationId(
+      state,
+      status,
+      type,
+      purpose
+    );
+    const text = `UPDATE  
+    properties SET state = $1 , status = $2, type = $3, purpose = $4, price = $5, 
+    city = $6, address = $7, other_type = $8, image_url = $9, image_id = $10, 
+    image_name = $11, description = $12, updated_on = $13
+   WHERE id = $14 RETURNING updated_on
+    `;
+    const values = [...relationsId, ...others, moment(), id];
+
+    const {
+      rows: [{ updated_on }]
+    } = await db.queryWithParams(text, values);
+    return updated_on;
+  }
+
   static async findById(propId) {
-    const property = properties.find(({ id }) => id === parseInt(propId, 10));
+    const text = `SELECT
+    properties.id,
+    properties.owner,
+    status.name status,
+    states.name state,
+    properties.city,
+    properties.address,
+    types.name property_type,
+    properties.created_on,
+    properties.image_url,
+    properties.other_type,
+    properties.image_name,
+    properties.image_id,
+    properties.description,
+    purposes.name purpose
+ FROM
+    properties
+ INNER JOIN status ON status.id = properties.status
+ INNER JOIN states ON states.id = properties.state
+ INNER JOIN types ON types.id = properties.type
+ INNER JOIN purposes ON purposes.id = properties.purpose
+ WHERE properties.id = $1
+ `;
+    const {
+      rows: [property]
+    } = await db.queryWithParams(text, [propId]);
     return property;
   }
 

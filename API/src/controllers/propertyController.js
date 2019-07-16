@@ -1,4 +1,5 @@
 import Property from '../services/property';
+import Helpers from '../utils/helpers';
 
 export default class PropertyController {
   /* eslint camelcase: 0 */
@@ -18,10 +19,7 @@ export default class PropertyController {
         data: allProperties
       });
     } catch (e) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
-      });
+      return Helpers.serverInternalError(res);
     }
   }
 
@@ -41,10 +39,7 @@ export default class PropertyController {
         data: property
       });
     } catch (e) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
-      });
+      return Helpers.serverInternalError(res);
     }
   }
 
@@ -100,58 +95,83 @@ export default class PropertyController {
           created_on,
           image_url,
           purpose: reason,
-          image_name,
           other_type,
           description
         }
       });
     } catch (err) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
+      return Helpers.serverInternalError(res);
+    }
+  }
+
+  static async updatePrice(req, res) {
+    const {
+      params: { propertyId },
+      body: { price },
+      prop
+    } = req;
+    try {
+      const updated_on = await Property.updatePrice(price, parseInt(propertyId, 10));
+      if (!updated_on) return Helpers.serverInternalError(res);
+      return res.status(200).json({
+        id: propertyId,
+        status: prop.status,
+        type: prop.property_type,
+        state: prop.state,
+        city: prop.city,
+        address: prop.address,
+        price: parseFloat(price),
+        created_on: prop.created_on,
+        image_url: prop.image_url,
+        purpose: prop.purpose,
+        other_type: prop.other_type,
+        description: prop.description,
+        updated_on
       });
+    } catch (err) {
+      return Helpers.serverInternalError(res);
     }
   }
 
   static async updateProperty(req, res) {
     try {
-      const { prop } = req;
-      const { price, state, city, address, type, status, purpose, otherType } = req.body;
-      prop.purpose = prop.purpose === purpose || !purpose ? prop.purpose : purpose;
-      prop.price =
-        prop.price === parseFloat(price) || !parseFloat(price)
-          ? prop.price
-          : parseFloat(price);
-      prop.state = prop.state === state || !state ? prop.state : state;
-      prop.status = prop.status === status || !status ? prop.status : status;
-      prop.city = prop.city === city || !city ? prop.city : city;
-      prop.address = prop.address === address || !address ? prop.address : address;
-      const { newOtherType, newType } = Property.updateType(prop, type, otherType);
-      prop.type = newType;
-      prop.otherType = newOtherType;
-      await Property.updateAndSave(prop);
+      const { body, prop } = req;
+      const propertyValues = [
+        body.purpose || prop.purpose,
+        body.state || prop.state,
+        body.status || prop.status,
+        body.type || prop.property_type,
+        parseFloat(body.price) || prop.price,
+        body.city || prop.city,
+        body.address || prop.address,
+        body.other_type || prop.other_type,
+        body.image_url || prop.image_url,
+        body.image_id || prop.image_id,
+        body.image_name || prop.image_name,
+        body.description || prop.description
+      ];
+      const updated_on = await Property.update(propertyValues, prop.id);
+      if (!updated_on) return Helpers.serverInternalError(res);
       return res.status(200).json({
-        status: 'Success',
+        status: 'success',
         data: {
           id: prop.id,
-          status: prop.status,
-          type: prop.type,
-          state: prop.state,
-          city: prop.city,
-          address: prop.address,
-          price: prop.price,
+          status: propertyValues[2],
+          type: propertyValues[3],
+          state: propertyValues[1],
+          city: propertyValues[5],
+          address: propertyValues[6],
+          price: propertyValues[4],
           created_on: prop.created_on,
-          image_url: prop.image_url,
-          imageName: prop.imageName,
-          purpose: prop.purpose,
-          otherType: prop.otherType
+          image_url: propertyValues[8],
+          purpose: propertyValues[0],
+          other_type: propertyValues[7],
+          description: propertyValues[11],
+          updated_on
         }
       });
     } catch (e) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
-      });
+      return Helpers.serverInternalError(res);
     }
   }
 

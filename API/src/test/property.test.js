@@ -37,7 +37,6 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'purpose',
-            'image_name',
             'other_type',
             'description'
           );
@@ -319,8 +318,9 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'purpose',
-            'image_name',
-            'other_type'
+            'other_type',
+            'description',
+            'update_on'
           );
         })
         .end(done);

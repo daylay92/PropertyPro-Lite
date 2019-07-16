@@ -11,12 +11,17 @@ env:
     - CC_TEST_REPORTER_ID=e06c942579925bedca917556e3ba14cf5f26186999f5a1ec91e2de559f118a56
 
 before_script:
+  - psql -c "CREATE DATABASE testing_db;" -U postgres
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
 script: 
+  - npm run migrations
   - npm test
+
+services:
+  - postgresql
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

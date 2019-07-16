@@ -6,7 +6,7 @@ export default class ImageUpload {
     const multerUpload = multer({
       storage,
       limits: { files: 1, fileSize: 750000 }
-    }).single('image');
+    }).single('image_url');
     multerUpload(req, res, err => {
       if (err instanceof multer.MulterError)
         return res.status(400).json({
@@ -14,11 +14,14 @@ export default class ImageUpload {
           error: 'Image should not exceed 750kb'
         });
       if (err.field === 'image_url') return next();
-      if (err)
+      if (err) {
+        console.log(err.stack);
         return res.status(400).json({
           status: '400 Bad Request',
           error: 'Invalid File Format'
         });
+      }
+
       if (req.file) {
         req.body.image_url = req.file.url;
         req.body.image_id = req.file.public_id;

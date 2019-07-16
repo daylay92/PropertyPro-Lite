@@ -127,6 +127,19 @@ export default class Property extends PropertyModel {
     return updated_on;
   }
 
+  static async markSoldOrRented(id, purpose, status) {
+    const purposeId = Property.getRelationId('purposes', purpose);
+    const statusId = Property.getRelationId('status', status);
+    const [statusID, purposeID] = await Promise.all([statusId, purposeId]);
+    const text = `UPDATE properties SET status = $1, purpose = $2, updated_on = $3
+    WHERE id = $4 RETURNING updated_on
+    `;
+    const {
+      rows: [{ updated_on }]
+    } = await db.queryWithParams(text, [statusID, purposeID, moment(), id]);
+    return updated_on;
+  }
+
   static async update(valueArr, id) {
     const [purpose, state, status, type, ...others] = valueArr;
     const relationsId = await Property.generateAllRelationId(
@@ -155,9 +168,10 @@ export default class Property extends PropertyModel {
     properties.owner,
     status.name status,
     states.name state,
+    properties.price,
     properties.city,
     properties.address,
-    types.name property_type,
+    types.name "type",
     properties.created_on,
     properties.image_url,
     properties.other_type,

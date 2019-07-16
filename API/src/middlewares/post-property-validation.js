@@ -22,8 +22,7 @@ export default class PostProperty {
         .isEmpty()
         .withMessage('Field cannot be empty')
         .trim()
-        .customSanitizer(Helpers.toInt)
-        .matches(/^\d+(\.|\d)\d\d$/)
+        .isNumeric()
         .withMessage('should be a float or a number e.g 5000.00 or 5000')
         .escape(),
       check('state')

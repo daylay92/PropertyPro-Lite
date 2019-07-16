@@ -20,10 +20,6 @@ class Helpers {
     }
   }
 
-  static toInt(value) {
-    return parseInt(value, 10);
-  }
-
   static serverInternalError(res, msg = undefined) {
     return res.status(500).json({
       status: '500 Server Interval Error',

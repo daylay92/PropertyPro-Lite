@@ -575,8 +575,9 @@ describe('Property Route Endpoints', () => {
             'created_on',
             'image_url',
             'purpose',
-            'image_name',
-            'otherType'
+            'other_type',
+            'description',
+            'updated_on'
           );
         })
         .end(done);

@@ -118,7 +118,7 @@ export default class PropertyController {
         data: {
           id: propertyId,
           status: prop.status,
-          type: prop.property_type,
+          type: prop.type,
           state: prop.state,
           city: prop.city,
           address: prop.address,
@@ -143,7 +143,7 @@ export default class PropertyController {
         body.purpose || prop.purpose,
         body.state || prop.state,
         body.status || prop.status,
-        body.type || prop.property_type,
+        body.type || prop.type,
         parseFloat(body.price) || prop.price,
         body.city || prop.city,
         body.address || prop.address,
@@ -182,12 +182,17 @@ export default class PropertyController {
     try {
       const { prop: property } = req;
       const { available } = req.query;
-      if (available === 'true') property.status = 'Available';
+      if (available === 'true') property.status = 'available';
       if (!available)
-        property.status = property.purpose === 'For Rent' ? 'Rented' : 'Sold';
-      await Property.updateAndSave(property);
+        property.status = property.purpose === 'for rent' ? 'rented' : 'sold';
+      const updated_on = await Property.markSoldOrRented(
+        property.id,
+        property.purpose,
+        property.status
+      );
+      if (!updated_on) return Helpers.serverInternalError(res);
       return res.status(200).json({
-        status: 'Success',
+        status: 'success',
         data: {
           id: property.id,
           status: property.status,
@@ -198,16 +203,14 @@ export default class PropertyController {
           price: property.price,
           created_on: property.created_on,
           image_url: property.image_url,
-          imageName: property.imageName,
           purpose: property.purpose,
-          otherType: property.otherType
+          other_type: property.other_type,
+          description: property.description,
+          updated_on
         }
       });
     } catch (e) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
-      });
+      return Helpers.serverInternalError(res);
     }
   }
 

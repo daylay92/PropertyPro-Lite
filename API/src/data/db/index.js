@@ -24,10 +24,6 @@ class DB {
 const db = new DB();
 
 /* eslint no-console : 0 */
-db.pool.on('connect', () => {
-  console.log('connected to the db');
-});
-
 db.pool.on('error', () => {
   console.log('some database error have occurred');
   process.exit(-1);

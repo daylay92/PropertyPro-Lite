@@ -129,7 +129,6 @@ export default class Property extends PropertyModel {
 
   static async update(valueArr, id) {
     const [purpose, state, status, type, ...others] = valueArr;
-    console.log(purpose, state, status, type);
     const relationsId = await Property.generateAllRelationId(
       state,
       status,

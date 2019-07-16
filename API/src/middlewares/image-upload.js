@@ -8,17 +8,12 @@ export default class ImageUpload {
       limits: { files: 1, fileSize: 750000 }
     }).single('image');
     multerUpload(req, res, err => {
-      if (err) {
-        console.log(err.stack);
-        console.log(err.field);
-        console.log('error happened');
-      }
       if (err instanceof multer.MulterError)
         return res.status(400).json({
           status: '400 Bad Request',
           error: 'Image should not exceed 750kb'
         });
-
+      if (err.field === 'image_url') return next();
       if (err)
         return res.status(400).json({
           status: '400 Bad Request',

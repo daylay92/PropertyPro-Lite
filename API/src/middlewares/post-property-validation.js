@@ -129,6 +129,7 @@ export default class PostProperty {
   /* eslint no-param-reassign: 0 */
 
   static async verifyValidationResult(req, res, next) {
+    console.log(req.body);
     const errors = validationResult(req);
     let isRequiredError = false;
     if (!errors.isEmpty()) {
@@ -155,7 +156,7 @@ export default class PostProperty {
         errors: errorObj
       });
     }
-
+    console.log('no errors');
     return next();
   }
 }

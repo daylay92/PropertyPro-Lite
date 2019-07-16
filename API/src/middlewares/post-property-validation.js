@@ -21,9 +21,8 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .isLength({ min: 3, max: 15 })
-        .withMessage('should be between 3-15 characters long')
         .trim()
+        .customSanitizer(Helpers.toInt)
         .matches(/^\d+(\.|\d)\d\d$/)
         .withMessage('should be a float or a number e.g 5000.00 or 5000')
         .escape(),
@@ -49,8 +48,6 @@ export default class PostProperty {
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')
-        .isLength({ min: 5 })
-        .withMessage('Should be atleast 3 characters long')
         .trim()
         .escape(),
       check('type')
@@ -144,7 +141,6 @@ export default class PostProperty {
         else newErrObj[param] = [msg];
         return newErrObj;
       }, {});
-      console.log(errorObj);
       if (req.file) deleteImage(req.file.public_id);
       if (isRequiredError)
         return res.status(400).json({

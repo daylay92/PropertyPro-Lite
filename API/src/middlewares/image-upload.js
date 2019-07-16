@@ -13,7 +13,6 @@ export default class ImageUpload {
           status: '400 Bad Request',
           error: 'Image should not exceed 750kb'
         });
-      if (err.field === 'image_url') return next();
       if (err) {
         console.log(err.stack);
         return res.status(400).json({

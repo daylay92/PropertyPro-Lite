@@ -133,6 +133,7 @@ export default class PostProperty {
     let isRequiredError = false;
     if (!errors.isEmpty()) {
       const validateErrors = errors.array();
+      console.log(validateErrors);
       const errorObj = validateErrors.reduce((newErrObj, { msg, param }) => {
         if (msg === 'Field is Required' || msg === 'Field cannot be empty')
           isRequiredError = true;
@@ -140,6 +141,7 @@ export default class PostProperty {
         else newErrObj[param] = [msg];
         return newErrObj;
       }, {});
+      console.log(errorObj);
       if (req.file) deleteImage(req.file.public_id);
       if (isRequiredError)
         return res.status(400).json({

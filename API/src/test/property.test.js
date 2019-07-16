@@ -194,7 +194,8 @@ describe('Property Route Endpoints', () => {
             'owner_email',
             'owner_phone_number',
             'purpose',
-            'other_type'
+            'other_type',
+            'description'
           );
         })
         .end(done);
@@ -210,7 +211,7 @@ describe('Property Route Endpoints', () => {
             body: { status, data }
           } = res;
           const { type } = data[0];
-          expect(type).to.equal('2 Bedroom');
+          expect(type).to.equal('2 bedroom');
           expect(status).to.equal('success');
           expect(data).to.be.an('array');
           expect(data[0]).to.have.all.keys(
@@ -226,14 +227,15 @@ describe('Property Route Endpoints', () => {
             'owner_email',
             'owner_phone_number',
             'purpose',
-            'other_type'
+            'other_type',
+            'description'
           );
         })
         .end(done);
     });
     it('should return a resource not found error response when a user filters for property adverts of a specific type that is currently not available on the App', done => {
       request
-        .get(`/api/v1/property?type=Land`)
+        .get(`/api/v1/property?type=FarmLand`)
         .set('token', validToken)
         .expect('Content-Type', /json/)
         .expect(404)

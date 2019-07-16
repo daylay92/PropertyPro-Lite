@@ -20,10 +20,10 @@ class Helpers {
     }
   }
 
-  static serverInternalError(res) {
+  static serverInternalError(res, msg = undefined) {
     return res.status(500).json({
       status: '500 Server Interval Error',
-      error: 'Something went wrong while processing your request, Do try again'
+      error: msg || 'Something went wrong while processing your request, Do try again'
     });
   }
 }

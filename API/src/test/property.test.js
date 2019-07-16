@@ -158,7 +158,8 @@ describe('Property Route Endpoints', () => {
             'owner_email',
             'owner_phone_number',
             'purpose',
-            'other_type'
+            'other_type',
+            'description'
           );
         })
         .end(done);

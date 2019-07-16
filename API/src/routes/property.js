@@ -9,7 +9,7 @@ import PutProperty from '../middlewares/put-property-validation';
 
 const router = Router();
 
-router.get('/', PropertyController.getAllProperties);
+router.get('/', Authenticate.verify, PropertyController.getAllProperties);
 router.get('/:propertyId', PropertyController.getProperty);
 router.post(
   '/',

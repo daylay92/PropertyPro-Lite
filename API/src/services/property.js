@@ -308,43 +308,31 @@ export default class Property extends PropertyModel {
   }
 
   static async fetchAll() {
-    const allProperties = properties.map(
-      async ({
-        id,
-        status,
-        type,
-        state,
-        city,
-        address,
-        price,
-        created_on,
-        image_url,
-        purpose,
-        otherType,
-        owner
-      }) => {
-        const {
-          email: ownerEmail,
-          phoneNumber: ownerPhoneNumber
-        } = await UserServices.findById(owner);
-        return {
-          id,
-          status,
-          type,
-          state,
-          city,
-          address,
-          price,
-          created_on,
-          image_url,
-          ownerEmail,
-          ownerPhoneNumber,
-          purpose,
-          otherType
-        };
-      }
-    );
-    const result = await Promise.all(allProperties);
-    return result;
+    const text = `
+    SELECT
+    properties.id,
+    status.name status,
+	  types.name "type",
+    states.name state,
+    properties.city,
+    properties.address,
+	  properties.price,
+    properties.created_on,
+    properties.image_url,
+    users.email owner_email,
+	  users.phone_number owner_phone_number,
+	  purposes.name purpose,
+    properties.other_type,
+    properties.description
+ FROM
+    properties
+ INNER JOIN status ON status.id = properties.status
+ INNER JOIN states ON states.id = properties.state
+ INNER JOIN types ON types.id = properties.type
+ INNER JOIN purposes ON purposes.id = properties.purpose
+ INNER JOIN users ON users.id = properties.owner
+    `;
+    const { rows } = await db.query(text);
+    return rows;
   }
 }

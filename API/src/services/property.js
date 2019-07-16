@@ -1,6 +1,5 @@
 import moment from 'moment';
 import PropertyModel from '../models/propertyModel';
-import UserServices from './user';
 import db from '../data/db/index';
 
 export default class Property extends PropertyModel {
@@ -193,41 +192,35 @@ export default class Property extends PropertyModel {
   }
 
   static async fetchById(propertyId) {
-    const property = await Property.findById(propertyId);
-    if (!property) return property;
+    const text = `
+    SELECT
+    properties.id,
+    status.name status,
+	  types.name "type",
+    states.name state,
+    properties.city,
+    properties.address,
+	  properties.price,
+    properties.created_on,
+    properties.image_url,
+    users.email owner_email,
+	  users.phone_number owner_phone_number,
+	  purposes.name purpose,
+    properties.other_type,
+    properties.description
+ FROM
+    properties
+ INNER JOIN status ON status.id = properties.status
+ INNER JOIN states ON states.id = properties.state
+ INNER JOIN types ON types.id = properties.type
+ INNER JOIN purposes ON purposes.id = properties.purpose
+ INNER JOIN users ON users.id = properties.owner
+ WHERE properties.id = $1
+ `;
     const {
-      id,
-      status,
-      type,
-      state,
-      city,
-      address,
-      price,
-      created_on,
-      image_url,
-      purpose,
-      otherType,
-      owner
-    } = property;
-    const {
-      email: ownerEmail,
-      phoneNumber: ownerPhoneNumber
-    } = await UserServices.findById(owner);
-    return {
-      id,
-      status,
-      type,
-      state,
-      city,
-      address,
-      price,
-      created_on,
-      image_url,
-      ownerEmail,
-      ownerPhoneNumber,
-      purpose,
-      otherType
-    };
+      rows: [property]
+    } = await db.queryWithParams(text, [parseInt(propertyId, 10)]);
+    return property;
   }
 
   static async deleteById(propertyId) {

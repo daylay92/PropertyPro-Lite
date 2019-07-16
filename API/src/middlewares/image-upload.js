@@ -10,7 +10,7 @@ export default class ImageUpload {
     multerUpload(req, res, err => {
       if (err) {
         console.log(err.stack);
-        console.log(req.body);
+        console.log(err.field);
         console.log('error happened');
       }
       if (err instanceof multer.MulterError)

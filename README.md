@@ -1,7 +1,7 @@
 # PropertyPro-Lite
 [![Website daylay92.github.io/PropertyPro-Lite/UI](https://img.shields.io/website-up-down-green-red/https/daylay92.github.io/PropertyPro-Lite/UI.svg)](https://daylay92.github.io/PropertyPro-Lite/UI/)
 [![Build Status](https://travis-ci.org/daylay92/PropertyPro-Lite.svg?branch=develop)](https://travis-ci.org/daylay92/PropertyPro-Lite)
-[![Coverage Status](https://coveralls.io/repos/github/daylay92/PropertyPro-Lite/badge.svg?branch=develop)](https://coveralls.io/github/daylay92/PropertyPro-Lite?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/daylay92/PropertyPro-Lite/badge.svg)](https://coveralls.io/github/daylay92/PropertyPro-Lite)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b0434f953d7534ab7c6d/test_coverage)](https://codeclimate.com/github/daylay92/PropertyPro-Lite/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/b0434f953d7534ab7c6d/maintainability)](https://codeclimate.com/github/daylay92/PropertyPro-Lite/maintainability)
 

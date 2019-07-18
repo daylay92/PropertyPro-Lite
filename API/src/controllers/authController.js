@@ -1,4 +1,5 @@
 import User from '../services/user';
+import Helpers from '../utils/helpers';
 
 class Auth {
   /* eslint camelcase: 0 */
@@ -20,10 +21,7 @@ class Auth {
         }
       });
     } catch (e) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
-      });
+      return Helpers.serverInternalError(res);
     }
   }
 
@@ -52,10 +50,7 @@ class Auth {
         error: 'Invalid login credentials'
       });
     } catch (e) {
-      return res.status(500).json({
-        status: '500 Server Interval Error',
-        error: 'Something went wrong while processing your request, Do try again'
-      });
+      return Helpers.serverInternalError(res);
     }
   }
 }

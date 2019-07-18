@@ -38,16 +38,14 @@ app.use('/api/v1/property', propertyRoutes);
 // Default Route
 app.get('/api/v1', (req, res) =>
   res.status(200).json({
-    status: 'Success',
+    status: 'success',
     message: 'Welcome to the PropertyPro-Lite API'
   })
 );
 
 // Respond to Non-existent Route
 app.all('*', (req, res) =>
-  res
-    .status(404)
-    .json({ status: '404 Not Found', message: "This route doesn't exist" })
+  res.status(404).json({ status: '404 Not Found', message: "This route doesn't exist" })
 );
 /* eslint no-console : 0 */
 // Listen for Requests to Server

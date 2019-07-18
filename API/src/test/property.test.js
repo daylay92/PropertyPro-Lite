@@ -94,8 +94,9 @@ describe('Property Route Endpoints', () => {
         .field('state', 'Lagos')
         .field('city', 12344)
         .field('address', '30, Caleb Road')
-        .field('type', '2 bedroom')
+        .field('type', 'others')
         .field('purpose', 'For Rent')
+        .field('other_type', 're')
         .attach('image_url', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
         .set('Connection', 'keep-alive')
         .set('token', validToken)
@@ -105,6 +106,31 @@ describe('Property Route Endpoints', () => {
           const { status } = res.body;
           expect(status).to.equal('400 Bad Request');
           expect(res.body).to.have.all.keys('status', 'error', 'errors');
+          expect(res.body.errors).to.be.an('object');
+        })
+        .end(done);
+    });
+    it('should prevent a user from posting a property advert if he/she provides invalid input parameters such as selecting for sale and rented as purpose and status respectively', done => {
+      request
+        .post('/api/v1/property')
+        .field('status', 'rented')
+        .field('price', 'rhjfioo')
+        .field('state', 'Lagos')
+        .field('city', 12344)
+        .field('address', '30, Caleb Road')
+        .field('type', 'others')
+        .field('purpose', 'for sale')
+        .field('other_type', 'self-contain')
+        .attach('image_url', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
+        .set('Connection', 'keep-alive')
+        .set('token', validToken)
+        .expect('Content-Type', /json/)
+        .expect(400)
+        .expect(res => {
+          const { status } = res.body;
+          expect(status).to.equal('400 Bad Request');
+          expect(res.body).to.have.all.keys('status', 'error', 'errors');
+          expect(res.body.errors).to.be.an('object');
         })
         .end(done);
     });
@@ -117,7 +143,6 @@ describe('Property Route Endpoints', () => {
         .field('city', 'Ikeja')
         .field('address', '')
         .field('type', '2 bedroom')
-        .field('purpose', 'For Rent')
         .attach('image_url', path.resolve(__dirname, '../../../UI/assets/images/1.jpg'))
         .set('Connection', 'keep-alive')
         .set('token', validToken)
@@ -302,7 +327,8 @@ describe('Property Route Endpoints', () => {
         .field('state', 'Ekiti')
         .field('city', 'Ado')
         .field('address', '40, Caleb Road')
-        .field('type', 'Studio Flat')
+        .field('type', 'others')
+        .field('other_type', 'self-contain')
         .attach('image_url', path.resolve(__dirname, '../../../UI/assets/images/2.jpg'))
         .set('token', validToken)
         .set('Connection', 'keep-alive')
@@ -373,7 +399,7 @@ describe('Property Route Endpoints', () => {
     it('should prevent a user from updating a property advert if he/she provides invalid input parameters', done => {
       request
         .put('/api/v1/property/2')
-        .field('status', 'Available')
+        .field('status', 'rented')
         .field('price', 'rhjfioo')
         .field('state', 'Lagos')
         .field('city', 12344)
@@ -394,12 +420,13 @@ describe('Property Route Endpoints', () => {
     it('should prevent a user from updating a property advert with empty field parameters', done => {
       request
         .put('/api/v1/property/2')
-        .field('status', 'Available')
+        .field('status', 'sold')
         .field('price', '')
         .field('state', 'Lagos')
         .field('city', '')
         .field('address', '')
-        .field('type', '2 bedroom')
+        .field('type', 'others')
+        .field('other_type', 'connecticut')
         .field('purpose', 'For Rent')
         .set('Connection', 'keep-alive')
         .set('token', validToken)
@@ -559,7 +586,7 @@ describe('Property Route Endpoints', () => {
   });
   // mark property as sold/rent
   describe('PATCH api/v1/property/:property-id/sold', () => {
-    it('should allow an authenticated user(Agent) to successfully mark his/her property as sold/rented', done => {
+    it('should allow an authenticated user(Agent) to successfully mark his/her property as sold if the  purpose of the property is for sale', done => {
       request
         .patch(`/api/v1/property/${testPropertyId}/sold`)
         .set('token', validToken)
@@ -568,6 +595,63 @@ describe('Property Route Endpoints', () => {
         .expect(res => {
           const { status, data } = res.body;
           expect(status).to.equal('success');
+          expect(data.status).to.equal('rented');
+          expect(data).to.have.all.keys(
+            'id',
+            'status',
+            'type',
+            'state',
+            'city',
+            'address',
+            'price',
+            'created_on',
+            'image_url',
+            'purpose',
+            'other_type',
+            'description',
+            'updated_on'
+          );
+        })
+        .end(done);
+    });
+    it('should allow an authenticated user(Agent) to successfully return the status of his/her property to available if he/she errorenous marks it as sold/rented', done => {
+      request
+        .patch(`/api/v1/property/${testPropertyId}/sold?available=true`)
+        .set('token', validToken)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const { status, data } = res.body;
+          expect(status).to.equal('success');
+          expect(data.status).to.equal('available');
+          expect(data).to.have.all.keys(
+            'id',
+            'status',
+            'type',
+            'state',
+            'city',
+            'address',
+            'price',
+            'created_on',
+            'image_url',
+            'purpose',
+            'other_type',
+            'description',
+            'updated_on'
+          );
+        })
+        .end(done);
+    });
+    it('should allow an authenticated user(Agent) to successfully mark his/her property has rented if the purpose of the property is for rent', done => {
+      request
+        .patch(`/api/v1/property/3/sold`)
+        .set('token', validToken)
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .expect(res => {
+          const { status, data } = res.body;
+          expect(status).to.equal('success');
+          expect(data.status).to.equal('sold');
           expect(data).to.have.all.keys(
             'id',
             'status',

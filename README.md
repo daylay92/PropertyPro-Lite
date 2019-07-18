@@ -44,9 +44,10 @@ $ cd PropertyPro-Lite
 $ npm install
 ```
 
-Create a `.env` file and enter values for the `SIGN_SECRET`,`CLOUDINARY_CLOUD_NAME`,`CLOUDINARY_API_KEY`,  `CLOUDINARY_API_SECRET` environment variables, this variables infers the following: 
+Create a `.env` file and enter values for the `SIGN_SECRET`,`CLOUDINARY_CLOUD_NAME`,`CLOUDINARY_API_KEY`,  `CLOUDINARY_API_SECRET` and `DATABASE_URL` environment variables, this variables infers the following: 
 
 - `SIGN_SECRET` -  JWT secret for signing access token
+- `DATABASE_URL` - connection string for postgresql database
 - `CLOUDINARY_CLOUD_NAME` & `CLOUDINARY_API_SECRET` & `CLOUDINARY_API_KEY` -  Cloudinary credentials for storing uploaded images
 
 ## Starting the dev server
@@ -54,11 +55,14 @@ Create a `.env` file and enter values for the `SIGN_SECRET`,`CLOUDINARY_CLOUD_NA
 ```bash
 npm run dev
 ```
-
-## Running the tests
+## Creating database tables and rows
+```bash
+npm run migrations
+```
+## Running the tests locally
 
 ```bash
-npm test
+npm run test-dev
 ```
 ## Test the endpoints
 

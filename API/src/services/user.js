@@ -2,7 +2,6 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { config } from 'dotenv';
 import UserModel from '../models/userModel';
-import users from '../data/data-structure/users';
 import db from '../data/db/index';
 
 config();
@@ -61,18 +60,6 @@ class User extends UserModel {
     return { id, is_admin };
   }
 
-  generateToken() {
-    const { id, is_admin } = this;
-    const token = jwt.sign(
-      {
-        data: { id, is_admin }
-      },
-      process.env.SIGN_SECRET,
-      { expiresIn: '24h' }
-    );
-    return token;
-  }
-
   static generateToken(id, is_admin) {
     const token = jwt.sign(
       {
@@ -90,11 +77,6 @@ class User extends UserModel {
     const {
       rows: [user]
     } = await db.queryWithParams(text, value);
-    return user;
-  }
-
-  static async findById(userId) {
-    const user = users.find(({ id }) => id === parseInt(userId, 10));
     return user;
   }
 }

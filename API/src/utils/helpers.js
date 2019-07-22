@@ -1,5 +1,6 @@
 class Helpers {
   static toSmallLetters(value) {
+    if (!value || typeof value !== 'string') return value;
     return value.toLowerCase();
   }
 

@@ -1,5 +1,6 @@
 import { config } from 'dotenv';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import { urlencoded, json } from 'body-parser';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
@@ -27,6 +28,9 @@ app.use(urlencoded({ extended: true }));
 
 // parse application/json
 app.use(json());
+
+// parse cookies
+app.use(cookieParser());
 
 // render swagger UI
 app.use('/api/v1/api-docs', swaggerUI.serve, swaggerUI.setup(doc));

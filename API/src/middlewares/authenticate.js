@@ -6,10 +6,10 @@ config();
 export default class Authenticate {
   static async verify(req, res, next) {
     const {
-      body: { token: bodyToken = null },
-      headers: { token: headerToken = null }
+      headers: { token: headerToken = null },
+      cookies: { token: cookieToken = null }
     } = req;
-    const token = !headerToken ? bodyToken : headerToken;
+    const token = !cookieToken ? headerToken : cookieToken;
 
     if (!token) {
       res.status(401).json({

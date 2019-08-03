@@ -26,6 +26,7 @@ class Auth {
       );
       const { id, is_admin } = await user.save();
       const token = User.generateToken(id, is_admin);
+      res.cookie('token', token, { maxAge: 86400000, httpOnly: true });
       return res.status(201).json({
         status: 'success',
         data: {
@@ -50,6 +51,7 @@ class Auth {
       if (isMatch) {
         const { id, first_name, last_name, is_admin } = user;
         const token = User.generateToken(id, is_admin);
+        res.cookie('token', token, { maxAge: 86400000, httpOnly: true });
         return res.status(200).json({
           status: 'success',
           data: {

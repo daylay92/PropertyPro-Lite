@@ -4,10 +4,26 @@ import Helpers from '../utils/helpers';
 class Auth {
   /* eslint camelcase: 0 */
   static async signUp(req, res) {
-    const { first_name, last_name, address, email, password, phone_number } = req.body;
+    const {
+      first_name,
+      last_name,
+      address,
+      email,
+      gender,
+      password,
+      phone_number
+    } = req.body;
     try {
       const pass = await User.hashPassword(password);
-      const user = new User(first_name, last_name, email, address, pass, phone_number);
+      const user = new User(
+        first_name,
+        last_name,
+        email,
+        address,
+        pass,
+        phone_number,
+        gender
+      );
       const { id, is_admin } = await user.save();
       const token = User.generateToken(id, is_admin);
       return res.status(201).json({

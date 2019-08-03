@@ -1,5 +1,6 @@
 import { check, validationResult } from 'express-validator';
 import UserServices from '../services/user';
+import Helpers from '../utils/helpers';
 
 export default class SignUp {
   static validate() {
@@ -34,8 +35,18 @@ export default class SignUp {
         .withMessage('Field cannot be empty')
         .isEmail()
         .withMessage('Should be a valid Email Address'),
+      check('gender')
+        .exists()
+        .withMessage('Field is Required')
+        .not()
+        .isEmpty()
+        .withMessage('Field cannot be empty')
+        .customSanitizer(Helpers.toSmallLetters)
+        .isIn(['male', 'female'])
+        .withMessage('Should be either male or female'),
       check('confirm_password')
-        .optional()
+        .exists()
+        .withMessage('Field is Required')
         .not()
         .isEmpty()
         .withMessage('Field cannot be empty')

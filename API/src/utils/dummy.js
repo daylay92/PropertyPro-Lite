@@ -10,6 +10,7 @@ const validUserData = {
   password: 'rrft3456',
   confirm_password: 'rrft3456',
   phone_number: '08063805512',
+  gender: 'male',
   address: `${faker.address.streetAddress()}, Lagos, Nigeria`
 };
 
@@ -43,6 +44,7 @@ const alreadyExistingUserData = {
   password: 'King1234',
   confirm_password: 'King1234',
   phone_number: '08063805512',
+  gender: 'male',
   address: `${faker.address.streetAddress()}, Lagos, Nigeria`
 };
 

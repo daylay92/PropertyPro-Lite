@@ -1,23 +1,23 @@
 import bcrypt from 'bcrypt';
 
 const seeders = `
-    INSERT INTO users (first_name, last_name, email, password, phone_number, address)
+    INSERT INTO users (first_name, last_name, email, password, phone_number, gender, address)
     VALUES ('John', 'Doe', 'john.doe@gmail.com', '${bcrypt.hashSync(
       'johnny',
       8
-    )}', '08064789498', '20, Church Street, Ikoyi, Lagos State');
+    )}', '08064789498', 'male', '20, Church Street, Ikoyi, Lagos State');
 
-    INSERT INTO users (first_name, last_name, email, password, phone_number, address)
+    INSERT INTO users (first_name, last_name, email, password, phone_number, gender, address)
     VALUES ('mary', 'Doe', 'mary.doe@gmail.com', '${bcrypt.hashSync(
       'marydoe',
       8
-    )}', '08064789498', '20, Daniel Street, Ogudu, Lagos State');
+    )}', '08064789498', 'female', '20, Daniel Street, Ogudu, Lagos State');
 
-    INSERT INTO users (first_name, last_name, email, password, phone_number, address, is_admin)
+    INSERT INTO users (first_name, last_name, email, password, phone_number, gender, address, is_admin)
     VALUES ('Ayodele', 'Akinbohun', 'daylay92@yahoo.com', '${bcrypt.hashSync(
       'ayodele123',
       8
-    )}', '08063805598', '90, Ania Street, Ojoka, Lagos State', true);
+    )}', '08063805598', 'male', '90, Ania Street, Ojoka, Lagos State', true);
    
 
     INSERT INTO status (name)

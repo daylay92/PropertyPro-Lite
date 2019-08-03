@@ -7,8 +7,17 @@ import db from '../data/db/index';
 config();
 
 class User extends UserModel {
-  constructor(firstName, lastName, email, address, password, phone, isAdmin = false) {
-    super(null, firstName, lastName, email, address, password, phone, isAdmin);
+  constructor(
+    firstName,
+    lastName,
+    email,
+    address,
+    password,
+    phone,
+    gender,
+    isAdmin = false
+  ) {
+    super(null, firstName, lastName, email, address, password, phone, gender, isAdmin);
   }
 
   static async hashPassword(password) {
@@ -37,12 +46,13 @@ class User extends UserModel {
       last_name,
       password,
       phone_number,
+      gender,
       address,
       is_admin
     } = this;
     const query = `INSERT INTO
-            users(email, first_name, last_name, password, phone_number, address, is_admin)
-            VALUES($1, $2, $3, $4, $5, $6, $7)
+            users(email, first_name, last_name, password, phone_number, gender, address, is_admin)
+            VALUES($1, $2, $3, $4, $5, $6, $7, $8)
             returning id`;
     const values = [
       email.toLowerCase(),
@@ -50,6 +60,7 @@ class User extends UserModel {
       last_name,
       password,
       phone_number,
+      gender,
       address,
       is_admin
     ];

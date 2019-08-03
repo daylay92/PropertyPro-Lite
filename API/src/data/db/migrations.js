@@ -18,6 +18,7 @@ const migrations = async () => {
         last_name VARCHAR(30) NOT NULL,
         password VARCHAR(65) NOT NULL,
         phone_number VARCHAR NOT NULL,
+        gender VARCHAR(7) NOT NULL,
         address VARCHAR NOT NULL,
         is_admin BOOLEAN NOT NULL DEFAULT (false),
         created_on TIMESTAMP NOT NULL DEFAULT NOW()
